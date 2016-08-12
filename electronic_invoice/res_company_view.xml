@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_l10n_br_account_company_ei_form">
+            <field name="name">view.l10n.br.account.company.ei.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_company_form" />
+            <field name="arch" type="xml">
+
+                <field name="fiscal_type" position="after">
+                    <field name="tributacao"/>
+                </field>
+
+                <field name="partner_fiscal_type_id" position="after">
+                    <field name="accounting_responsible"/>
+                </field>
+
+                <page string="Impostos" position="after">
+                    <page string="Electronic Invoice">
+                        <group>
+                            <field name="ei_environment"/>
+                            <field name="ei_product_version"/>
+                            <field name="ei_service_version"/>
+                            <field name="ei_service_description"/>
+                        </group>
+                    </page>
+                </page>
+
+            </field>
+        </record>
+
+    </data>
+</openerp>

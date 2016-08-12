@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="action_cnab_file_format" model="ir.actions.act_window">
+            <field name="name">Layout de Arquivos</field>
+            <field name="res_model">cnab.file_format</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+        </record>
+        
+        <menuitem
+            id="menu_cnab_file_format"
+            name="Layout de Arquivos"
+            action="action_cnab_file_format"
+            parent="menu_cnab_root"
+            sequence="10" />
+            
+        <record id="cnab_file_format_form" model="ir.ui.view">
+            <field name="name">cnab.file_format</field>
+            <field name="view_type">form</field>
+            <field name="model">cnab.file_format</field>
+            <field name="arch" type="xml">
+                <form string="Layout de Arquivos">
+                    <group col="4" colspan="4">
+                        <field name="name"/>
+                        <field name="bank"/>
+                        <field name="version"/>
+                        <field name="type"/>
+                        <field name="filename"/>
+                    </group>
+                    <group col="2">
+                        <field name="description"/>
+                        <field name="records_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="cnab_file_format_tree" model="ir.ui.view">
+            <field name="name">cnab.file_format</field>
+            <field name="view_type">tree</field>
+            <field name="model">cnab.file_format</field>
+            <field name="arch" type="xml">
+                <tree string="Layouts de Arquivos">
+                    <field name="name"/>
+                    <field name="bank"/>
+                    <field name="version"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="cnab_file_format_search" model="ir.ui.view">
+            <field name="name">cnab.file_format</field>
+            <field name="view_type">search</field>
+            <field name="model">cnab.file_format</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="version"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="cnab_record_format_form" model="ir.ui.view">
+            <field name="name">cnab.record_format</field>
+            <field name="view_type">form</field>
+            <field name="model">cnab.record_format</field>
+            <field name="arch" type="xml">
+                <form string="Layout de Campos">
+                    <group>
+                        <field name="identifier"/>
+                        <field name="name"/>
+                        <field name="repeatable"/>
+                        <field name="description"/>
+                        <field name="records_ids"/>
+                        <field name="fields_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="cnab_record_format_tree" model="ir.ui.view">
+            <field name="name">cnab.record_format</field>
+            <field name="view_type">tree</field>
+            <field name="model">cnab.record_format</field>
+            <field name="arch" type="xml">
+                <tree string="Layout de Campos">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="cnab_field_format_form" model="ir.ui.view">
+            <field name="name">cnab.field_format</field>
+            <field name="view_type">form</field>
+            <field name="model">cnab.field_format</field>
+            <field name="arch" type="xml">
+                <form string="Layout dos Campos">
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="record_id"/>
+                        <field name="type"/>
+                        <field name="format"/>
+                        <field name="length"/>
+                        <field name="value"/>
+                        <field name="position"/>
+                        <field name="value_type"/>
+                        <field name="padding"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="cnab_field_format_tree" model="ir.ui.view">
+            <field name="name">cnab.field_format</field>
+            <field name="view_type">tree</field>
+            <field name="model">cnab.field_format</field>
+            <field name="arch" type="xml">
+                <tree string="Layout de Campos">
+					<field name="sequence"/>
+                    <field name="name"/>
+                    <field name="length"/>
+                </tree>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

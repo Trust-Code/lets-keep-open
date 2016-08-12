@@ -1,0 +1,110 @@
+# Brazilian Portuguese translation for openobject-addons
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the openobject-addons package.
+# OutTech <contato@outtech.com.br>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-11-30 16:45+0000\n"
+"PO-Revision-Date: 2014-11-30 16:45+0000\n"
+"Last-Translator: OutTech <contato@outtech.com.br>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-11-30 16:45+0000\n"
+"X-Generator: Launchpad (build 1)\n"
+
+#. module: l10n_br_sale_ext
+#: model:ir.actions.report.xml,name:l10n_br_sale_ext.report_sale_order_no_tax
+msgid "Quotation / Order no Tax"
+msgstr "Cotação / Pedido sem Impostos"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Shipping address :"
+msgstr "Endereço de Entrega :"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Invoice address :"
+msgstr "Endereço de Cobrança :"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Order N°"
+msgstr "Pedido N°"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Quotation N°"
+msgstr "Coatção N°"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Your Reference"
+msgstr "Sua Referência"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Date Ordered"
+msgstr "Data do Pedido"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Payment Term"
+msgstr "Condição de Pagamento"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Description"
+msgstr "Descrição"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Quantity"
+msgstr "Quantidade"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Unit Price"
+msgstr "Preço Unitário"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Price"
+msgstr "Total"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Net Total :"
+msgstr "Sub-Total :"
+
+#. module: l10n_br_sale_ext
+#: report:sale.order.no.tax:0
+msgid "Taxes :"
+msgstr "Impostos :"
+
+#. module: l10n_br_sale_ext
+#: view:sale.order:0
+#: field:sale.order,immediate_payment_amount:0
+msgid "Immediate Payment Amount"
+msgstr "Valor do Pagamento a Vista"
+
+#. module: l10n_br_sale_ext
+#: view:sale.order:0
+#: field:sale.order,immediate_payment_journal:0
+msgid "Immediate Payment Journal"
+msgstr "Método de Pagamento a Vista"
+
+#. module: l10n_br_sale_ext
+#: model:res.groups,name:l10n_br_sale_ext.group_block_price_change
+msgid "Block Price Change"
+msgstr "Bloqueia Alteração de Preço"

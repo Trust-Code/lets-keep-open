@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="action_cnab_file_format_loader" model="ir.actions.act_window">
+            <field name="name">Carregar Layout de Arquivos</field>
+            <field name="res_model">cnab.wizard.file_format_loader</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            id="menu_cnab_file_format_loader"
+            name="Carregar Layout de Arquivos"
+            action="action_cnab_file_format_loader"
+            parent="menu_cnab_root"
+            sequence="20" />
+
+        <record id="cnab_file_format_loader_form" model="ir.ui.view">
+            <field name="name">cnab.wizard.file_format_loader</field>
+            <field name="view_type">form</field>
+            <field name="model">cnab.wizard.file_format_loader</field>
+            <field name="arch" type="xml">
+                <form string="Carregar Layout de Arquivos" version="7.0">
+                    <group>
+                        <field name="file"/>
+                        <field name="type"/>
+                        <field name="replace"/>
+                    </group>
+                    <footer>
+                        <button type="object" name="load" string="Load"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+    
+</openerp>

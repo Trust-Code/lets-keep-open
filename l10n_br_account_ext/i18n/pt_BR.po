@@ -1,0 +1,317 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_br_account_ext
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-08 14:30+0000\n"
+"PO-Revision-Date: 2015-06-08 14:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "EI Confirmed"
+msgstr "NF-e Confirmada"
+
+#. module: l10n_br_account_ext
+#: selection:account.invoice,ei_status:0
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: l10n_br_account_ext
+#: view:account.tax.code:0
+msgid "Statistics"
+msgstr "Estatísticas"
+
+#. module: l10n_br_account_ext
+#: selection:account.tax.code,tax_retain_type:0
+msgid "No Retain"
+msgstr "Sem Retenção"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_account_tax_code
+msgid "Tax Code"
+msgstr "Código do Imposto"
+
+#. module: l10n_br_account_ext
+#: field:account.tax.code,invoice_tax_retain_account:0
+msgid "Invoice Tax Retain Account"
+msgstr "Conta para Renteção de Imposto na Fatura"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Electronic Invoices to send"
+msgstr "Electronic Invoices to send"
+
+#. module: l10n_br_account_ext
+#: selection:electronic.invoice.event,action:0
+msgid "Send"
+msgstr "Enviar"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+#: field:account.invoice,ei_status:0
+msgid "EI Status"
+msgstr "NF-e/RPS Situação"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_electronic_invoice_event
+msgid "electronic.invoice.event"
+msgstr "electronic.invoice.event"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Exportada Receita"
+msgstr "Exportada Receita"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Immediate Payment Amount"
+msgstr "Valor do Pagamento a Vista"
+
+#. module: l10n_br_account_ext
+#: view:account.tax.code:0
+msgid "Invoice Tax Deduction"
+msgstr "Dedução de Imposto na Fatura"
+
+#. module: l10n_br_account_ext
+#: selection:account.tax.code,tax_retain_type:0
+msgid "Invoice Amount Monthly"
+msgstr "Total Mensal da Fatura"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,ei_code:0
+msgid "EI Code"
+msgstr "NF-e Número"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Status"
+msgstr "Situação"
+
+#. module: l10n_br_account_ext
+#: field:l10n_br_account.service.type,ei_description:0
+msgid "Electronic Invoice Description"
+msgstr "Descrição da NF-e"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice.tax,tax_retain:0
+#: view:account.tax.code:0
+msgid "Tax Retain"
+msgstr "Imposto Retido"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,immediate_pay_journal_id:0
+msgid "Journal"
+msgstr "Diário"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_account_invoice_confirm
+msgid "Confirm the selected invoices"
+msgstr "Confirmar as faturas selecionadas"
+
+#. module: l10n_br_account_ext
+#: field:electronic.invoice.event,event_date:0
+msgid "Event Date"
+msgstr "Data do Evento"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Electronic Invoice Events"
+msgstr "Eventos da NF-e"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,ei_date:0
+msgid "EI Date"
+msgstr "NF-e Data Emissão"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Validate"
+msgstr "Validar"
+
+#. module: l10n_br_account_ext
+#: selection:account.invoice,ei_status:0
+msgid "Sent"
+msgstr "Enviada"
+
+#. module: l10n_br_account_ext
+#: model:ir.actions.act_window,name:l10n_br_account_ext.action_account_items
+#: model:ir.model,name:l10n_br_account_ext.model_account_move_line
+msgid "Journal Items"
+msgstr "Itens do Diário"
+
+#. module: l10n_br_account_ext
+#: field:account.tax.code,account_collected_deduct_id:0
+msgid "Invoice Deduct Tax Account"
+msgstr "Conta para Dedução de Impostos da Fatura"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "EI To Send"
+msgstr "NF-e para Enviar"
+
+#. module: l10n_br_account_ext
+#: field:electronic.invoice.event,user_id:0
+msgid "User"
+msgstr "Usuário"
+
+#. module: l10n_br_account_ext
+#: field:electronic.invoice.event,action:0
+msgid "Action"
+msgstr "Ação"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,ei_verification_code:0
+msgid "EI Verification Code"
+msgstr "NF-e Código de Verificação"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "EI Cancelled"
+msgstr "NF-e Cancelada"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,rps_code:0
+msgid "RPS Code"
+msgstr "RPS Número"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Cancel Invoice"
+msgstr "Cancelar fatura"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Electronic Invoice"
+msgstr "Nota Fiscal Eletrônica"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,ei_events_ids:0
+msgid "Electronic Invoice Event"
+msgstr "Evento da NF-e"
+
+#. module: l10n_br_account_ext
+#: field:account.tax.code,refund_tax_retain_account:0
+msgid "Refund Tax Retain Account"
+msgstr "Conta para Imposto Retido na Devolução"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,immediate_pay_amount:0
+msgid "Amount"
+msgstr "Total"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_l10n_br_account_service_type
+msgid "Cadastro de Operações Fiscais de Serviço"
+msgstr "Cadastro de Operações Fiscais de Serviço"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,ei_description:0
+msgid "EI Description"
+msgstr "NF-e Descrição"
+
+#. module: l10n_br_account_ext
+#: selection:account.invoice,ei_status:0
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Immediate Payment Journal"
+msgstr "Método de Pagamento a Vista"
+
+#. module: l10n_br_account_ext
+#: help:account.tax.code,account_collected_deduct_id:0
+msgid "Set the account that will be set by deduct on invoice tax lines for invoices. Leave empty to not use deduction account tax."
+msgstr "Informar a conta dedutora de impostos por linha da fatura. Deixa vazia caso não queira utilizar contas dedutorias de impostos."
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_account_invoice_tax
+msgid "Invoice Tax"
+msgstr "Impostos da Fatura"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_account_move
+msgid "Account Entry"
+msgstr "Lançamento Contábil"
+
+#. module: l10n_br_account_ext
+#: selection:account.invoice,ei_status:0
+msgid "Failed"
+msgstr "Erro"
+
+#. module: l10n_br_account_ext
+#: selection:account.tax.code,tax_retain_type:0
+msgid "By Invoice"
+msgstr "Por Fatura"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Documento Fiscal"
+msgstr "Documento Fiscal"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Linha da Fatura"
+
+#. module: l10n_br_account_ext
+#: model:ir.model,name:l10n_br_account_ext.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Extrato Bancário"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Electronic Invoices confirmed"
+msgstr "NF-e Confirmada"
+
+#. module: l10n_br_account_ext
+#: field:electronic.invoice.event,invoice_id:0
+#: model:ir.model,name:l10n_br_account_ext.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: l10n_br_account_ext
+#: selection:electronic.invoice.event,action:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_br_account_ext
+#: field:account.tax.code,tax_retain_type:0
+msgid "Tax Retain Type"
+msgstr "Tipo de Imposto Retido"
+
+#. module: l10n_br_account_ext
+#: field:electronic.invoice.event,message:0
+msgid "Message"
+msgstr "Mensagem"
+
+#. module: l10n_br_account_ext
+#: field:account.tax.code,tax_retain_amount:0
+msgid "Tax Retain Amount"
+msgstr "Total de Imposto Retido"
+
+#. module: l10n_br_account_ext
+#: field:account.invoice,rps_serie:0
+msgid "RPS Serie"
+msgstr "RPS Série"
+
+#. module: l10n_br_account_ext
+#: selection:electronic.invoice.event,action:0
+msgid "Check"
+msgstr "Verificar"
+
+#. module: l10n_br_account_ext
+#: view:account.invoice:0
+msgid "Electronic Invoices cancelled"
+msgstr "Nf-e Cancelada"
+
+

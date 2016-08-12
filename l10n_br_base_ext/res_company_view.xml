@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_l10n_br_account_company_ext_form">
+			<field name="name">l10n_br_account_ext.res.company</field>
+			<field name="model">res.company</field>
+			<field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_company_form" />
+			<field name="priority" eval="20"/>
+			<field name="arch" type="xml">
+
+				<page string="NFse" position="replace"/>
+				<page string="NFe" position="replace"/>
+
+				<page string="Configuration" position="inside">
+					<group string="Partner">
+						<field name="partner_default_account_payable_id" />
+						<field name="partner_default_account_receivable_id"/>
+						<field name="partner_default_fiscal_type_id"/>
+					</group>
+				</page>
+
+			</field>
+		</record>
+
+    </data>
+</openerp>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="cnab_res_bank_form" model="ir.ui.view">
+            <field name="name">cnab.bank</field>
+            <field name="view_type">form</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <group string="Communication" position="after">
+                    <notebook colspan="4">
+                        <page string="Code Occurrence">
+                            <group>
+                                <field name="code_occurrence_ids" nolabel="1">
+                                    <tree string="Items Template" editable="top">
+                                        <field name="code_occurrence"/>
+                                        <field name="action"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </group>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

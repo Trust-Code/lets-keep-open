@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        
+        <record id="cnab_sequence_type" model="ir.sequence.type">
+            <field name="name">cnab_sequence_type</field>
+            <field name="code">cnab.sequence</field>
+        </record>
+
+        <record id="pslip_on_itau_sequence" model="ir.sequence.type">
+            <field name="name">Payment Slip Our Number - Itaú</field>
+            <field name="code">payment_slip_our_number_itau</field>
+        </record>
+        
+    </data>
+</openerp>

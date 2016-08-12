@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="account_bank_event_form" model="ir.ui.view">
+        	<field name="name">Bank Events Form</field>
+            <field name="view_type">form</field>
+        	<field name="model">account.bank.event</field>
+        	<field name="arch" type="xml">
+   				<form string="Bank Events">
+                    <group>
+                        <field name="bank"/>
+                        <field name="status"/>
+                        <field name="code_occurrence"/>
+                    </group>
+                </form>
+			</field>
+    	</record>
+
+        <record id="account_bank_event_tree" model="ir.ui.view">
+            <field name="name">Bank Events Tree</field>
+            <field name="view_type">tree</field>
+            <field name="model">account.bank.event</field>
+            <field name="arch" type="xml">
+                <tree string="Bank Events">
+                    <field name="bank"/>
+                    <field name="status"/>
+                    <field name="code_occurrence"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="account_bank_event_filter" model="ir.ui.view">
+            <field name="name">Bank Events Filter</field>
+            <field name="model">account.bank.event</field>
+            <field name="arch" type="xml">
+                <search string="Bank Events">
+                    <group expand="0" string="Group By...">
+                        <filter string="Bank" icon="terp-bank" domain="[]" context="{'group_by':'bank'}"/>
+                        <filter string="Status" icon="terp-status" domain="[]" context="{'group_by':'status'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="action_account_bank_event" model="ir.actions.act_window">
+            <field name="name">Bank Events</field>
+            <field name="res_model">account.bank.event</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+			<field name="view_id" ref="account_bank_event_tree"/>
+            <field name="search_view_id" ref="account_bank_event_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            id="account_bank_event_menu"
+            name="Bank Events"
+            action="action_account_bank_event"
+            parent="menu_cnab_root"
+            sequence="20" />
+
+    </data>
+</openerp>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+    <record id="cnab_importer_form" model="ir.ui.view">
+        <field name="name">cnab.wizard.importer</field>
+        <field name="view_type">form</field>
+        <field name="model">cnab.wizard.importer</field>
+        <field name="arch" type="xml">
+            <form string="Importar Arquivo de Retorno" version="7.0">
+                <group col="4">
+                    <field name="payment_type"/>
+                    <field name="type"/>
+                </group>
+                <group col="2">
+                    <field name="file"/>
+                </group>
+                <footer>
+                    <button type="object" name="import_file" string="Import"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_cnab_importer" model="ir.actions.act_window">
+        <field name="name">Importar Arquivo de Retorno</field>
+        <field name="res_model">cnab.wizard.importer</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="domain">[]</field>
+    </record>
+    
+    
+    <menuitem 
+        id="menu_cnab_importer" 
+        name="Importar Arquivo de Retorno"
+        action="action_cnab_importer" 
+        parent="account.menu_finance_bank_and_cash"
+        sequence="3" />
+    </data>
+    
+</openerp>

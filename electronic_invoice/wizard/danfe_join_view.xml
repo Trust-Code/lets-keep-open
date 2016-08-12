@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="danfe_join_form" model="ir.ui.view">
+            <field name="name">danfe.join.form</field>
+            <field name="model">danfe.join</field>
+            <field name="arch" type="xml">
+                <form string="Danfe Join" version="7.0">
+                    <p>This is a functionality to join Danfe's in one PDF file.</p>
+                    <field name="data" readonly="1" filename="filename"/>
+                    <field name="invisible" invisible="1"/>
+                    <footer>
+                        <button type="object" name="danfe_join" string="Danfe Join" class="oe_highlight" attrs="{'invisible':[('invisible','=',True)]}"/>
+                        <button string="Fechar" class="oe_highlight" special="cancel" attrs="{'invisible':[('invisible','=',False)]}"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_danfe_join" model="ir.actions.act_window">
+            <field name="name">Danfe Join</field>
+            <field name="res_model">danfe.join</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <act_window id="act_window_danfe_join"
+                    multi="True"
+        	        key2="client_action_multi"
+                    name="Danfe Join"
+                    res_model="danfe.join"
+                    src_model="account.invoice"
+                    view_id="danfe_join_form"
+                    view_mode="form"
+                    target="new"
+                    view_type="form"/>
+
+    </data>
+</openerp>

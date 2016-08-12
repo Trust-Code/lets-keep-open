@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_quotation_tree" model="ir.ui.view">
+            <field name="name">l10n_br_sale_ext.order.tree</field>
+            <field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="priority">4</field>
+            <field name="arch" type="xml">
+				<field name="partner_id" position="after">
+					<field name="client_order_ref"/>
+				</field>
+            </field>
+        </record>
+
+        <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">l10n_br_sale_ext.order.tree</field>
+            <field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="priority">4</field>
+            <field name="arch" type="xml">
+				<field name="partner_id" position="after">
+					<field name="client_order_ref"/>
+				</field>
+            </field>
+        </record>
+
+		<record id="l10n_br_sale_order_form_ext" model="ir.ui.view">
+			<field name="name">l10n_br_sale.order.form.ext</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="l10n_br_delivery.l10n_br_delivery_order_form" />
+			<field name="priority">38</field>
+			<field name="arch" type="xml">
+ 				<field name="pricelist_id" position="after">
+					<field name="fiscal_document_id"/>
+				</field>
+				<xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="replace">
+                    <field name="price_unit" on_change="onchange_price_unit(parent.pricelist_id, price_unit, product_id, product_uom_qty, parent.partner_id, product_uom, parent.date_order)"/>
+                </xpath>
+ 				<field name="payment_term" position="replace"/>
+				<field name="incoterm" position="replace"/>
+				<label for="carrier_id" position="before">
+					<label for="incoterm"/>
+					<div>
+						<field name="incoterm" widget="selection" modifiers="{}"/>
+					</div>
+				</label>
+ 				<field name="note" position="before">
+					<group style="width: 65%%">
+						<field name="payment_term" widget="selection"/>
+						<field name="immediate_pay_amount" string="Immediate Payment Amount" widget='monetary' options='{"currency_field": "currency_id"}'/>
+						<field name="immediate_pay_journal_id"  string="Immediate Payment Journal" domain="[('type','in',['bank', 'cash'])]" widget="selection"/>
+					</group>
+				</field>
+			</field>
+		</record>
+
+    </data>
+</openerp>

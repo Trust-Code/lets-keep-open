@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<txg:Texgit xmlns:txg="http://gilmatryx.googlepages.com/Texgit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gilmatryx.googlepages.com/Texgit file:////home/gilmar/NFM/WORKSPACE/TexgitSchema.xsd" version="1.0-academic">
+    <FlatFile>
+        <layout>
+            <name>Extrato Bancário - Itaú </name>
+            <version>Versão 0.0.1</version>
+            <description>Extrato Bancário - Itaú</description>
+        </layout>
+        <GroupOfRecords>
+            <Record name="Header-Arquivo">
+                <GroupOfFields>
+                    <Field name="CodBanco" length="3" value="341" position="1"/>
+                    <Field name="CodLote" length="4" value="0000" type="INTEGER"/>
+                    <IdType name="IDReg" value="0" length="1"/>
+                    <Field name="Brancos" value=" " length="9"/>
+                    <Field name="TipoInscricao" length="1"/>
+                    <Field name="NumInscricao" length="14" type="INTEGER"/>
+                    <Field name="Brancos" value=" " length="15"/>
+                    <Field name="Convenio" length="5"/>
+                    <Field name="Zeros" value="0" type="INTEGER" length="1"/>
+					<Field name="AgenciaCedente" type="INTEGER" length="4"/>
+                    <Field name="DacAgenciaCedente" length="1"/>
+                    <Field name="Zeros" value="0000000" length="7"/>
+                    <Field name="ContaCedente" type="INTEGER" length="5"/>
+                    <Field name="Brancos" value=" " length="1"/>
+                    <Field name="DacAgenciaContaCedente" length="1"/>
+                    <Field name="NomeEmpresa" length="30"/>
+					<Field name="NomeBanco" length="30"/>
+					<Field name="Brancos" value=" " length="10"/>
+					<Field name="CodRetorno" value="2" length="1"/>
+					<Field name="DataGeracaoArquivo" length="8"/>
+					<Field name="HoraGeracaoArquivo" length="6"/>
+					<Field name="NumSequencial" type="INTEGER" length="6"/>
+					<Field name="NumVersaoLayout" value="050" type="INTEGER" length="3"/>
+					<Field name="Brancos" value="00000" type="INTEGER" length="5"/>
+					<Field name="UsoBanco" length="20"/>
+					<Field name="Brancos" value=" " length="49"/>
+                </GroupOfFields>
+            </Record>
+			 <Record name="Header-Lote">
+                <GroupOfFields>
+                    <Field name="CodBanco" length="3" value="341" position="1"/>
+                    <Field name="CodLote" type="INTEGER" length="4"/>
+                    <IdType name="IDReg" value="1" length="1"/>
+                    <Field name="TipoOperacao" value="E" length="1"/>
+                    <Field name="TipoServico" value="04" type="INTEGER" length="2"/>
+                    <Field name="FormaLancamento" value="40" length="2" type="INTEGER"/>
+                    <Field name="NumVersaoLayout" value="031" length="3"/>
+                    <Field name="Brancos" length="1" value=" "/>
+                    <Field name="TipoInscricao" length="1"/>
+                    <Field name="NumInscricao" type="INTEGER" length="14"/>
+                    <Field name="TipoConta" length="4"/>
+                    <Field name="Brancos" length="11" value=" "/>
+                    <Field name="Convenio" length="5"/>
+                    <Field name="Brancos" length="1" value="0"/>
+                    <Field name="AgenciaCedente" type="INTEGER" length="4"/>
+                    <Field name="DacAgenciaCedente" length="1"/>
+					<Field name="Brancos" value="0000000" type="INTEGER" length="7"/>
+					<Field name="ContaCedente" type="INTEGER" length="5"/>
+					<Field name="Brancos" value=" " length="1"/>
+					<Field name="DacAgenciaContaCedente" length="1"/>
+					<Field name="NomeEmpresa" length="30"/>
+					<Field name="Brancos" value=" " length="40"/>
+					<Field name="DataSaldoInicial" length="8"/>
+					<Field name="ValorSaldoInicial" type="INTEGER" length="18"/>
+					<Field name="SituacaoSaldoInicial" length="1"/>
+					<Field name="PosicaoSaldoInicial" length="1"/>
+					<Field name="Moeda" value="BRL" length="3"/>
+					<Field name="NumSequencial" type="INTEGER" length="5"/>
+					<Field name="Brancos" value=" " length="62"/>
+                </GroupOfFields>
+            </Record>
+            <Record name="Detalhe-SegmentoE" repeatable="true">
+                <GroupOfFields>
+                    <Field name="CodBanco" value="341" length="3" position="1"/>
+                    <Field name="CodLote" type="INTEGER" length="4"/>
+                    <IdType name="IDReg" length="1" value="3"/>
+                    <Field name="NumSequencialLote" length="5" type="INTEGER"/>
+                    <Field name="Segmento" value="E" length="1"/>
+                    <Field name="IdTipoLancamento" type="INTEGER" length="1"/>
+                    <Field name="Brancos" length="2"/>
+                    <Field name="TipoInscricao" length="1"/>
+                    <Field name="NumInscricao" type="INTEGER" length="14"/>
+                    <Field name="Brancos" value=" " length="15"/>
+                    <Field name="Convenio" length="5"/>
+                    <Field name="Zeros" type="INTEGER" value="0" length="1"/>
+                    <Field name="AgenciaCedente" type="INTEGER" length="4"/>
+                    <Field name="DacAgenciaCedente" length="1"/>
+                    <Field name="Zeros" value="0000000" length="7"/>
+                    <Field name="ContaCedente" type="INTEGER" length="5"/>
+                    <Field name="Brancos" value=" " length="1"/>
+                    <Field name="DacAgenciaContaCedente" length="1"/>
+                    <Field name="NomeEmpresa" length="30"/>
+                    <Field name="UsoBanco" length="6"/>
+                    <Field name="NaturezaLancamento" length="3"/>
+                    <Field name="TipoComplemento" type="INTEGER" length="2"/>
+                    <Field name="BancoOrigem" type="INTEGER" length="3"/>
+                    <Field name="AgenciaOrigem" type="INTEGER" length="5"/>
+                    <Field name="AgenciaContaOrigem" type="INTEGER" length="12"/>
+                    <Field name="CPMF" length="1"/>
+                    <Field name="DataContabil" length="8"/>
+                    <Field name="DataLancamento" length="8"/>
+                    <Field name="ValorLancamento" type="INTEGER" length="18"/>
+                    <Field name="TipoLancamento" length="1"/>
+                    <Field name="CategoriaLancamento" type="INTEGER" length="3"/>
+                    <Field name="CodLancamento" length="4"/>
+                    <Field name="Historico" length="25"/>
+                    <Field name="Brancos" length="33"/>
+                    <Field name="NumDocumento" length="6"/>
+                </GroupOfFields>
+            </Record>
+			<Record name="Trailler-Lote">
+                <GroupOfFields>
+                    <Field name="CodBanco" value="341" length="3" position="1"/>
+                    <Field name="CodLote" type="INTEGER" length="4"/>
+                    <IdType name="IDReg" value="5" length="1"/>
+					<Field name="Brancos" value=" " length="9"/>
+					<Field name="TipoInscricao" length="1"/>
+					<Field name="NumInscricao" type="INTEGER" length="14"/>
+					<Field name="Brancos" value=" " length="15"/>
+					<Field name="Convenio" length="5"/>
+					<Field name="Zeros" value="0" length="1"/>
+					<Field name="AgenciaCedente" type="INTEGER" length="4"/>
+					<Field name="DacAgenciaCedente" length="1"/>
+					<Field name="Brancos" value="0000000" length="7"/>
+					<Field name="ContaCedente" type="INTEGER" length="5"/>
+					<Field name="Brancos" value=" " length="1"/>
+					<Field name="DacAgenciaContaCedente" length="1"/>
+					<Field name="Brancos" value=" " length="16"/>
+					<Field name="Bloqueado" type="INTEGER" length="18"/>
+					<Field name="LimiteConta" type="INTEGER" length="18"/>
+					<Field name="SaldoBloqueado" type="INTEGER" length="18"/>
+					<Field name="DataFinal" length="8"/>
+					<Field name="SaldoFinal" type="INTEGER" length="18"/>
+					<Field name="SituacaoSaldoFinal" length="1"/>
+					<Field name="PosicaoSaldoFinal" length="1"/>
+					<Field name="QuantidadeRegistro" type="INTEGER" length="6"/>
+					<Field name="TotalValorDebito" type="INTEGER" length="18"/>
+					<Field name="TotalValorCredito" type="INTEGER" length="18"/>
+					<Field name="TotalValorNaoContabeis" type="INTEGER" length="18"/>
+					<Field name="Brancos" value=" " length="10"/>
+                </GroupOfFields>
+            </Record>
+            <Record name="Trailler-Arquivo">
+                <GroupOfFields>
+                    <Field name="CodBanco" value="341" length="3" position="1"/>
+                    <Field name="CodLote" value="9999" length="4"/>
+                    <IdType name="IDReg" type="INTEGER" value="9" length="1"/>
+					<Field name="Brancos" value=" " length="9"/>
+					<Field name="QuantidadeLotesArquivo" type="INTEGER" length="6"/>
+					<Field name="QuantidadeRegistroArquivo" type="INTEGER" length="6"/>
+					<Field name="QuantidadeContasConciliacao" type="INTEGER" length="6"/>
+					<Field name="Brancos" value=" " length="205"/>
+                </GroupOfFields>
+            </Record>
+        </GroupOfRecords>
+    </FlatFile>
+
+</txg:Texgit>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_l10n_br_account_invoice_form_ext">
+			<field name="name">l10n_br_account.invoice.form.ext</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_invoice_form" />
+			<field name="arch" type="xml">
+
+				<button name="invoice_cancel" position="replace">
+                    <button name="invoice_cancel" states="draft,proforma2,open" string="Cancel Invoice" groups="base.group_no_one"/>
+                </button>
+
+                <button name="invoice_validate" position="replace"/>
+
+                <button name="invoice_open" position="replace">
+                    <button name="invoice_open" states="draft" string="Validate" class="oe_highlight" groups="base.group_user"/>
+				</button>
+
+                <field name="payment_term" position="after">
+                    <field name="immediate_pay_amount" string="Immediate Payment Amount" widget='monetary' options='{"currency_field": "currency_id"}'/>
+                    <field name="immediate_pay_journal_id"  string="Immediate Payment Journal" domain="[('type','in',['bank', 'cash'])]" widget="selection"/>
+                </field>
+
+                <xpath expr="//field[@name='tax_line']/tree/field[@name='amount']" position="after">
+                    <field name="tax_retain"/>
+                </xpath>
+
+                <page string="Documento Fiscal" position="replace"/>
+
+                <page string="Vencimentos" position="replace">
+                    <page string="Vencimentos">
+                        <group>
+                            <field name="move_line_receivable_id" nolabel="1" context="{'form_view_ref': 'l10n_br_account_ext.view_date_maturity_form'}" attrs="{'readonly':False}">
+                                <tree string="Vencimentos">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="ref"/>
+                                    <field name="debit" string="Valor"/>
+                                    <field name="date_maturity"/>
+                                    <field name="payment_type"/>
+                                    <field name="reconcile_id"/>
+                                </tree>
+                            </field>
+                        </group>
+				    </page>
+                </page>
+
+            </field>
+        </record>
+
+        <record id="view_date_maturity_form" model="ir.ui.view">
+            <field name="name">l10n_br_account.date.maturity.ext</field>
+            <field name="model">account.move.line</field>
+            <field name="arch" type="xml">
+                <form string="Date Maturity" version="7.0">
+                    <group col="4">
+                        <field name="date_maturity"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

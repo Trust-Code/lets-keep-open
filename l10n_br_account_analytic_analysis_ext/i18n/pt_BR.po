@@ -1,0 +1,469 @@
+# Brazilian Portuguese translation for openobject-addons
+# Copyright (c) 2014 OutTech
+# This file is distributed under the same license as the openobject-addons package.
+# FIRST AUTHOR contato@outtech.com.br, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-07 19:36+0000\n"
+"PO-Revision-Date: 2015-03-22 11:50+0000\n"
+"Last-Translator: OutTech - http://www.outtech.com.br"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.invoice.line,inactive_date:0
+msgid "Inactive Date"
+msgstr "Data de Inativação"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: code:addons/l10n_br_account_analytic_analysis_ext/account_analytic_analysis.py:136
+#, python-format
+msgid "No Customer Defined!"
+msgstr "Nenhum Cliente Definido !"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_make_invoice
+msgid "Account Make Invoice"
+msgstr "Criar Fatura"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Special Condition Item"
+msgstr "Condição Especial Item"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,price_subtotal:0
+#: field:account.analytic.invoice.line,price_subtotal:0
+msgid "Sub Total"
+msgstr "Sub-Total"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+#: field:account.analytic.account,payment_term_id:0
+#: field:account.analytic.special.condition,payment_term:0
+msgid "Payment Term"
+msgstr "Condição de Pagamento"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,res_currency_id:0
+msgid "Rate to renewal"
+msgstr "Taxa para correção"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: selection:account.analytic.account,fiscal_type:0
+msgid "Produto"
+msgstr "Produto"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: code:addons/l10n_br_account_analytic_analysis_ext/account_analytic_analysis.py:147
+#, python-format
+msgid "Please define a sale journal for the company \"%s\"."
+msgstr "Por favor, defina o Diário de Vendas para a Empresa \"%s\"."
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:contract.partner.commission.report,state:0
+#: field:contract.salesperson.commission.report,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: view:contract.salesperson.commission.report:0
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Create Invoice"
+msgstr "Criar Fatura"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: view:contract.salesperson.commission.report:0
+msgid "Draft"
+msgstr "Provisória"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: code:addons/l10n_br_account_analytic_analysis_ext/account_analytic_analysis.py:136
+#, python-format
+msgid "You must first select a Customer for Contract %s!"
+msgstr "Você deve primeiro escolher um Cliente para o Contrato %s!"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Account Analytic Lines"
+msgstr "Itens do Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:contract.partner.commission.report,price_total:0
+#: field:contract.salesperson.commission.report,price_total:0
+msgid "Invoice Value"
+msgstr "Valor Faturado"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,price_unit:0
+#: field:account.analytic.invoice.line,price_unit:0
+msgid "Unit Price"
+msgstr "Preço Unitário"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_renewal
+msgid "Account Renewal Contract"
+msgstr "Renovar Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_analytic_partner_commission
+msgid "Contract Partner Commission"
+msgstr "Comissão de Parceiro por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: selection:account.analytic.account,recurring_rule_type:0
+msgid "Day(s)"
+msgstr "Dia(s)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_contract_salesperson_commission_report
+msgid "Contract Salesperson Commission Report"
+msgstr "Relatório de Comissão de Vendedor por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,product_id:0
+#: field:account.analytic.invoice.line,product_id:0
+msgid "Product"
+msgstr "Produto"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.make.invoice:0
+#: view:account.renewal:0
+msgid "or"
+msgstr "ou"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,salesperson_commission:0
+msgid "Salesperson Commission (%)"
+msgstr "Comissão do Vendedor (%)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.salesperson.commission.report:0
+msgid "Contract Salesperson Commission"
+msgstr "Comissão do Vendedor por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,recurring_interval:0
+msgid "Repeat Every"
+msgstr "Repetir Sempre"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,months_renewal:0
+msgid "Months to renewal"
+msgstr "Meses para renovação"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,invoice_date:0
+msgid "Invoice Date"
+msgstr "Data do Faturamento"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: selection:account.analytic.account,recurring_rule_type:0
+msgid "Month(s)"
+msgstr "Mês(es)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: view:contract.salesperson.commission.report:0
+msgid "Paid"
+msgstr "Paga"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,recurring_invoice_line_ids:0
+msgid "Invoice Lines"
+msgstr "Linhas da Fatura"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_analytic_additional_item
+msgid "Contract Additional Items"
+msgstr "Itens Adicionais por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.make.invoice:0
+msgid "Do you really want to create the invoice(s)?"
+msgstr "Você confirma a criação da(s) fatura(s)?"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:contract.partner.commission.report,internal_number:0
+#: field:contract.salesperson.commission.report,internal_number:0
+msgid "Invoice Number"
+msgstr "Número da Fatura"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,salesperson_id:0
+#: view:contract.salesperson.commission.report:0
+#: field:contract.salesperson.commission.report,salesperson_id:0
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,date_cancel:0
+msgid "Cancel Date"
+msgstr "Data do Cancelamento"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+#: view:account.renewal:0
+#: model:ir.actions.act_window,name:l10n_br_account_analytic_analysis_ext.action_account_renewal
+msgid "Renewal Contract"
+msgstr "Renovar Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Recurring Invoices"
+msgstr "Faturamento Recorrente"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.make.invoice,limit_date:0
+msgid "Limit for Invoice Create"
+msgstr "Limite para criação da(s) fatura(s)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: help:account.analytic.account,months_renewal:0
+msgid "Months to next due date"
+msgstr "Meses para renovar"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+#: field:account.analytic.account,invoice_additem_ids:0
+msgid "Additional Item"
+msgstr "Item Adicional"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.special.condition,end_date:0
+msgid "End Date"
+msgstr "Data da Validade"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: selection:account.analytic.account,recurring_rule_type:0
+msgid "Year(s)"
+msgstr "Ano(s)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,invoice_date_planned:0
+msgid "Invoice Date Planned"
+msgstr "Data Planejada de Faturamento"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:contract.partner.commission.report,perc_commission:0
+#: field:contract.salesperson.commission.report,perc_commission:0
+msgid "Perc. Commission %"
+msgstr "Perc. Comissão %"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,generate_invoice_parent:0
+msgid "Generate Invoices for Parent Contract"
+msgstr "Gerar Fatura com dados do Contrato Pai"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,fiscal_type:0
+msgid "Fiscal Type"
+msgstr "Tipo Fiscal"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.renewal:0
+msgid "Do you really want to renewal contract ?"
+msgstr "Você confirma a renovação do(s) contrato(s) ?"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Contract Information"
+msgstr "Informações do Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: help:account.analytic.account,recurring_rule_type:0
+msgid "Invoice automatically repeat at specified interval"
+msgstr "Faturamento automático repetido no intervalo especifico"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.ui.menu,name:l10n_br_account_analytic_analysis_ext.menu_report_contract_commission
+msgid "Contract Commission"
+msgstr "Comissão por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+#: field:account.analytic.account,stock_production_lot_ids:0
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_stock_production_lot
+msgid "Serial Number"
+msgstr "Número de Série"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,recurring_rule_type:0
+msgid "Recurrency"
+msgstr "Recorrência"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: code:addons/l10n_br_account_analytic_analysis_ext/account_analytic_analysis.py:146
+#, python-format
+msgid "Error!"
+msgstr "Erro!"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: selection:account.analytic.account,recurring_rule_type:0
+msgid "Week(s)"
+msgstr "Semana(s)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: selection:account.analytic.account,fiscal_type:0
+msgid "Serviço"
+msgstr "Serviço"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+#: field:account.analytic.account,special_condition_ids:0
+msgid "Special Condition"
+msgstr "Condição Especial"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: view:contract.salesperson.commission.report:0
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,grouping_invoice_parent:0
+msgid "Grouping Invoice in Parent Contract"
+msgstr "Faturar agrupado pelo Contrato Pai"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.special.condition,discount:0
+msgid "Discount (%)"
+msgstr "Desconto (%)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:contract.partner.commission.report,value_commission:0
+#: field:contract.salesperson.commission.report,value_commission:0
+msgid "Commission Value"
+msgstr "Valor da Comissão"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,quantity:0
+#: field:account.analytic.invoice.line,quantity:0
+msgid "Quantity"
+msgstr "Quantidade"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_analytic_special_condition
+msgid "Contract Special Condition"
+msgstr "Condição Especial por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+#: field:account.analytic.account,partner_commission_ids:0
+#: model:ir.actions.act_window,name:l10n_br_account_analytic_analysis_ext.action_contract_partner_commission_report
+#: model:ir.ui.menu,name:l10n_br_account_analytic_analysis_ext.menu_report_contract_partner_commission
+msgid "Partner Commission"
+msgstr "Comissão por Parceiro"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.make.invoice:0
+#: model:ir.actions.act_window,name:l10n_br_account_analytic_analysis_ext.action_account_make_invoice
+msgid "Create Invoices"
+msgstr "Criar Faturas"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Child Contracts"
+msgstr "Contratos Filho"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: field:contract.partner.commission.report,period_id:0
+#: view:contract.salesperson.commission.report:0
+#: field:contract.salesperson.commission.report,period_id:0
+msgid "Period"
+msgstr "Período"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.account,recurring_next_date:0
+msgid "Date of Next Invoice"
+msgstr "Data do Próximo Faturamento"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.additional.item,analytic_account_id:0
+#: field:account.analytic.invoice.line,analytic_account_id:0
+#: field:account.analytic.partner.commission,analytic_account_id:0
+#: field:account.analytic.special.condition,analytic_account_id:0
+#: view:contract.partner.commission.report:0
+#: field:contract.partner.commission.report,analytic_account_id:0
+#: view:contract.salesperson.commission.report:0
+#: field:contract.salesperson.commission.report,analytic_account_id:0
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_analytic_account
+#: field:stock.production.lot,analytic_account_id:0
+msgid "Analytic Account"
+msgstr "Conta Analítica"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.partner.commission,partner_commission:0
+msgid "Partner Commission (%)"
+msgstr "Comissão do Parceiro (%)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_account_analytic_invoice_line
+msgid "Contract Invoice Line"
+msgstr "Linha da Fatura por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.analytic.account:0
+msgid "Sales Commission"
+msgstr "Comissão de Vendas"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: help:account.analytic.account,recurring_interval:0
+msgid "Repeat every (Days/Week/Month/Year)"
+msgstr "Repetir a cada (Dia/Semana/Mês/Ano)"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.actions.act_window,name:l10n_br_account_analytic_analysis_ext.action_contract_salesperson_commission_report
+#: model:ir.ui.menu,name:l10n_br_account_analytic_analysis_ext.menu_report_contract_salesperson_commission
+msgid "Salesperson Commission"
+msgstr "Comissão por Vendedor"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:account.make.invoice:0
+#: view:account.renewal:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.partner.commission,partner_id:0
+#: view:contract.partner.commission.report:0
+#: field:contract.partner.commission.report,partner_id:0
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: field:account.analytic.special.condition,start_date:0
+msgid "Start Date"
+msgstr "Data de Inicio"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: view:contract.partner.commission.report:0
+#: view:contract.salesperson.commission.report:0
+msgid "Open"
+msgstr "Aberta"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: model:ir.model,name:l10n_br_account_analytic_analysis_ext.model_contract_partner_commission_report
+msgid "Contract Partner Commission Report"
+msgstr "Relatório de Comissão por Parceiro por Contrato"
+
+#. module: l10n_br_account_analytic_analysis_ext
+#: code:addons/l10n_br_account_analytic_analysis_ext/wizard/account_renewal.py:70
+#, python-format
+msgid "Contract Renewed"
+msgstr "Contrato Renovado"
+

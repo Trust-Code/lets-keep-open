@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="bank_file_tree" model="ir.ui.view">
+            <field name="name">Bank File Tree</field>
+            <field name="view_type">tree</field>
+            <field name="model">account.bank.file</field>
+            <field name="arch" type="xml">
+                <tree string="Bank File" create="false">
+                    <field name="file_type"/>
+                    <field name="bank"/>
+                    <field name="date_time"/>
+                    <field name="cnab_file" filename="filename"/>
+                    <field name="filename" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bank_file_filter" model="ir.ui.view">
+            <field name="name">Bank File Filter</field>
+            <field name="model">account.bank.file</field>
+            <field name="arch" type="xml">
+                <search string="Bank File">
+
+                    <filter name="remessa" string="Remessa" domain="[('file_type','=','remessa')]" help="Show Files Remessa"/>
+                    <filter name="retorno" string="Retorno" domain="[('file_type','=','retorno')]" help="Show Files Retorno"/>
+                    <filter name="extrato" string="Extrato" domain="[('file_type','=','extrato')]" help="Show Files Extrato"/>
+
+                    <group expand="0" string="Group By...">
+                        <filter string="Bank" icon="terp-bank" domain="[]" context="{'group_by':'bank'}"/>
+                        <filter string="File Type" icon="terp-file" domain="[]" context="{'group_by':'file_type'}"/>
+                        <filter string="Date Create" icon="terp-date" domain="[]" context="{'group_by':'date_time'}"/>
+                    </group>
+
+               </search>
+            </field>
+        </record>
+
+        <record id="action_bank_file" model="ir.actions.act_window">
+            <field name="name">Bank File Action</field>
+            <field name="res_model">account.bank.file</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+			<field name="view_id" ref="bank_file_tree"/>
+            <field name="search_view_id" ref="bank_file_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            id="bank_file_menu"
+            name="Bank File"
+            action="action_bank_file"
+            parent="account.menu_finance_bank_and_cash"
+            sequence="2" />
+
+
+
+    </data>
+</openerp>

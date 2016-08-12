@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<txg:Texgit xmlns:txg="http://gilmatryx.googlepages.com/Texgit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://gilmatryx.googlepages.com/Texgit file:////home/gilmar/NFM/WORKSPACE/TexgitSchema.xsd" version="1.0-academic">
+    <FlatFile>
+        <layout>
+            <name>Retorno Bancário - Santander 400</name>
+            <version>Versão 0.0.1</version>
+            <description>Através deste layout, você poderá ler/gerar arquivos para retorno cnab400 do Santander</description>
+        </layout>
+        <GroupOfRecords>
+            <Record name="Header">
+                <GroupOfFields>
+                    <IdType name="IDReg" value="0" length="1" position="1"/>
+                    <Field name="IdentificacaoRetorno" value="2" type="INTEGER" length="1" padding="ZERO_LEFT"/>
+                    <Field name="LiteralRetorno" value="RETORNO" length="7"/>
+                    <Field name="CodigoServico" value="01" type="INTEGER" length="2" padding="ZERO_LEFT"/>
+                    <Field name="LiteralServico" value="COBRANCA" length="15"/>
+                    <Field name="AgenciaCedente" type="INTEGER" length="4" padding="ZERO_LEFT"/>
+                    <Field name="ContaCorrente" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="ContaCorrente" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="NomeEmpresa" length="30"/>
+                    <Field name="NumeroBanco" type="INTEGER" value="033" length="3" padding="ZERO_LEFT"/>
+                    <Field name="NomeBanco" length="15" value="SANTANDER"/>
+                    <Field name="DataGravacaoArquivo" type="DATE" length="6" format="DATE_DDMMYY"/>
+                    <Field name="Densidade" type="INTEGER" length="8"/>
+                    <Field name="Branco" value=" " length="277"/>
+                    <Field name="SiglaEmpresa" length="4"/>
+                    <Field name="Branco" value=" " length="2"/>
+                    <Field name="NumeroVersao" length="3" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NroSequencialRegistro" value="000001" type="INTEGER" length="6" padding="ZERO_LEFT"/>
+                </GroupOfFields>
+            </Record>
+            <Record name="Detalhe-Transacao" repeatable="true">
+                <GroupOfFields>
+                    <IdType name="IDReg" value="1" length="1" position="1"/>
+                    <Field name="TipoInscricaoEmpresa" length="2" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NInscricaoEmpresa" length="14" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="AgenciaCedente" type="INTEGER" length="4" padding="ZERO_LEFT"/>
+                    <Field name="ContaCorrente" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="ContaCorrente" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="UsoEmpresa" length="25"/>
+                    <Field name="NossoNumero" length="8"/>
+                    <Field name="Branco" value=" " length="37"/>
+                    <Field name="Carteira" type="INTEGER" length="1" padding="ZERO_LEFT"/>
+                    <Field name="IdentificacaoOcorrencia" type="INTEGER" length="2" padding="ZERO_LEFT"/>
+                    <Field name="DataOcorrencia" type="DATE" length="6" format="DATE_DDMMYY"/>
+                    <Field name="NDocumento" length="10"/>
+                    <Field name="NossoNumero" length="8"/>
+                    <Field name="CodigoRemessa" type="INTEGER" length="2" padding="ZERO_LEFT"/>
+                    <Field name="CodigoErro1" length="3"/>
+                    <Field name="CodigoErro2" length="3"/>
+                    <Field name="CodigoErro3" length="3"/>
+                    <Field name="Branco" value=" " length="1"/>
+                    <Field name="DataVencimentoTitulo" type="DATE" length="6" format="DATE_DDMMYY"/>
+                    <Field name="ValorTitulo" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="NumeroBanco" type="INTEGER" value="033" length="3" padding="ZERO_LEFT"/>
+                    <Field name="AgenciaCedente" type="INTEGER" length="5" padding="ZERO_LEFT"/>
+                    <Field name="EspecieTitulo" type="INTEGER" length="2" padding="ZERO_LEFT"/>
+                    <Field name="ValorCobranca" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorDespesas" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorJurosAtraso" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorIOF" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorAbatimento" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorDesconto" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorPrincipal" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="JurosMora" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="OutrosCreditos" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="Branco" value=" " length="1"/>
+                    <Field name="Aceite" value="N" length="1"/>
+                    <Field name="Branco" value=" " length="1"/>
+                    <Field name="DataCredito" type="DATE" length="6" format="DATE_DDMMYY"/>
+                    <Field name="NomeSacado" length="36"/>
+                    <Field name="IdentificadorComplementoConta" length="1" value="I"/>
+                    <Field name="Moeda" length="2" value="00" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="ValorTitulo" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorIOC" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="ValorDebitoCredito" type="INTEGER" length="13" padding="ZERO_LEFT"/>
+                    <Field name="IdentificaçãoDebCred" length="1"/>
+                    <Field name="Branco" value=" " length="3"/>
+                    <Field name="ComplementoConta" length="1" type="INTEGER"/>
+                    <Field name="SiglaEmpresa" length="4"/>
+                    <Field name="Branco" value=" " length="2"/>
+                    <Field name="NumeroVersao" length="3" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NroSequencialRegistro" type="INTEGER" length="6" padding="ZERO_LEFT"/>
+                </GroupOfFields>
+            </Record>
+            <Record name="Trailler">
+                <GroupOfFields>
+                    <IdType name="IDReg" value="9" length="1" position="1"/>
+                    <Field name="IdentificacaoRetorno" type="INTEGER" value="2" length="1" padding="ZERO_LEFT"/>
+                    <Field name="TipoRegisto" type="INTEGER" value="01" length="2" padding="ZERO_LEFT"/>
+                    <Field name="NumeroBanco" type="INTEGER" value="033" length="3" padding="ZERO_LEFT"/>
+                    <Field name="Brancos" value=" " length="10"/>
+                    <Field name="QuantidadeTitulos" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="ValorTotal" type="INTEGER" length="14" padding="ZERO_LEFT"/>
+                    <Field name="NAviso" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="Brancos" value=" " length="10"/>
+                    <Field name="Zeros" value="0" length="30"/>
+                    <Field name="Brancos" value=" " length="10"/>
+                    <Field name="QuantidadeTitulos" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="ValorTotal" length="14" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NAviso" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="Brancos" value=" " length="10"/>
+                    <Field name="QuantidadeTitulos" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="ValorTotal" length="14" type="INTEGER" padding="ZERO_LEFT"/>
+                    <Field name="NAviso" type="INTEGER" length="8" padding="ZERO_LEFT"/>
+                    <Field name="Brancos" value=" " length="224"/>
+                    <Field name="NumeroVersao" length="3" value="000"/>
+                    <Field name="NroSequencialRegistro" type="INTEGER" length="6" padding="ZERO_LEFT"/>
+                </GroupOfFields>
+            </Record>
+        </GroupOfRecords>
+    </FlatFile>
+</txg:Texgit>

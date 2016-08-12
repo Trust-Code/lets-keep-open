@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_renewal" model="ir.ui.view">
+            <field name="name">Renewal Contract</field>
+            <field name="model">account.renewal</field>
+            <field name="arch" type="xml">
+                <form string="Renewal Contract" version="7.0">
+                    <separator colspan="4" string="Do you really want to renewal contract ?" />
+                    <footer>
+                        <button name="make_renewal_contract" string="Renewal Contract" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_account_renewal" model="ir.actions.act_window">
+            <field name="name">Renewal Contract</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.renewal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_account_renewal"/>
+            <field name="target">new</field>
+            <field name="multi">True</field>
+        </record>
+
+        <record model="ir.values" id="action_account_multi_renewal">
+            <field name="model_id" ref="model_account_renewal" />
+            <field name="name">Renewal Contract</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_account_renewal'))" />
+            <field name="key">action</field>
+            <field name="model">account.analytic.account</field>
+        </record>
+
+    </data>
+</openerp>

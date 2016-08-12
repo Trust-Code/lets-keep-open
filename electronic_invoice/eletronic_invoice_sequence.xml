@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+<!--RPS Code: Sequences & sequences codes-->
+        <record id="seq_type_rps_code" model="ir.sequence.type">
+            <field name="name">RPS Code Sequence</field>
+            <field name="code">rps.code.seq</field>
+        </record>
+
+        <record id="seq_rps_code" model="ir.sequence">
+            <field name="name">RPS Code Sequence</field>
+            <field name="code">rps.code.seq</field>
+            <field eval="1" name="number_next_actual"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="0" name="padding"/>
+        </record>
+
+    </data>
+</openerp>

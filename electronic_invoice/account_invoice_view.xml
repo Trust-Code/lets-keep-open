@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <delete id="l10n_br_account.nfe_export_invoice" model="ir.actions.act_window"/>
+
+        <record model="ir.ui.view" id="view_l10n_br_account_invoice_ei_form">
+			<field name="name">l10n_br_account.invoice.ei.form</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_invoice_form" />
+			<field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Dados Adicionais']/notebook/page[@string='CFOP']" position="before">
+                    <page string="Electronic Invoice">
+                        <group colspan="4" name="electronic_invoice_control">
+                            <field name="ei_status"/>
+                            <field name="rps_code" attrs="{'invisible':[('fiscal_type','!=','service')]}"/>
+                            <field name="rps_serie" attrs="{'invisible':[('fiscal_type','!=','service')]}"/>
+                            <field name="ei_code"/>
+                            <field name="ei_verification_code"/>
+                            <field name="ei_access_key" attrs="{'invisible':[('fiscal_type','=','service')]}"/>
+                            <field name="ei_protocol" attrs="{'invisible':[('fiscal_type','=','service')]}"/>
+                            <field name="ei_date"/>
+                            <field name="ei_description"/>
+                            <field name="ei_justification"/>
+                            <field name="ei_correction_letter" attrs="{'invisible':[('fiscal_type','=','service')]}"/>
+                        </group>
+                        <group colspan="4" string="Electronic Invoice Events">
+                            <field nolabel="1" name="ei_events_ids">
+                                <tree>
+                                    <field name="event_date"/>
+                                    <field name="user_id"/>
+                                    <field name="action"/>
+                                    <field name="message"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+		<record id="view_l10n_br_account_invoice_ei_filter" model="ir.ui.view">
+			<field name="name">l10n_br_account.invoice.ei.select</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_invoice_filter" />
+			<field name="priority">32</field>
+			<field name="arch" type="xml">
+				<filter string="Exportada Receita" position="replace"/>
+                <filter name="unpaid" position="after">
+                    <separator/>
+                    <filter name="ei_to_send" string="EI To Send" domain="['|',('ei_status','=','failed'),('ei_status','=',False)]" help="Electronic Invoices to send"/>
+                    <filter name="ei_confirmed" string="EI Confirmed" domain="[('ei_status','=','confirmed')]" help="Electronic Invoices confirmed"/>
+                    <filter name="ei_cancelled" string="EI Cancelled" domain="[('ei_status','=','cancelled')]" help="Electronic Invoices cancelled"/>
+                </filter>
+                <filter string="Status" position="after">
+                    <filter string="EI Status" icon="terp-stock_effects-object-colorize" domain="[]"  context="{'group_by':'ei_status'}"/>
+                </filter>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_l10n_br_account_ei_invoice_tree">
+			<field name="name">l10n_br_account_ei.invoice.tree</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_invoice_tree" />
+			<field name="arch" type="xml">
+				<field name="state" position="after">
+					<field name="ei_status" string="EI Status"/>
+				</field>
+			</field>
+		</record>
+
+        <record model="ir.ui.view" id="view_electronic_invoice_form">
+			<field name="name">electronic.invoice</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_invoice_form" />
+			<field name="arch" type="xml">
+
+                <xpath expr="/form/sheet/h1" position="before">
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button name="%(action_electronic_invoice)d" type="action" string="Electronic Invoice" attrs="{'invisible': [('state','=','draft')]}" context="{'ei_status':ei_status}"/>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+		<act_window id="action_multi_electronic_invoice"
+                    multi="True"
+                    key2="client_action_multi"
+			        name="Electronic Invoice"
+			        src_model="account.invoice"
+                    res_model="electronic.invoice"
+                    view_id="wizard_electronic_invoice"
+			        view_mode="form"
+                    target="new"
+                    view_type="form" />
+
+    </data>
+</openerp>

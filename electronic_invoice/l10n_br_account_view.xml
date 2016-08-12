@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <record model="ir.ui.view" id="view_l10n_br_account_service_type_ext_form">
+            <field name="name">l10n_br_account.service.type.ext.form</field>
+            <field name="model">l10n_br_account.service.type</field>
+            <field name="inherit_id" ref="l10n_br_account.view_l10n_br_account_service_type_form"/>
+            <field name="arch" type="xml">
+                <field name="internal_type" position="after">
+                    <field name="ei_description"/>
+                </field>
+            </field>
+        </record>
+
+	</data>
+
+</openerp>

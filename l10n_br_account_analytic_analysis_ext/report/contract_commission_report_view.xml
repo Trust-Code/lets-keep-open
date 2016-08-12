@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <!--Menu-->
+
+    <menuitem id="menu_report_contract_commission"
+              parent="base.next_id_64"
+              name="Contract Commission"
+              sequence="12" />
+
+    <!--Partner Commission-->
+
+    <record id="view_contract_partner_commission_tree" model="ir.ui.view">
+        <field eval="1" name="priority"/>
+        <field name="name">contract.partner.commission.tree</field>
+        <field name="model">contract.partner.commission.report</field>
+        <field name="arch" type="xml">
+            <tree string="Contract Partner Commission" create="false">
+                <field name="period_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+                <field name="analytic_account_id"/>
+                <field name="internal_number"/>
+                <field name="received"/>
+                <field name="perc_commission"/>
+                <field name="value_commission"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_contract_partner_commission_search" model="ir.ui.view">
+        <field name="name">contract.partner.commission.search</field>
+        <field name="model">contract.partner.commission.report</field>
+        <field name="arch" type="xml">
+            <search string="Contract Partner Commission">
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Open" name="open" domain="[('state','in',('open','proforma2','sefaz_export'))]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>
+                <filter string="Paid" name="paid" domain="[('state','=','paid')]"/>
+                <group expand="1" string="Group By...">
+                    <filter string="Period" icon="terp-personal" name="period" context="{'group_by':'period_id'}"/>
+                    <filter string="Partner" icon="terp-partner"  name="partner" context="{'group_by':'partner_id'}"/>
+                    <filter string="Analytic Account" icon="terp-folder-green" name="analytic_account" context="{'group_by':'analytic_account_id'}" groups="analytic.group_analytic_accounting"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_contract_partner_commission_report" model="ir.actions.act_window">
+        <field name="name">Partner Commission</field>
+        <field name="res_model">contract.partner.commission.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_contract_partner_commission_search"/>
+        <field name="view_id" ref="view_contract_partner_commission_tree"/>
+        <field name="context">{'search_default_period': 1,'search_default_partner': 1,'search_default_open': 1,'search_default_paid': 1 }</field>
+    </record>
+
+    <menuitem action="action_contract_partner_commission_report"
+              id="menu_report_contract_partner_commission"
+              parent="l10n_br_account_analytic_analysis_ext.menu_report_contract_commission"
+              sequence="1"/>
+
+    <!--Salesperson Commission-->
+
+    <record id="view_contract_salesperson_commission_tree" model="ir.ui.view">
+        <field eval="1" name="priority"/>
+        <field name="name">contract.salesperson.commission.tree</field>
+        <field name="model">contract.salesperson.commission.report</field>
+        <field name="arch" type="xml">
+            <tree string="Contract Salesperson Commission" create="false">
+                <field name="period_id" invisible="1"/>
+                <field name="salesperson_id" invisible="1"/>
+                <field name="analytic_account_id"/>
+                <field name="internal_number"/>
+                <field name="received"/>
+                <field name="perc_commission"/>
+                <field name="value_commission"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_contract_salesperson_commission_search" model="ir.ui.view">
+        <field name="name">contract.salesperson.commission.search</field>
+        <field name="model">contract.salesperson.commission.report</field>
+        <field name="arch" type="xml">
+            <search string="Contract Salesperson Commission">
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Open" name="open" domain="[('state','in',('open','proforma2','sefaz_export'))]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>
+                <filter string="Paid" name="paid" domain="[('state','=','paid')]"/>
+                <group expand="1" string="Group By...">
+                    <filter string="Period" icon="terp-personal" name="period" context="{'group_by':'period_id'}"/>
+                    <filter string="Salesperson" icon="terp-partner"  name="salesperson" context="{'group_by':'salesperson_id'}"/>
+                    <filter string="Analytic Account" icon="terp-folder-green" name="analytic_account" context="{'group_by':'analytic_account_id'}" groups="analytic.group_analytic_accounting"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_contract_salesperson_commission_report" model="ir.actions.act_window">
+        <field name="name">Salesperson Commission</field>
+        <field name="res_model">contract.salesperson.commission.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="view_contract_salesperson_commission_search"/>
+        <field name="view_id" ref="view_contract_salesperson_commission_tree"/>
+        <field name="context">{'search_default_period': 1,'search_default_salesperson': 1,'search_default_open': 1,'search_default_paid': 1 }</field>
+    </record>
+
+
+    <menuitem action="action_contract_salesperson_commission_report"
+              id="menu_report_contract_salesperson_commission"
+              parent="l10n_br_account_analytic_analysis_ext.menu_report_contract_commission"
+              sequence="2"/>
+
+</data>
+</openerp>

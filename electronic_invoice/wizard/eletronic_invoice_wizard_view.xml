@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="wizard_electronic_invoice" model="ir.ui.view">
+            <field name="name">Electronic Invoice</field>
+            <field name="model">electronic.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Electronic Invoice" version="7.0">
+
+                    <p class="oe_grey">
+                        Electronic Invoice Transaction
+                    </p>
+
+                    <footer>
+                        <button string="Send" name="send" type="object"/>
+                        <button string="Cancel" name="cancel" type="object"/>
+                        <button string="Inactivate" name="inactivate" type="object"/>
+                        <button string="Correction Letter" name="correction_letter" type="object"/>
+                        <button string="Schedule To Send" name="schedule_to_send" type="object"/>
+                        <button string="Prepare To Resend" name="prepare_to_resend" type="object"  invisible="context.get('ei_status') not in ['cancelled']"/>
+                        <button string="Manual Electronic Invoice" name="action_manual_electronic_invoice" type="object"  invisible="context.get('ei_status') in ['inactive','scheduled','failed','cancelled','sent','confirmed']"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_electronic_invoice" model="ir.actions.act_window">
+            <field name="name">Electronic Invoice</field>
+            <field name="res_model">electronic.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_electronic_invoice"/>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="manual_electronic_invoice_form" model="ir.ui.view">
+            <field name="name">Manual Electronic Invoice</field>
+            <field name="model">electronic.invoice.manual</field>
+            <field name="arch" type="xml">
+                <form string="Manual Electronic Invoice" version="7.0">
+                    <p class="oe_grey">
+                        Manual Electronic Invoice
+                    </p>
+                    <group>
+                        <field name="ei_code"/>
+                        <field name="ei_verification_code"/>
+                        <field name="ei_date"/>
+                    </group>
+                    <footer>
+                        <button string="Save" name="save_data" type="object" context="context.get('active_id')"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

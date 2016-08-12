@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <record id="account_analytic_account_form_ih01" model="ir.ui.view">
+        <field name="name">account.analytic.account.form.ih01</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="account_analytic_analysis.account_analytic_account_form_form"/>
+        <field eval="40" name="priority"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='set_pending']" position="before">
+                <button name="%(action_account_make_invoice)d" string="Create Invoice" type="action" groups="account.group_account_invoice" attrs="{'invisible':[('state','!=','open')]}" class="oe_highlight"/>
+                <button name="%(action_account_renewal)d" string="Renewal Contract" type="action" groups="account.group_account_invoice" class="oe_highlight"/>
+            </xpath>
+            <xpath expr='//div[@name="duration"]' position="after">
+                <field name="date_cancel"/>
+                <field name="months_renewal"/>
+                <field name="res_currency_id"/>
+            </xpath>
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">[('customer', '=', True)]</attribute>
+            </field>
+            <xpath expr='//separator[@name="toinvoice"]' position="after">
+                <group>
+                    <field name="generate_invoice_parent"/>
+                    <field name="grouping_invoice_parent"/>
+                </group>
+            </xpath>
+            <page string="Contract Information" position="after">
+                <page string="Recurring Invoices" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                    <group>
+                        <group>
+                            <field name="recurring_interval" class="oe_inline" attrs="{'invisible':[('grouping_invoice_parent','==',True)]}"/>
+                            <field name="recurring_rule_type" class="oe_inline" attrs="{'invisible':[('grouping_invoice_parent','==',True)]}"/>
+                            <field name="recurring_next_date" attrs="{'invisible':[('grouping_invoice_parent','==',True)]}"/>
+                        </group>
+                        <group>
+                            <field name="fiscal_type" attrs="{'required':[('recurring_next_date','!=',False),('grouping_invoice_parent','==',False)],'invisible':[('grouping_invoice_parent','==',True)]}"/>
+                            <field name="payment_term_id"/>
+                        </group>
+                    </group>
+                    <field name="recurring_invoice_line_ids" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                        <tree string="Account Analytic Lines" editable="bottom">
+                            <field name="product_id" on_change="product_id_change(product_id,parent.partner_id)"/>
+                            <field name="quantity" on_change="subtotal_change(quantity,price_unit)"/>
+                            <field name="price_unit" on_change="subtotal_change(quantity,price_unit)"/>
+                            <field name="price_subtotal"/>
+                            <field name="inactive_date"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Additional Item" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                    <field name="invoice_additem_ids">
+                        <tree string="Additional Item" editable="bottom">
+                            <field name="product_id" on_change="product_id_change(product_id,parent.partner_id)"/>
+                            <field name="quantity" on_change="subtotal_change(quantity,price_unit)"/>
+                            <field name="price_unit" on_change="subtotal_change(quantity,price_unit)"/>
+                            <field name="price_subtotal"/>
+                            <field name="invoice_date_planned"/>
+                            <field name="invoice_date"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Special Condition" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                    <field name="special_condition_ids">
+                        <tree string="Special Condition Item" editable="bottom">
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="discount"/>
+                            <field name="payment_term"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Sales Commission" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                    <group>
+                        <group>
+                            <field name="salesperson_id"/>
+                        </group>
+                        <group>
+                            <field name="salesperson_commission"/>
+                        </group>
+                    </group>
+                    <field name="partner_commission_ids">
+                        <tree string="Partner Commission" editable="bottom">
+                            <field name="partner_id"/>
+                            <field name="partner_commission"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Serial Number" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                    <field name="stock_production_lot_ids"/>
+                </page>
+                <page string="Child Contracts" attrs="{'invisible':[('type','not in',['contract', 'template'])]}">
+                    <field name="child_ids"/>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_overdue_search_ext" model="ir.ui.view">
+        <field name="name">account.analytic.account.search.ext</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="account_analytic_analysis.view_account_analytic_account_overdue_search"/>
+        <field name="arch" type="xml">
+            <filter name="cancelled" position="replace">
+                <filter name="cancelled" string="Cancelled" domain="[('state','=','cancelled')]" help="Cancelled contracts"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_account_analytic_account_overdue_search_inh" model="ir.ui.view">
+        <field name="name">account.analytic.account.search.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="account_analytic_analysis.view_account_analytic_account_overdue_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="/search/group/filter[@string='Pricelist']" position="after">
+                <filter string="Payment Term" domain="[]" context="{'group_by' : 'payment_term_id'}" />
+            </xpath>
+        </field>
+    </record>
+
+    </data>
+</openerp>

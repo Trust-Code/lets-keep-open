@@ -1,0 +1,835 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* bank_transaction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-19 18:11+0000\n"
+"PO-Revision-Date: 2015-06-19 18:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bank_transaction
+#: field:account.move.line,our_number:0
+msgid "Our Number"
+msgstr "Nosso Número"
+
+#. module: bank_transaction
+#: selection:cnab.file_format,type:0
+#: selection:cnab.wizard.file_format_loader,type:0
+msgid "Arquivo de Remessa Bancária"
+msgstr "Arquivo de Remessa Bancária"
+
+#. module: bank_transaction
+#: field:account.bank.file,filename:0
+#: field:account.move.line,filename:0
+#: field:cnab.file_format,filename:0
+msgid "Filename"
+msgstr "Nome do Arquivo"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+#: view:payment.slip:0
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: bank_transaction
+#: model:ir.actions.act_window,name:bank_transaction.action_bank_file
+msgid "Bank File Action"
+msgstr "Arquivos Bancários"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+#: selection:account.bank.file,file_type:0
+msgid "Extrato"
+msgstr "Extrato"
+
+#. module: bank_transaction
+#: model:email.template,subject:bank_transaction.email_template_edi_invoice
+msgid "${object.company_id.name} Payment Slip (Ref ${object.name or 'n/a'})"
+msgstr "INNOVA CAPTURE - MENSALIDADE SISTEMA TEF"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_record_format
+msgid "cnab.record_format"
+msgstr "cnab.record_format"
+
+#. module: bank_transaction
+#: field:partner.payment.type.default,company_id:0
+msgid "Company"
+msgstr "Empresa"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid "Billing Information"
+msgstr "Informações do Boleto"
+
+#. module: bank_transaction
+#: field:payment.type,layout_retorno:0
+msgid "Layout de Retorno"
+msgstr "Layout de Retorno"
+
+#. module: bank_transaction
+#: field:account.bank.event,code_occurrence:0
+#: view:res.bank:0
+msgid "Code Occurrence"
+msgstr "Código de Ocorrência"
+
+#. module: bank_transaction
+#: model:ir.ui.menu,name:bank_transaction.menu_cnab_root
+msgid "CNAB"
+msgstr "CNAB"
+
+#. module: bank_transaction
+#: field:res.partner.bank,bank_col_service:0
+msgid "Bank Collection Service"
+msgstr "Carteira de Cobrança Bancária"
+
+#. module: bank_transaction
+#: selection:payment.type,type_banking_billing:0
+msgid "Registrada"
+msgstr "Registrada"
+
+#. module: bank_transaction
+#: field:cnab.field_format,value:0
+msgid "Value"
+msgstr "Valor"
+
+#. module: bank_transaction
+#: field:cnab.field_format,length:0
+msgid "Length"
+msgstr "Tamanho"
+
+#. module: bank_transaction
+#: field:cnab.field_format,position:0
+msgid "Position"
+msgstr "Posição"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_field_format
+msgid "cnab.field_format"
+msgstr "cnab.field_format"
+
+#. module: bank_transaction
+#: view:payment.slip:0
+msgid "Confirm Create Slip"
+msgstr "Confirmar Criação do Boleto"
+
+#. module: bank_transaction
+#: field:cnab.wizard.file_format_loader,replace:0
+msgid "Replace any entries with the same name"
+msgstr "Substitua Qualquer Entrada com o Mesmo Nome"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+msgid "Date Create"
+msgstr "Data de Criação"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_account_bank_event
+msgid "account.bank.event"
+msgstr "account.bank.event"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_res_partner
+#: field:partner.payment.type.default,partner_id:0
+#: view:payment.slip:0
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: bank_transaction
+#: view:cnab.wizard.exporter:0
+msgid "Only Export"
+msgstr "Somente Exportar"
+
+#. module: bank_transaction
+#: field:cnab.wizard.importer,payment_type:0
+#: field:partner.payment.type.default,payment_type:0
+msgid "Payment Type"
+msgstr "Tipo de Pagamento"
+
+#. module: bank_transaction
+#: selection:account.bank.event,action:0
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: bank_transaction
+#: field:res.partner.bank,monthly_interest:0
+msgid "Monthly Interest (%)"
+msgstr "Juros Mensais (%)"
+
+#. module: bank_transaction
+#: model:email.template,body_html:bank_transaction.email_template_edi_invoice
+msgid "\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello ${object.partner_id.name},</p>\n"
+"\n"
+"    <p>A new payment slip is available for you: </p>\n"
+"\n"
+"    <p style=\"border-left: 1px solid #8e0000; margin-left: 30px;\">\n"
+"       &nbsp;&nbsp;<strong>REFERENCES</strong><br />\n"
+"       &nbsp;&nbsp;Payment slip number: <strong> ${object.name}</strong><br />\n"
+"       &nbsp;&nbsp;Payment slip total: <strong> R$ ${object.debit}</strong><br />\n"
+"       &nbsp;&nbsp;Payment slip date create: ${object.slip_create_date}<br />\n"
+"       % if object.origin:\n"
+"       &nbsp;&nbsp;Order reference: ${object.origin}<br />\n"
+"       % endif\n"
+"       % if object.user_id:\n"
+"       &nbsp;&nbsp;Your contact: <a href=\"mailto:${object.user_id.email or ''}?subject=Invoice%20${object.number}\">${object.user_id.name}</a>\n"
+"       % endif\n"
+"    </p>\n"
+"\n"
+"    % if object.paypal_url:\n"
+"    <br/>\n"
+"    <p>It is also possible to directly pay with Paypal:</p>\n"
+"        <a style=\"margin-left: 120px;\" href=\"${object.paypal_url}\">\n"
+"            <img class=\"oe_edi_paypal_button\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\"/>\n"
+"        </a>\n"
+"    % endif\n"
+"\n"
+"    <br/>\n"
+"    <p>If you have any question, do not hesitate to contact us.</p>\n"
+"    <p>Thank you for choosing ${object.company_id.name or 'us'}!</p>\n"
+"    <br/>\n"
+"    <br/>\n"
+"    <div style=\"width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"        <h3 style=\"margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;\">\n"
+"            <strong style=\"text-transform:uppercase;\">${object.company_id.name}</strong></h3>\n"
+"    </div>\n"
+"    <div style=\"width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;\">\n"
+"        <span style=\"color: #222; margin-bottom: 5px; display: block; \">\n"
+"        % if object.company_id.street:\n"
+"            ${object.company_id.street}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.street2:\n"
+"            ${object.company_id.street2}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.city or object.company_id.zip:\n"
+"            ${object.company_id.zip} ${object.company_id.city}<br/>\n"
+"        % endif\n"
+"        % if object.company_id.country_id:\n"
+"            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>\n"
+"        % endif\n"
+"        </span>\n"
+"        % if object.company_id.phone:\n"
+"            <div style=\"margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; \">\n"
+"                Phone:&nbsp; ${object.company_id.phone}\n"
+"            </div>\n"
+"        % endif\n"
+"        % if object.company_id.website:\n"
+"            <div>\n"
+"                Web :&nbsp;<a href=\"${object.company_id.website}\">${object.company_id.website}</a>\n"
+"            </div>\n"
+"        %endif\n"
+"        <p></p>\n"
+"    </div>\n"
+"</div>   "
+msgstr "<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"<p>Prezado Cliente ${object.partner_id.name},</p>\n"
+"   <p>\n"
+"Você recebe o  boleto da INNOVA CAPTURE via correios,  referente à mensalidade do sistema TEF, sistema este que viabiliza as vendas com cartões em seu estabelecimento.\n"
+"</p>\n"
+"\n"
+"<p>Para sua comodidade segue em anexo o Boleto.\n"
+"</p>\n"
+"<p>\n"
+"Evite o bloqueio do sistema, efetuando o pagamento até a data de vencimento.\n"
+"</p>\n"
+"<p>\n"
+"Duvidas, nos contate pelo e-mail e numero de telefone abaixo.\n"
+"</p>\n"
+"<p>\n"
+"Atenciosamente.\n"
+"</p>\n"
+"<p>\n"
+"Equipe Fiancanceira\n"
+"</p>\n"
+"<p>\n"
+"Telefone: 55 11 4063.0302 opção 03\n"
+"</p>\n"
+"<p>\n"
+"e-mail: financeiro@innovacapture.com.br\n"
+"</p>\n"
+"\n"
+"<br/>\n"
+"\n"
+"</div>   "
+
+#. module: bank_transaction
+#: field:res.partner.bank,writeoff_acc_id_default:0
+msgid "Counterpart Account Default"
+msgstr "Conta de Contrapartida Padrão"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,type:0
+msgid "SequencialNumber"
+msgstr "Número Sequencial"
+
+#. module: bank_transaction
+#: view:cnab.wizard.exporter:0
+msgid "Exportar CNAB"
+msgstr "Exportar CNAB"
+
+#. module: bank_transaction
+#: field:cnab.file_format,version:0
+msgid "Version"
+msgstr "Versão"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+#: selection:account.bank.file,file_type:0
+msgid "Retorno"
+msgstr "Retorno"
+
+#. module: bank_transaction
+#: field:payment.type,layout_remessa:0
+msgid "Layout de Remessa"
+msgstr "Layout de Remessa"
+
+#. module: bank_transaction
+#: field:cnab.field_format,type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,value_type:0
+msgid "STRING"
+msgstr "Texto"
+
+#. module: bank_transaction
+#: model:ir.actions.act_window,name:bank_transaction.act_window_cnab_exporter
+msgid "Generation Bank Remessa"
+msgstr "Gerar Arquivo de Remessa"
+
+#. module: bank_transaction
+#: view:cnab.file_format:0
+msgid "Layouts de Arquivos"
+msgstr "Layouts de Arquivos"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+msgid "Show Files Retorno"
+msgstr "Mostrar Arquivos de Retorno"
+
+#. module: bank_transaction
+#: selection:payment.type,type_banking_billing:0
+msgid "Sem Registro"
+msgstr "Sem Registro"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,padding:0
+msgid "ZERO_LEFT"
+msgstr "Zeros à esquerda"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,value_type:0
+msgid "INTEGER"
+msgstr "Inteiro"
+
+#. module: bank_transaction
+#: selection:cnab.file_format,type:0
+#: selection:cnab.wizard.file_format_loader,type:0
+#: selection:cnab.wizard.importer,type:0
+msgid "Arquivo de Extrato Bancário"
+msgstr "Arquivo de Extrato Bancário"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid ": Interest"
+msgstr ": Juros"
+
+#. module: bank_transaction
+#: model:ir.actions.act_window,name:bank_transaction.act_window_send_email
+#: view:payment.slip:0
+msgid "Send by Email"
+msgstr "Mandar por e-mail"
+
+#. module: bank_transaction
+#: field:res.partner,payment_type_default:0
+msgid "Payment Type Default"
+msgstr "Tipo de Pagamento Padrão"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_bradesco_payee_info
+msgid "cnab.bradesco.payee_info"
+msgstr "cnab.bradesco.payee_info"
+
+#. module: bank_transaction
+#: view:payment.type:0
+msgid "Layout dos Arquivos"
+msgstr "Layout dos Arquivos"
+
+#. module: bank_transaction
+#: field:res.partner.bank,bank_col_agreement:0
+msgid "Bank Collection Agreement"
+msgstr "Convênio Bancário"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid "Write here the introduction in the letter,\n"
+"                        according to the level of the follow-up. You can\n"
+"                        use the following keywords in the text. Don't\n"
+"                        forget to translate in all languages you installed\n"
+"                        using to top right icon."
+msgstr "Escreva aqui as instruções que aparecerão no boleto.\n"
+"                        Se necessário, utilize as seguintes tags:\n"
+"                        %(monthly_fine)s para informar multa;\n"
+"                        %(monthly_interest)s para informar os juros.\n"
+""
+
+#. module: bank_transaction
+#: view:cnab.wizard.exporter:0
+#: view:payment.slip:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: bank_transaction
+#: view:cnab.wizard.file_format_loader:0
+#: model:ir.actions.act_window,name:bank_transaction.action_cnab_file_format_loader
+#: model:ir.ui.menu,name:bank_transaction.menu_cnab_file_format_loader
+msgid "Carregar Layout de Arquivos"
+msgstr "Carregar Layout de Arquivos"
+
+#. module: bank_transaction
+#: selection:res.partner.bank,payment_option_default:0
+msgid "Reconcile Payment Balance"
+msgstr "Reconciliar o Balanço do Pagamento"
+
+#. module: bank_transaction
+#: field:res.bank,code_occurrence_ids:0
+msgid "Codes of Occurrence"
+msgstr "Códigos da Ocorrência"
+
+#. module: bank_transaction
+#: view:cnab.field_format:0
+msgid "Layout dos Campos"
+msgstr "Layout dos Campos"
+
+#. module: bank_transaction
+#: field:cnab.field_format,value_type:0
+msgid "Value Type"
+msgstr "Tipo de Valor"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid "%(monthly_fine)s"
+msgstr "%(monthly_fine)s"
+
+#. module: bank_transaction
+#: field:cnab.field_format,record_id:0
+msgid "Record"
+msgstr "Registro"
+
+#. module: bank_transaction
+#: view:res.bank:0
+msgid "Communication"
+msgstr "Comunicações"
+
+#. module: bank_transaction
+#: view:cnab.wizard.exporter:0
+msgid "Export and View Bank Files"
+msgstr "Exportar e Vizualizar os Arquivos Bancários"
+
+#. module: bank_transaction
+#: selection:cnab.file_format,type:0
+#: selection:cnab.wizard.file_format_loader,type:0
+#: selection:cnab.wizard.importer,type:0
+msgid "Arquivo de Retorno Bancário"
+msgstr "Arquivo de Retorno Bancário"
+
+#. module: bank_transaction
+#: view:cnab.wizard.exporter:0
+#: view:payment.slip:0
+msgid "Mensagem"
+msgstr "Mensagem"
+
+#. module: bank_transaction
+#: model:ir.actions.act_window,name:bank_transaction.act_window_payment_slip
+#: view:payment.slip:0
+msgid "Payment Slip"
+msgstr "Boleto"
+
+#. module: bank_transaction
+#: field:cnab.record_format,records_ids:0
+msgid "Inner Records"
+msgstr "Registros Opcionais"
+
+#. module: bank_transaction
+#: view:cnab.wizard.importer:0
+msgid "Import"
+msgstr "Importar"
+
+#. module: bank_transaction
+#: field:cnab.record_format,record_id:0
+msgid "Parent Record"
+msgstr "Registro Pai"
+
+#. module: bank_transaction
+#: field:account.move.line,status:0
+msgid "Status"
+msgstr "Status"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_bradesco_payer_info
+msgid "cnab.bradesco.payer_info"
+msgstr "cnab.bradesco.payer_info"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid "%(monthly_interest)s"
+msgstr "%(monthly_interest)s"
+
+#. module: bank_transaction
+#: field:cnab.file_format,records_ids:0
+msgid "Records"
+msgstr "Registros"
+
+#. module: bank_transaction
+#: field:cnab.field_format,padding:0
+msgid "Padding"
+msgstr "Completar"
+
+#. module: bank_transaction
+#: field:res.partner.bank,generate_payment_slip:0
+msgid "Payment Slip Generate"
+msgstr "Gerar Boleto"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+msgid "Show Files Extrato"
+msgstr "Mostrar Extratos Bancários"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_account_move_line
+msgid "Journal Items"
+msgstr "Itens do Diário"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_payment_slip
+msgid "payment.slip"
+msgstr "payment.slip"
+
+#. module: bank_transaction
+#: field:account.move.line,status_aux:0
+msgid "Status Auxiliary"
+msgstr "Status Auxiliar"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: bank_transaction
+#: field:account.bank.file,cnab_file:0
+msgid "CNAB File"
+msgstr "Arquivo CNAB"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid "Default for Payments With Interest"
+msgstr "Padrão para Pagamentos com Juros"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_partner_payment_type_default
+msgid "partner.payment.type.default"
+msgstr "partner.payment.type.default"
+
+#. module: bank_transaction
+#: view:cnab.file_format:0
+#: model:ir.actions.act_window,name:bank_transaction.action_cnab_file_format
+#: model:ir.ui.menu,name:bank_transaction.menu_cnab_file_format
+msgid "Layout de Arquivos"
+msgstr "Layout de Arquivos"
+
+#. module: bank_transaction
+#: field:account.bank.event,action:0
+msgid "Action"
+msgstr "Ação"
+
+#. module: bank_transaction
+#: view:cnab.wizard.file_format_loader:0
+msgid "Load"
+msgstr "Carregar"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+#: field:account.bank.file,file_type:0
+#: field:cnab.file_format,type:0
+#: field:cnab.wizard.file_format_loader,type:0
+#: field:cnab.wizard.importer,type:0
+msgid "File Type"
+msgstr "Tipo de arquivo"
+
+#. module: bank_transaction
+#: selection:payment.type,type_banking_billing:0
+msgid "Escritural"
+msgstr "Escritural"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,value_type:0
+msgid "BIGDECIMAL"
+msgstr "BIGDECIMAL"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_file_format
+msgid "cnab.file_format"
+msgstr "cnab.file_format"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Contas Bancárias"
+
+#. module: bank_transaction
+#: view:account.move.line:0
+#: model:ir.actions.act_window,name:bank_transaction.action_bank_payment
+#: model:ir.ui.menu,name:bank_transaction.menu_bank_payment
+msgid "Bank Payments"
+msgstr "Títulos Bancários"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,format:0
+msgid "DATE_DDMMYY"
+msgstr "DATA_DDMMAA"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: bank_transaction
+#: view:cnab.wizard.importer:0
+#: model:ir.actions.act_window,name:bank_transaction.action_cnab_importer
+#: model:ir.ui.menu,name:bank_transaction.menu_cnab_importer
+msgid "Importar Arquivo de Retorno"
+msgstr "Importar Arquivo de Retorno"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,type:0
+#: field:cnab.record_format,identifier:0
+msgid "IdType"
+msgstr "IdType"
+
+#. module: bank_transaction
+#: view:res.partner:0
+msgid "Sales & Purchases"
+msgstr "Compras & Vendas"
+
+#. module: bank_transaction
+#: selection:account.bank.event,action:0
+msgid "Pay"
+msgstr "Pagamento"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,value_type:0
+msgid "CHARACTER"
+msgstr "Caracter"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+msgid "Show Files Remessa"
+msgstr "Mostrar Arquivos de Remessa"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,type:0
+msgid "Field"
+msgstr "Campo"
+
+#. module: bank_transaction
+#: field:account.move.line,slip_create_date:0
+#: view:payment.slip:0
+msgid "Slip Create Date"
+msgstr "Data de Emissão da Fatura"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,value_type:0
+msgid "DATE"
+msgstr "Data"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_wizard_file_format_loader
+msgid "cnab.wizard.file_format_loader"
+msgstr "cnab.wizard.file_format_loader"
+
+#. module: bank_transaction
+#: model:ir.actions.act_window,name:bank_transaction.action_cnab_exporter
+msgid "Export CNAB"
+msgstr "Exportar CNAB"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_wizard_importer
+msgid "cnab.wizard.importer"
+msgstr "cnab.wizard.importer"
+
+#. module: bank_transaction
+#: field:cnab.file_format,description:0
+#: field:cnab.record_format,description:0
+msgid "Description"
+msgstr "Descrição"
+
+#. module: bank_transaction
+#: field:cnab.field_format,format:0
+msgid "Format"
+msgstr "Formatar"
+
+#. module: bank_transaction
+#: field:payment.type,layout_extrato:0
+msgid "Layout do Extrato"
+msgstr "Layout do Extrato"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid "Bank account"
+msgstr "Conta Bancária"
+
+#. module: bank_transaction
+#: view:res.bank:0
+msgid "Items Template"
+msgstr "Template dos Ítens"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+#: model:ir.ui.menu,name:bank_transaction.bank_file_menu
+msgid "Bank File"
+msgstr "Arquivos Bancários"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_account_bank_file
+msgid "account.bank.file"
+msgstr "account.bank.file"
+
+#. module: bank_transaction
+#: field:account.bank.file,date_time:0
+msgid "Date/Time"
+msgstr "Data/Hora"
+
+#. module: bank_transaction
+#: view:account.bank.file:0
+#: selection:account.bank.file,file_type:0
+msgid "Remessa"
+msgstr "Remessa"
+
+#. module: bank_transaction
+#: field:account.bank.event,bank_id:0
+#: view:account.bank.file:0
+#: field:account.bank.file,bank:0
+#: field:cnab.file_format,bank:0
+#: model:ir.model,name:bank_transaction.model_res_bank
+msgid "Bank"
+msgstr "Banco"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+#: field:res.partner.bank,instructions:0
+msgid "Instructions"
+msgstr "Instruções"
+
+#. module: bank_transaction
+#: field:account.move.line,slip_file:0
+msgid "Slip File"
+msgstr "Boleto"
+
+#. module: bank_transaction
+#: field:cnab.field_format,name:0
+#: field:cnab.file_format,name:0
+#: field:cnab.record_format,name:0
+msgid "Name"
+msgstr "Nome"
+
+#. module: bank_transaction
+#: field:cnab.record_format,fields_ids:0
+msgid "Fields"
+msgstr "Campo"
+
+#. module: bank_transaction
+#: selection:cnab.field_format,format:0
+msgid "DECIMAL_DD"
+msgstr "DECIMAL_DD"
+
+#. module: bank_transaction
+#: field:payment.type,bank_account:0
+msgid "Bank Account"
+msgstr "Conta Bancária"
+
+#. module: bank_transaction
+#: view:cnab.field_format:0
+#: view:cnab.record_format:0
+msgid "Layout de Campos"
+msgstr "Layout de Campos"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_cnab_wizard_exporter
+msgid "cnab.wizard.exporter"
+msgstr "cnab.wizard.exporter"
+
+#. module: bank_transaction
+#: view:res.partner.bank:0
+msgid ": Fine"
+msgstr ": Multa"
+
+#. module: bank_transaction
+#: field:res.partner,send_payment_slip:0
+msgid "Send Payment Slip by Email"
+msgstr "Enviar Boleto por Email"
+
+#. module: bank_transaction
+#: model:ir.model,name:bank_transaction.model_payment_type
+msgid "Payment type"
+msgstr "Tipo de Pagamento"
+
+#. module: bank_transaction
+#: field:res.partner.bank,payment_option_default:0
+msgid "Payment Difference Default"
+msgstr "Diferença de Pagamento Padrão"
+
+#. module: bank_transaction
+#: field:cnab.field_format,sequence:0
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: bank_transaction
+#: view:payment.slip:0
+msgid "Confirmation Send by Email"
+msgstr "Confirmação Enviada por Email"
+
+#. module: bank_transaction
+#: field:payment.type,type_banking_billing:0
+msgid "Type Banking Billing"
+msgstr "Tipo de Pagamento Bancário"
+
+#. module: bank_transaction
+#: selection:res.partner.bank,payment_option_default:0
+msgid "Keep Open"
+msgstr "Manter Aberto"
+
+#. module: bank_transaction
+#: view:cnab.wizard.exporter:0
+#: view:payment.slip:0
+msgid "or"
+msgstr "ou"
+
+#. module: bank_transaction
+#: field:cnab.record_format,repeatable:0
+msgid "repeatable"
+msgstr "repetível"
+
+#. module: bank_transaction
+#: field:res.partner.bank,monthly_fine:0
+msgid "Monthly Fine for Delay (%)"
+msgstr "Multa Mensal por Atraso(%)"
+
+#. module: bank_transaction
+#: field:cnab.record_format,file_id:0
+#: field:cnab.wizard.file_format_loader,file:0
+#: field:cnab.wizard.importer,file:0
+msgid "File"
+msgstr "Arquivo"
+

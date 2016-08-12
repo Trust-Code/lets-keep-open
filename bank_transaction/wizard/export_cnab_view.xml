@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="cnab_exporter_form" model="ir.ui.view">
+            <field name="name">cnab.wizard.exporter</field>
+            <field name="view_type">form</field>
+            <field name="model">cnab.wizard.exporter</field>
+            <field name="arch" type="xml">
+                <form string="Exportar CNAB" version="7.0">
+                    <p>Mensagem</p>
+                    <footer>
+                        <button type="object" name="generate_remessa" context="{'open_bank_file': True}" string="Export and View Bank Files" class="oe_highlight"/>
+                        <button type="object" name="generate_remessa" context="{'open_bank_file': False}" string="Only Export"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cnab_exporter" model="ir.actions.act_window">
+            <field name="name">Export CNAB</field>
+            <field name="res_model">cnab.wizard.exporter</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+        </record>
+
+        <act_window id="act_window_cnab_exporter"
+        	key2="client_action_multi"
+            name="Generation Bank Remessa"
+            res_model="cnab.wizard.exporter"
+            src_model="account.move.line"
+            view_id="cnab_exporter_form"
+            view_mode="form"
+            target="new"
+            view_type="form"/>
+        
+    </data>
+   
+</openerp>

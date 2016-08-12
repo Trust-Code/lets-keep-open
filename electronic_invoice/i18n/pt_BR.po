@@ -1,0 +1,425 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* electronic_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-19 13:28+0000\n"
+"PO-Revision-Date: 2016-04-19 13:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "EI Confirmed"
+msgstr "NF-e Confirmada"
+
+#. module: electronic_invoice
+#: selection:account.invoice,ei_status:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_electronic_invoice
+msgid "electronic.invoice"
+msgstr "Nota Fiscal Eletrônica"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado no municipio, porem Imune"
+msgstr "Tributado no municipio, porem Imune"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado fora do municipio, porem Imune"
+msgstr "Tributado fora do municipio, porem Imune"
+
+#. module: electronic_invoice
+#: selection:res.company,ei_product_version:0
+msgid "3.10"
+msgstr "3.10"
+
+#. module: electronic_invoice
+#: selection:res.company,ei_service_version:0
+msgid "Piracicaba/SP - 1.10"
+msgstr "Piracicaba/SP - 1.10"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "Electronic Invoices to send"
+msgstr "Envio de nota fiscal eletrônica"
+
+#. module: electronic_invoice
+#: view:electronic.invoice:0
+#: selection:electronic.invoice.event,action:0
+msgid "Send"
+msgstr "Enviar"
+
+#. module: electronic_invoice
+#: view:electronic.invoice:0
+msgid "Electronic Invoice Transaction"
+msgstr "Transação Nota Fiscal Eletrônica"
+
+#. module: electronic_invoice
+#: field:res.company,ei_environment:0
+msgid "Environment"
+msgstr "Ambiente"
+
+#. module: electronic_invoice
+#: field:electronic.invoice.event,action:0
+msgid "Action"
+msgstr "Ação"
+
+#. module: electronic_invoice
+#: selection:res.company,ei_environment:0
+msgid "Production"
+msgstr "Produção"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "Exportada Receita"
+msgstr "Exportada Receita"
+
+#. module: electronic_invoice
+#: selection:res.company,ei_environment:0
+msgid "Test"
+msgstr "Teste"
+
+#. module: electronic_invoice
+#: view:danfe.join:0
+msgid "Fechar"
+msgstr "Fechar"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_ei_sp_saopaulo_001
+msgid "ei.sp.saopaulo.001"
+msgstr "ei.sp.saopaulo.001"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_code:0
+msgid "EI Code"
+msgstr "NF-e Número"
+
+#. module: electronic_invoice
+#: field:danfe.join,filename:0
+msgid "Filename"
+msgstr "Nome do arquivo"
+
+#. module: electronic_invoice
+#: view:electronic.invoice:0
+#: selection:electronic.invoice.event,action:0
+msgid "Correction Letter"
+msgstr "Carta de Correção"
+
+#. module: electronic_invoice
+#: field:l10n_br_account.service.type,ei_description:0
+msgid "Electronic Invoice Description"
+msgstr "Descrição da NF-e"
+
+#. module: electronic_invoice
+#: field:res.company,tributacao:0
+msgid "Tributação"
+msgstr "Tributação"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_ei_simpliss_110
+msgid "ei.simpliss.110"
+msgstr "ei.simpliss.110"
+
+#. module: electronic_invoice
+#: field:danfe.join,invisible:0
+msgid "Button Invisible"
+msgstr "Botão invisível"
+
+#. module: electronic_invoice
+#: field:electronic.invoice.event,event_date:0
+msgid "Event Date"
+msgstr "Data do Evento"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "Electronic Invoice Events"
+msgstr "Eventos da NF-e"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_date:0
+msgid "EI Date"
+msgstr "NF-e Data Emissão"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_danfe_join
+msgid "danfe.join"
+msgstr "Unir Danfe"
+
+#. module: electronic_invoice
+#: view:electronic.invoice:0
+msgid "Schedule To Send"
+msgstr "Agendar para Envio"
+
+#. module: electronic_invoice
+#: selection:account.invoice,ei_status:0
+msgid "Sent"
+msgstr "Enviada"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado fora do municipio"
+msgstr "Tributado fora do municipio"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_access_key:0
+msgid "EI Access Key"
+msgstr "NF-e Chave de Acesso"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_correction_letter:0
+msgid "EI Correction Letter"
+msgstr "NF-e Carta de Correção"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "EI To Send"
+msgstr "NF-e para Enviar"
+
+#. module: electronic_invoice
+#: field:res.company,ei_service_description:0
+msgid "Service Description"
+msgstr "Descrição para NF-e de Serviço"
+
+#. module: electronic_invoice
+#: field:electronic.invoice.event,user_id:0
+msgid "User"
+msgstr "Usuário"
+
+#. module: electronic_invoice
+#: selection:account.invoice,ei_status:0
+msgid "Scheduled"
+msgstr "Agendado"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_verification_code:0
+msgid "EI Verification Code"
+msgstr "NF-e Código de Verificação"
+
+#. module: electronic_invoice
+#: selection:res.company,ei_service_version:0
+msgid "São Paulo/SP - 1"
+msgstr "São Paulo/SP - 1"
+
+#. module: electronic_invoice
+#: field:electronic.invoice.event,invoice_id:0
+#: model:ir.model,name:electronic_invoice.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "EI Cancelled"
+msgstr "NF-e Cancelada"
+
+#. module: electronic_invoice
+#: selection:account.invoice,ei_status:0
+msgid "Failed"
+msgstr "Erro"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_justification:0
+msgid "EI Justification"
+msgstr "NF-e Justificação"
+
+#. module: electronic_invoice
+#: view:res.company:0
+msgid "Impostos"
+msgstr "Impostos"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+#: view:electronic.invoice:0
+#: model:ir.actions.act_window,name:electronic_invoice.action_electronic_invoice
+#: model:ir.actions.act_window,name:electronic_invoice.action_multi_electronic_invoice
+#: view:res.company:0
+msgid "Electronic Invoice"
+msgstr "Nota Fiscal Eletrônica"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_events_ids:0
+msgid "Electronic Invoice Event"
+msgstr "Evento da NF-e"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado no municipio, porem Eligibilidade Suspensa"
+msgstr "Tributado no municipio, porem Eligibilidade Suspensa"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_ei_product_310
+msgid "ei.product.310"
+msgstr "ei.product.310"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado no municipio, porem Isento"
+msgstr "Tributado no municipio, porem Isento"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_l10n_br_account_service_type
+msgid "Cadastro de Operações Fiscais de Serviço"
+msgstr "Cadastro de Operações Fiscais de Serviço"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_description:0
+#: field:res.partner,ei_service_description:0
+msgid "EI Description"
+msgstr "NF-e Descrição"
+
+#. module: electronic_invoice
+#: selection:account.invoice,ei_status:0
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado fora do municipio, porem Eligibilidade Suspensa"
+msgstr "Tributado fora do municipio, porem Eligibilidade Suspensa"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Exportaçao de Serviços"
+msgstr "Exportaçao de Serviços"
+
+#. module: electronic_invoice
+#: field:res.company,ei_product_version:0
+msgid "Product Version"
+msgstr "Versão de Produção"
+
+#. module: electronic_invoice
+#: field:res.company,ei_service_version:0
+msgid "Service Version"
+msgstr "Versão de Serviço"
+
+#. module: electronic_invoice
+#: view:danfe.join:0
+#: model:ir.actions.act_window,name:electronic_invoice.act_window_danfe_join
+#: model:ir.actions.act_window,name:electronic_invoice.action_danfe_join
+msgid "Danfe Join"
+msgstr "Unir Danfes"
+
+#. module: electronic_invoice
+#: field:res.company,accounting_responsible:0
+msgid "Accounting Responsible"
+msgstr "Contador Responsável"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado no municipio, porem Eligibilidade Suspensa"
+msgstr "Tributado no municipio, porem Eligibilidade Suspensa"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "Status"
+msgstr "Situação"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+#: field:account.invoice,ei_status:0
+msgid "EI Status"
+msgstr "NF-e/RPS Situação"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "Electronic Invoices confirmed"
+msgstr "NF-e Confirmada"
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado fora do municipio, porem Isento"
+msgstr "Tributado fora do municipio, porem Isento"
+
+#. module: electronic_invoice
+#: field:account.invoice,rps_code:0
+msgid "RPS Code"
+msgstr "RPS Número"
+
+#. module: electronic_invoice
+#: view:danfe.join:0
+msgid "or"
+msgstr "ou"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_electronic_invoice_event
+msgid "electronic.invoice.event"
+msgstr "Evento de NF-e"
+
+#. module: electronic_invoice
+#: view:danfe.join:0
+msgid "This is a functionality to join Danfe's in one PDF file."
+msgstr "Esta funcionalidade une arquivos Danfe em um único PDF."
+
+#. module: electronic_invoice
+#: selection:res.company,tributacao:0
+msgid "Tributado no municipio"
+msgstr "Tributado no municipio"
+
+#. module: electronic_invoice
+#: selection:account.invoice,ei_status:0
+msgid "Inactive"
+msgstr "Inativo"
+
+#. module: electronic_invoice
+#: view:electronic.invoice:0
+#: selection:electronic.invoice.event,action:0
+msgid "Inactivate"
+msgstr "Inativar"
+
+#. module: electronic_invoice
+#: field:danfe.join,data:0
+msgid "File"
+msgstr "Arquivo"
+
+#. module: electronic_invoice
+#: field:account.invoice,ei_protocol:0
+msgid "EI Protocol"
+msgstr "NF-e Protocolo"
+
+#. module: electronic_invoice
+#: view:danfe.join:0
+#: view:electronic.invoice:0
+#: selection:electronic.invoice.event,action:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: electronic_invoice
+#: model:ir.model,name:electronic_invoice.model_res_partner
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: electronic_invoice
+#: field:electronic.invoice.event,message:0
+msgid "Message"
+msgstr "Mensagem"
+
+#. module: electronic_invoice
+#: field:account.invoice,rps_serie:0
+msgid "RPS Serie"
+msgstr "RPS Série"
+
+#. module: electronic_invoice
+#: selection:electronic.invoice.event,action:0
+msgid "Check"
+msgstr "Verificar"
+
+#. module: electronic_invoice
+#: view:account.invoice:0
+msgid "Electronic Invoices cancelled"
+msgstr "Nf-e Cancelada"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report id="report_sale_order_no_tax"
+                model="sale.order"
+                name="sale.order.no.tax"
+                string="Quotation / Order no Tax"
+                rml="l10n_br_sale_ext/report/sale_order_no_tax.rml"
+                auto="False"
+                usage="default"/>
+
+    </data>
+</openerp>

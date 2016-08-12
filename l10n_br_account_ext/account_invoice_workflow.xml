@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <delete id="l10n_br_account.tras_router_open" model="workflow.transition"/>
+        <delete id="l10n_br_account.tras_sefaz_export_cancel" model="workflow.transition"/>
+        <delete id="l10n_br_account.tras_sefaz_export_open" model="workflow.transition"/>
+        <delete id="l10n_br_account.tras_sefaz_export_exception" model="workflow.transition"/>
+        <delete id="l10n_br_account.tras_sefaz_exception_cancel" model="workflow.transition"/>
+        <delete id="l10n_br_account.tras_draft_router" model="workflow.transition"/>
+        <delete id="l10n_br_account.tras_router_open" model="workflow.transition"/>
+
+        <delete id="l10n_br_account.act_router" model="workflow.activity"/>
+        <delete id="l10n_br_account.act_sefaz_exception" model="workflow.activity"/>
+        <delete id="l10n_br_account.act_sefaz_export" model="workflow.activity"/>
+
+        <!-- Immediate Payment -->
+        <record id="account.act_open" model="workflow.activity">
+            <field name="wkf_id" ref="account.wkf"/>
+            <field name="name">open</field>
+            <field name="action">nfe_check()
+action_date_assign()
+action_internal_number()
+action_move_create()
+action_number()
+immediate_payment()
+invoice_validate()</field>
+            <field name="kind">function</field>
+        </record>
+
+        <record id="trans_draft_open" model="workflow.transition">
+            <field name="act_from" ref="account.act_draft"/>
+            <field name="act_to" ref="account.act_open"/>
+            <field name="signal">invoice_open</field>
+        </record>
+
+    </data>
+
+</openerp>

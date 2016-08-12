@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    	<record model="ir.ui.view" id="view_payment_type_cnab_form">
+        	<field name="name">payment.type.cnab.form</field>
+        	<field name="model">payment.type</field>
+        	<field name="inherit_id" ref="account_payment_extension.view_payment_type_form"/>
+        	<field name="arch" type="xml">
+   				<field name="code" position="after">
+					<field name="bank_account"/>
+				</field>
+                <field name="company_id" position="after">
+					<field name="type_banking_billing"/>
+                    <separator string="Layout dos Arquivos" colspan="4"/>
+                    <field name="layout_remessa"/>
+                    <field name="layout_extrato"/>
+                    <field name="layout_retorno"/>
+				</field>
+			</field>
+    	</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- sequence our number itau  -->
+        <record id="pslip_on_itau" model="ir.sequence">
+            <field name="name">Payment Slip Our Number - Itaú</field>
+            <field name="code">payment_slip_our_number_itau</field>
+            <field eval="1" name="number_next_actual"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="8" name="padding"/>
+        </record>
+
+    </data>
+</openerp>

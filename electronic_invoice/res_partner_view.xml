@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <record model="ir.ui.view" id="view_electronic_invoice_partner_form_">
+			<field name="name">l10n_br_base.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="l10n_br_account.l10n_br_account_view_partner_form" />
+			<field name="arch" type="xml">
+                <xpath expr="//group[@string='Dados Fiscais']" position="after">
+                    <group>
+                        <field name="ei_service_description"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

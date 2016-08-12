@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <record id="view_data_slip_form" model="ir.ui.view">
+        <field name="name">data.slip.form</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <form string="Bank account" version="7.0">
+                <group>
+                    <group name="slip" string="Billing Information" position="after" col="4">
+                        <field name="bank_col_service"/>
+                        <field name="bank_col_agreement"/>
+                        <field name="monthly_fine"/>
+                        <field name="monthly_interest"/>
+                        <field name="generate_payment_slip"/>
+                    </group>
+                </group>
+                <group string="Default for Payments With Interest" col="4">
+                        <field name="payment_option_default"/>
+                        <field name="writeoff_acc_id_default"/>
+                </group>
+                <group string="Instructions">
+                    <p colspan="2" class="oe_grey">
+                        Write here the introduction in the letter,
+                        according to the level of the follow-up. You can
+                        use the following keywords in the text. Don't
+                        forget to translate in all languages you installed
+                        using to top right icon.
+                        <group class="oe_grey">
+                            <b>%%(monthly_fine)s</b>: Fine
+                            <b>%%(monthly_interest)s</b>: Interest
+                        </group>
+                    </p>
+                    <field name="instructions"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_partner_bank_tree">
+		<field name="name">view_res.partner.bank.tree</field>
+		<field name="model">res.partner.bank</field>
+		<field name="inherit_id" ref="account_payment_extension.view_partner_bank_tree" />
+		<field name="arch" type="xml">
+			<field name="default_bank" position="after">
+				<field name="generate_payment_slip"/>
+			</field>
+		</field>
+	</record>
+
+    <record id="payment_slip_exporter_form" model="ir.ui.view">
+        <field name="name">Payment Slip Exporter Form</field>
+        <field name="view_type">form</field>
+        <field name="model">payment.slip</field>
+        <field name="arch" type="xml">
+            <form string="Payment Slip" version="7.0">
+                <p>Mensagem</p>
+                <footer>
+                    <button name="slip" type="object" string="Confirm Create Slip" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="send_email_confirm_form" model="ir.ui.view">
+        <field name="name">Send by Email Confirm Form</field>
+        <field name="view_type">form</field>
+        <field name="model">payment.slip</field>
+        <field name="arch" type="xml">
+            <form string="Confirmation Send by Email" version="7.0">
+                <p>Mensagem</p>
+                <footer>
+                    <button name="send_email" type="object" string="Send by Email" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+        <act_window name="Payment Slip"
+        	res_model="payment.slip"
+        	src_model="account.move.line"
+        	view_mode="form"
+        	target="new"
+    		key2="client_action_multi"
+    		id="act_window_payment_slip"
+        	view_id="payment_slip_exporter_form"
+        	view_type="tree"/>
+
+        <act_window name="Send by Email"
+        	res_model="payment.slip"
+        	src_model="account.move.line"
+        	view_mode="form"
+        	target="new"
+    		key2="client_action_multi"
+    		id="act_window_send_email"
+        	view_id="send_email_confirm_form"
+        	view_type="tree"/>
+
+        <record id="view_bank_payment_filter" model="ir.ui.view">
+            <field name="name">Bank Payments Filter</field>
+            <field name="model">payment.slip</field>
+            <field name="arch" type="xml">
+                <search string="Payment Slip">
+                    <!--
+                    <filter name="open" string="Open" domain="[('status','=','Open')]" help="Show Titles Open"/>
+                    <filter name="paid" string="Paid" domain="[('status','=','Paid')]" help="Show Titles Paid"/>
+
+                    <group expand="0" string="Group By...">
+                        <filter string="Status" icon="terp-status" domain="[]" context="{'group_by':'status'}"/>
+                        <filter string="Payment Type" icon="terp-payment-type" domain="[]" context="{'group_by':'payment_type'}"/>-->
+
+                    <group expand="0" string="Group By...">
+                        <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Slip Create Date" icon="terp-slip-create-date" domain="[]" context="{'group_by':'slip_create_date'}"/>
+                    </group>
+
+               </search>
+            </field>
+        </record>
+
+        <record id="bank_payment_tree" model="ir.ui.view">
+            <field name="name">Bank Payments</field>
+            <field name="view_type">tree</field>
+            <field name="model">account.move.line</field>
+            <field name="arch" type="xml">
+                <tree string="Bank Payments" create="false">
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="debit"/>
+                    <field name="date_maturity"/>
+                    <field name="status"/>
+                    <field name="payment_type"/>
+                    <field name="our_number"/>
+                    <field name="slip_create_date"/>
+                    <field name="filename" invisible="1"/>
+                    <field name="slip_file" filename="filename"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_bank_payment" model="ir.actions.act_window">
+            <field name="name">Bank Payments</field>
+            <field name="res_model">account.move.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+			<field name="view_id" ref="bank_payment_tree"/>
+            <field name="search_view_id" ref="view_bank_payment_filter"/>
+            <field name="domain">[('account_id.type','=','receivable'), ('debit','>','0.00')]</field>
+        </record>
+            <!--
+            <field name="domain">[('payment_type','!=', False), ('payment_type.type_banking_billing','in', ('REG','SRG','ESC'))]</field>
+            <field name="domain">[('account_id.type','=','receivable'), ('payment_type.type_banking_billing','!=', False)]</field>-->
+
+
+    <menuitem
+        id="menu_bank_payment"
+        name="Bank Payments"
+        action="action_bank_payment"
+        parent="account.menu_finance_receivables"
+        sequence="11" />
+
+
+    </data>
+</openerp>
