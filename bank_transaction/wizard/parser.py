@@ -4,9 +4,12 @@ from datetime import datetime
 from osv import osv, fields
 import logging
 import os
-TYPE_ADAPTERS = {'INTEGER': int,
- 'DATE': lambda s: datetime.strptime(s, '%d%m%y').date(),
- 'CHARACTER': lambda s: s}
+TYPE_ADAPTERS = {
+    'INTEGER': int,
+    'DATE': lambda s: datetime.strptime(s, '%d%m%y').date(),
+    'CHARACTER': lambda s: s
+}
+
 
 class CNABParser(object):
 
@@ -26,7 +29,8 @@ class CNABParser(object):
             if c == '':
                 return
 
-    def get_record_format(self, cnab_file, record_formats, format, idtype_length):
+    def get_record_format(self, cnab_file, record_formats,
+                          format, idtype_length):
         if format.type == 'retorno':
             idtype = cnab_file.read(idtype_length)
             cnab_file.seek(-idtype_length, os.SEEK_CUR)
@@ -47,7 +51,8 @@ class CNABParser(object):
         idtype_length = len(format.records_ids[0].identifier)
         records = []
         while True:
-            record_format = self.get_record_format(cnab_file, record_formats, format, idtype_length)
+            record_format = self.get_record_format(
+                cnab_file, record_formats, format, idtype_length)
             if record_format is None:
                 break
             records.append(self.parse_record(record_format, cnab_file))
@@ -66,7 +71,9 @@ class CNABParser(object):
                     adapter = TYPE_ADAPTERS[field.value_type]
                     value = adapter(value)
                 except ValueError as e:
-                    logging.warn('ValueError: %s, on field %s %s', repr(e), field.name, field)
+                    logging.warn(
+                        'ValueError: %s, on field %s %s', repr(e),
+                        field.name, field)
                     raise e
 
             record[field.name] = value

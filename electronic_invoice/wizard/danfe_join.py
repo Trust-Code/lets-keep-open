@@ -13,7 +13,7 @@ import os
 class danfe_join(osv.osv):
     _name = 'danfe.join'
 
-    def danfe_join(self, cr, uid, ids, context = None):
+    def danfe_join(self, cr, uid, ids, context=None):
         account_i_obj = self.pool.get('account.invoice').browse(cr, uid, context['active_ids'], context=context)
         output = PdfFileWriter()
         list_attachments = []
@@ -47,18 +47,23 @@ class danfe_join(osv.osv):
         w_timezone = self.pool.get('res.users').browse(cr, uid, uid).tz
         now = datetime.now(pytz.timezone(w_timezone))
         filename = 'DANFE_UN_%04d-%02d-%02d.pdf' % (now.year, now.month, now.day)
-        id_danfe_join = self.create(cr, uid, {'data': w_file,
-         'filename': filename,
-         'invisible': True}, context=context)
+        id_danfe_join = self.create(
+            cr, uid, {'data': w_file,
+                      'filename': filename,
+                      'invisible': True}, context=context)
         os.remove(os.path.join(file_name_fl))
-        return {'type': 'ir.actions.act_window',
-         'res_model': 'danfe.join',
-         'view_mode': 'form',
-         'view_type': 'form',
-         'res_id': id_danfe_join,
-         'views': [(False, 'form')],
-         'target': 'new'}
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'danfe.join',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': id_danfe_join,
+            'views': [(False, 'form')],
+            'target': 'new'
+        }
 
-    _columns = {'filename': fields.char('Filename'),
-     'data': fields.binary('File', readonly=True),
-     'invisible': fields.boolean('Button Invisible')}
+    _columns = {
+        'filename': fields.char('Filename'),
+        'data': fields.binary('File', readonly=True),
+        'invisible': fields.boolean('Button Invisible')
+    }

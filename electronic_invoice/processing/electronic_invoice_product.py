@@ -7,20 +7,24 @@ import os
 import string
 import base64
 from uuid import uuid4
-from pysped.nfe.leiaute import NFe_310, Det_310, NFRef_310, Dup_310, EventoCancNFe_100, EventoCCe_100, AutXML_310
+from pysped.nfe.leiaute import NFe_310, Det_310, NFRef_310, Dup_310, \
+    EventoCancNFe_100, EventoCCe_100, AutXML_310
 from pysped.nfe import ProcessadorNFe
+
 
 class ei_product_310(osv.osv):
     _name = 'ei.product.310'
 
-    def validate_send(self, cr, uid, ids, inv, context = None):
+    def validate_send(self, cr, uid, ids, inv, context=None):
         if not inv.company_id.ei_product_version:
-            return '%s - %s' % (u'Vers\xe3o da NF-e n\xe3o informada -', inv.company_id.name)
+            return '%s - %s' % (u'Versão da NF-e não informada -',
+                                inv.company_id.name)
         if inv.carrier_id and not inv.carrier_id.partner_id:
-            return '%s - %s' % (u'Dados da Trasportadora n\xe3o informados ', inv.carrier_id.name)
+            return '%s - %s' % (u'Dados da Trasportadora não informados ',
+                                inv.carrier_id.name)
         return ''
 
-    def define_send(self, cr, uid, ids, inv, context = None):
+    def define_send(self, cr, uid, ids, inv, context=None):
         if not context:
             context = {'lang': 'pt_BR'}
         user_timezone = self.pool.get('res.users').browse(cr, uid, uid).tz
@@ -285,7 +289,7 @@ class ei_product_310(osv.osv):
         nfe.gera_nova_chave()
         return nfe
 
-    def xml_send(self, cr, uid, ids, inv, ei_obj, cert_name, context = None):
+    def xml_send(self, cr, uid, ids, inv, ei_obj, cert_name, context=None):
         proc_nfe = ProcessadorNFe()
         proc_nfe.ambiente = 1 if inv.company_id.ei_environment == 'production' else 2
         proc_nfe.versao = '3.10'
@@ -294,10 +298,11 @@ class ei_product_310(osv.osv):
         proc_nfe.certificado.arquivo = cert_name
         proc_nfe.salvar_arquivos = False
         for processo in proc_nfe.processar_notas([ei_obj]):
-            result = {'action': 'send',
-             'ei_status': 'failed',
-             'message': processo.resposta.cStat.valor + '-' + processo.resposta.xMotivo.valor,
-             'ei_access_key': ei_obj.chave}
+            result = {
+                'action': 'send',
+                'ei_status': 'failed',
+                'message': processo.resposta.cStat.valor + '-' + processo.resposta.xMotivo.valor,
+                'ei_access_key': ei_obj.chave}
             if processo.webservice == 1:
                 for prot in processo.resposta.protNFe:
                     result['message'] = prot.infProt.cStat.valor + '-' + prot.infProt.xMotivo.valor
@@ -318,14 +323,15 @@ class ei_product_310(osv.osv):
 
         return result
 
-    def validate_cancel(self, cr, uid, ids, inv, context = None):
+    def validate_cancel(self, cr, uid, ids, inv, context=None):
         if not inv.ei_access_key or not inv.ei_protocol:
-            return '%s - %s' % (u'Chave da NF-e n\xe3o encontrada - ', inv.company_id.name)
+            return '%s - %s' % (u'Chave da NF-e não encontrada - ',
+                                inv.company_id.name)
         if not inv.ei_justification:
-            return '%s' % u'Justificativa da NF-e n\xe3o encontrada'
+            return '%s' % u'Justificativa da NF-e não encontrada'
         return ''
 
-    def define_cancel(self, cr, uid, ids, inv, context = None):
+    def define_cancel(self, cr, uid, ids, inv, context=None):
         if not context:
             context = {'lang': 'pt_BR'}
         user_timezone = self.pool.get('res.users').browse(cr, uid, uid).tz
@@ -340,7 +346,7 @@ class ei_product_310(osv.osv):
         nfe.infEvento.detEvento.xJust.valor = inv.ei_justification
         return nfe
 
-    def xml_cancel(self, cr, uid, ids, inv, ei_obj, cert_name, context = None):
+    def xml_cancel(self, cr, uid, ids, inv, ei_obj, cert_name, context=None):
         proc_nfe = ProcessadorNFe()
         proc_nfe.ambiente = 1 if inv.company_id.ei_environment == 'production' else 2
         proc_nfe.versao = '3.10'
@@ -349,8 +355,10 @@ class ei_product_310(osv.osv):
         proc_nfe.certificado.arquivo = cert_name
         proc_nfe.salvar_arquivos = False
         processo = proc_nfe.enviar_lote_cancelamento(lista_eventos=[ei_obj])
-        result = {'action': 'cancel',
-         'message': processo.resposta.xMotivo.valor}
+        result = {
+            'action': 'cancel',
+            'message': processo.resposta.xMotivo.valor
+        }
         for prot in processo.resposta.retEvento:
             result['message'] = prot.infEvento.cStat.valor + '-' + processo.resposta.xMotivo.valor
             if prot.infEvento.cStat.valor == '135':
@@ -363,22 +371,26 @@ class ei_product_310(osv.osv):
             return '%s' % u'Justificativa da NF-e n\xe3o encontrada'
         return ''
 
-    def define_inactivate(self, cr, uid, ids, inv, context = None):
+    def define_inactivate(self, cr, uid, ids, inv, context=None):
         if not context:
             context = {'lang': 'pt_BR'}
         user_timezone = self.pool.get('res.users').browse(cr, uid, uid).tz
         date_now = datetime.datetime.now(pytz.timezone(user_timezone))
-        nfe = {'ambiente': 1 if inv.company_id.ei_environment == 'production' else 2,
-         'UF': inv.company_id.partner_id.state_id.ibge_code,
-         'ano': date_now.strftime('%y'),
-         'CNPJ/CPF': re.sub('[%s]' % re.escape(string.punctuation), '', inv.company_id.partner_id.cnpj_cpf or ''),
-         'serie': inv.document_serie_id.code,
-         'numero_inicial': inv.internal_number,
-         'numero_final': inv.internal_number,
-         'justificativa': inv.ei_justification}
+        nfe = {
+            'ambiente': 1 if inv.company_id.ei_environment == 'production' else 2,
+            'UF': inv.company_id.partner_id.state_id.ibge_code,
+            'ano': date_now.strftime('%y'),
+            'CNPJ/CPF': re.sub('[%s]' % re.escape(string.punctuation), '',
+                               inv.company_id.partner_id.cnpj_cpf or ''),
+            'serie': inv.document_serie_id.code,
+            'numero_inicial': inv.internal_number,
+            'numero_final': inv.internal_number,
+            'justificativa': inv.ei_justification
+        }
         return nfe
 
-    def xml_inactivate(self, cr, uid, ids, inv, ei_obj, cert_name, context = None):
+    def xml_inactivate(self, cr, uid, ids, inv, ei_obj, cert_name,
+                       context=None):
         proc_nfe = ProcessadorNFe()
         proc_nfe.ambiente = 1 if inv.company_id.ei_environment == 'production' else 2
         proc_nfe.versao = '3.10'
@@ -386,18 +398,26 @@ class ei_product_310(osv.osv):
         proc_nfe.certificado.senha = inv.company_id.nfe_a1_password
         proc_nfe.certificado.arquivo = cert_name
         proc_nfe.salvar_arquivos = False
-        processo = proc_nfe.inutilizar_nota(ambiente=ei_obj['ambiente'], codigo_estado=ei_obj['UF'], ano=ei_obj['ano'], cnpj=ei_obj['CNPJ/CPF'], serie=ei_obj['serie'], numero_inicial=ei_obj['numero_inicial'], numero_final=ei_obj['numero_final'], justificativa=ei_obj['justificativa'])
+        processo = proc_nfe.inutilizar_nota(
+            ambiente=ei_obj['ambiente'], codigo_estado=ei_obj['UF'],
+            ano=ei_obj['ano'], cnpj=ei_obj['CNPJ/CPF'], serie=ei_obj['serie'],
+            numero_inicial=ei_obj['numero_inicial'],
+            numero_final=ei_obj['numero_final'],
+            justificativa=ei_obj['justificativa'])
         if processo.resposta.infInut.cStat.valor == '102':
-            result = {'action': 'inactivate',
-             'message': processo.resposta.infInut.xMotivo.valor,
-             'ei_status': 'inactive'}
+            result = {
+                'action': 'inactivate',
+                'message': processo.resposta.infInut.xMotivo.valor,
+                'ei_status': 'inactive'}
         else:
             msg = processo.resposta.infInut.cStat.valor + ' - ' + processo.resposta.xMotivo.valor
-            result = {'action': 'inactivate',
-             'message': msg}
+            result = {
+                'action': 'inactivate',
+                'message': msg
+            }
         return result
 
-    def define_correction_letter(self, cr, uid, ids, inv, context = None):
+    def define_correction_letter(self, cr, uid, ids, inv, context=None):
         if not context:
             context = {'lang': 'pt_BR'}
         user_timezone = self.pool.get('res.users').browse(cr, uid, uid).tz
@@ -412,7 +432,8 @@ class ei_product_310(osv.osv):
         nfe.infEvento.nSeqEvento.valor = inv.ei_correction_letter and 2 or 1
         return nfe
 
-    def xml_correction_letter(self, cr, uid, ids, inv, ei_obj, cert_name, context = None):
+    def xml_correction_letter(self, cr, uid, ids, inv, ei_obj, cert_name,
+                              context=None):
         proc_nfe = ProcessadorNFe()
         proc_nfe.ambiente = 1 if inv.company_id.ei_environment == 'production' else 2
         proc_nfe.versao = '3.10'
@@ -422,84 +443,116 @@ class ei_product_310(osv.osv):
         proc_nfe.salvar_arquivos = False
         processo = proc_nfe.enviar_lote_cce(lista_eventos=[ei_obj])
         if processo.resposta.cStat.valor == '128':
-            result = {'action': 'correction_letter',
-             'message': processo.resposta.xMotivo.valor}
+            result = {
+                'action': 'correction_letter',
+                'message': processo.resposta.xMotivo.valor
+            }
         else:
-            result = {'action': 'correction_letter',
-             'message': '%s - %s' % (processo.resposta.cStat.valor, processo.resposta.xMotivo.valor)}
+            result = {
+                'action': 'correction_letter',
+                'message': '%s - %s' % (
+                    processo.resposta.cStat.valor,
+                    processo.resposta.xMotivo.valor)
+                }
         return result
 
-
 ei_product_310()
+
 
 class electronic_invoice(osv.osv):
     _inherit = 'electronic.invoice'
 
-    def send_product(self, cr, uid, ids, inv, cert_name, context = None):
+    def send_product(self, cr, uid, ids, inv, cert_name, context=None):
         if inv.company_id.ei_product_version == '310':
             ei_product_obj = self.pool.get('ei.product.310')
         else:
-            return {'action': 'send',
-             'ei_status': 'failed',
-             'message': 'Versao de NF-e nao disponivel'}
+            return {
+                'action': 'send',
+                'ei_status': 'failed',
+                'message': 'Versao de NF-e nao disponivel'
+            }
         msg = ei_product_obj.validate_send(cr, uid, ids, inv, context=context)
         if msg:
-            return {'action': 'send',
-             'message': msg,
-             'ei_status': 'failed'}
+            return {
+                'action': 'send',
+                'message': msg,
+                'ei_status': 'failed'
+            }
         ei_obj = ei_product_obj.define_send(cr, uid, ids, inv, context=context)
         msg = ei_obj.validar()
         if msg:
-            return {'action': 'send',
-             'message': msg,
-             'ei_status': 'failed'}
-        result = ei_product_obj.xml_send(cr, uid, ids, inv, ei_obj, cert_name, context=context)
+            return {
+                'action': 'send',
+                'message': msg,
+                'ei_status': 'failed'
+            }
+        result = ei_product_obj.xml_send(cr, uid, ids, inv, ei_obj,
+                                         cert_name, context=context)
         return result
 
-    def cancel_product(self, cr, uid, ids, inv, cert_name, context = None):
+    def cancel_product(self, cr, uid, ids, inv, cert_name, context=None):
         if inv.company_id.ei_product_version == '310':
             ei_product_obj = self.pool.get('ei.product.310')
         else:
-            return {'action': 'cancel',
-             'message': 'Versao de NF-e nao disponivel'}
-        msg = ei_product_obj.validate_cancel(cr, uid, ids, inv, context=context)
+            return {
+                'action': 'cancel',
+                'message': 'Versao de NF-e nao disponivel'}
+        msg = ei_product_obj.validate_cancel(cr, uid, ids, inv,
+                                             context=context)
         if msg:
-            return {'action': 'cancel',
-             'message': msg}
-        ei_obj = ei_product_obj.define_cancel(cr, uid, ids, inv, context=context)
+            return {
+                'action': 'cancel',
+                'message': msg}
+        ei_obj = ei_product_obj.define_cancel(cr, uid, ids, inv,
+                                              context=context)
         msg = ei_obj.validar()
         if msg:
-            return {'action': 'cancel',
-             'message': msg}
-        result = ei_product_obj.xml_cancel(cr, uid, ids, inv, ei_obj, cert_name, context=context)
+            return {
+                'action': 'cancel',
+                'message': msg}
+        result = ei_product_obj.xml_cancel(
+            cr, uid, ids, inv, ei_obj, cert_name, context=context)
         return result
 
-    def inactivate_product(self, cr, uid, ids, inv, cert_name, context = None):
+    def inactivate_product(self, cr, uid, ids, inv, cert_name,
+                           context=None):
         if inv.company_id.ei_product_version == '310':
             ei_product_obj = self.pool.get('ei.product.310')
         else:
-            return {'action': 'inactivate',
-             'message': 'Versao de NF-e nao disponivel'}
-        msg = ei_product_obj.validate_inactivate(cr, uid, ids, inv, context=context)
+            return {
+                'action': 'inactivate',
+                'message': 'Versao de NF-e nao disponivel'
+            }
+        msg = ei_product_obj.validate_inactivate(
+            cr, uid, ids, inv, context=context)
         if msg:
-            return {'action': 'inactivate',
-             'message': msg}
-        ei_obj = ei_product_obj.define_inactivate(cr, uid, ids, inv, context=context)
-        result = ei_product_obj.xml_inactivate(cr, uid, ids, inv, ei_obj, cert_name, context=context)
+            return {
+                'action': 'inactivate',
+                'message': msg
+            }
+        ei_obj = ei_product_obj.define_inactivate(
+            cr, uid, ids, inv, context=context)
+        result = ei_product_obj.xml_inactivate(
+            cr, uid, ids, inv, ei_obj, cert_name, context=context)
         return result
 
-    def correction_letter_product(self, cr, uid, ids, inv, cert_name, context = None):
+    def correction_letter_product(self, cr, uid, ids, inv, cert_name,
+                                  context=None):
         if inv.company_id.ei_product_version == '310':
             ei_product_obj = self.pool.get('ei.product.310')
         else:
-            return {'action': 'correction_letter',
-             'message': 'Versao de NF-e nao disponivel'}
-        ei_obj = ei_product_obj.define_correction_letter(cr, uid, ids, inv, context=context)
+            return {
+                'action': 'correction_letter',
+                'message': 'Versao de NF-e nao disponivel'
+            }
+        ei_obj = ei_product_obj.define_correction_letter(
+            cr, uid, ids, inv, context=context)
         msg = ei_obj.validar()
         if msg:
             return {'action': 'correction_letter',
-             'message': msg}
-        result = ei_product_obj.xml_correction_letter(cr, uid, ids, inv, ei_obj, cert_name, context=context)
+                    'message': msg}
+        result = ei_product_obj.xml_correction_letter(
+            cr, uid, ids, inv, ei_obj, cert_name, context=context)
         return result
 
 

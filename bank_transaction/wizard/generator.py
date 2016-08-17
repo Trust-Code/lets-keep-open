@@ -1,15 +1,17 @@
 # Embedded file name: /opt/openerp/producao/addons-extra/bank_transaction/wizard/generator.py
-import time
-import netsvc
+
 from tools.translate import _
 from osv import osv, fields
 from collections import OrderedDict
 from cStringIO import StringIO
 from datetime import datetime
 import os
-TYPE_ADAPTERS = {'INTEGER': unicode,
- 'DATE': lambda d: d.strftime('%d%m%y'),
- 'CHARACTER': lambda s: s.upper()}
+TYPE_ADAPTERS = {
+    'INTEGER': unicode,
+    'DATE': lambda d: d.strftime('%d%m%y'),
+    'CHARACTER': lambda s: s.upper()
+}
+
 
 class CNABGenerator(object):
 
@@ -47,7 +49,6 @@ class CNABGenerator(object):
             for record in records:
                 record_format = record_formats[record['IDReg']]
                 for field in record_format.fields_ids:
-                    name = field.name
                     self.generate_field(field, record, result_file)
 
                 result_file.write('\r\n')
@@ -55,7 +56,8 @@ class CNABGenerator(object):
             result_file.seek(0)
             return result_file
         except:
-            raise osv.except_osv(_('Error'), _('Erro apresentado no campo %s') % field.name)
+            raise osv.except_osv(
+                _('Error'), _('Erro apresentado no campo %s') % field.name)
 
     def generate_field(self, field, record, result_file):
         if field.value is False:

@@ -53,15 +53,15 @@ class electronic_invoice(osv.osv):
              'type': 'binary'}, context=context)
         return True
 
-    def validate_send(self, cr, uid, ids, inv, context = None):
+    def validate_send(self, cr, uid, ids, inv, context=None):
         if not inv.company_id.cnpj_cpf:
-            return '%s - %s' % (u'CNPJ do Empresa n\xe3o informado - ', inv.company_id.name)
+            return '%s - %s' % (u'CNPJ do Empresa não informado - ', inv.company_id.name)
         if not inv.company_id.nfe_a1_file:
-            return '%s - %s' % (u'Certificado Digital n\xe3o informado - ', inv.company_id.name)
+            return '%s - %s' % (u'Certificado Digital não informado - ', inv.company_id.name)
         if not inv.company_id.nfe_a1_password:
-            return '%s - %s' % (u'Senha do Certificado Digital n\xe3o informada - ', inv.company_id.name)
+            return '%s - %s' % (u'Senha do Certificado Digital não informada - ', inv.company_id.name)
         if not inv.partner_id.cnpj_cpf:
-            return u'CNPJ/CPF do Cliente n\xe3o informado'
+            return u'CNPJ/CPF do Cliente não informado'
         if not inv.partner_id.state_id:
             return u'UF nao cadastrado para o Cliente informado'
         if not inv.partner_id.state_id.ibge_code:
@@ -73,14 +73,14 @@ class electronic_invoice(osv.osv):
         if not inv.partner_id.l10n_br_city_id.state_id.id == inv.partner_id.state_id.id:
             return u'UF do municipio diferente da UF do cliente'
         if not inv.document_serie_id:
-            return u'Fatura sem S\xe9rie'
+            return u'Fatura sem Série'
         if not inv.document_serie_id.fiscal_document_id:
-            return u'S\xe9rie sem Documento Fiscal'
+            return u'Série sem Documento Fiscal'
         if not inv.document_serie_id.fiscal_document_id.electronic:
-            return u'S\xe9rie n\xe3o configurada para Nota Fiscal Eletr\xf4nica'
+            return u'Série não configurada para Nota Fiscal Eletrônica'
         return ''
 
-    def send(self, cr, uid, ids, context = None):
+    def send(self, cr, uid, ids, context=None):
         invoice_obj = self.pool.get('account.invoice')
         invoice_ids = invoice_obj.search(cr, uid, [('id', 'in', context.get('active_ids'))])
         invoice_br = invoice_obj.browse(cr, uid, invoice_ids, context=context)
@@ -91,16 +91,18 @@ class electronic_invoice(osv.osv):
                 continue
             msg = self.validate_send(cr, uid, ids, invoice, context=context)
             if msg:
-                result = {'action': 'send',
-                 'status': 'failed',
-                 'message': msg}
+                result = {
+                    'action': 'send',
+                    'status': 'failed',
+                    'message': msg}
                 self.inv_write(cr, uid, ids, invoice, result, context=context)
                 continue
             cert_name = '/tmp/oe_electronic_invoice/' + self.create_temp_file(base64.decodestring(invoice.company_id.nfe_a1_file), path='/tmp/oe_electronic_invoice/')
             if not cert_name:
-                result = {'action': 'send',
-                 'status': 'failed',
-                 'message': 'Digital Certificate can not saved'}
+                result = {
+                    'action': 'send',
+                    'status': 'failed',
+                    'message': 'Digital Certificate can not be saved'}
             elif invoice.fiscal_type == 'product':
                 result = self.send_product(cr, uid, ids, invoice, cert_name, context=context)
             elif invoice.company_id.l10n_br_city_id.ibge_code == '50308':
@@ -110,9 +112,10 @@ class electronic_invoice(osv.osv):
             elif invoice.company_id.l10n_br_city_id.ibge_code in '44004':
                 result = self.send_ariss(cr, uid, ids, invoice, cert_name, context=context)
             else:
-                result = {'action': 'send',
-                 'status': False,
-                 'message': 'Envio de NF-e n\xc3\xa3o dispon\xc3\xadvel'}
+                result = {
+                    'action': 'send',
+                    'status': False,
+                    'message': 'Envio de NF-e não disponível'}
             self.inv_write(cr, uid, ids, invoice, result, context=context)
             os.remove(cert_name)
 
@@ -120,16 +123,16 @@ class electronic_invoice(osv.osv):
 
     def validate_cancel(self, cr, uid, ids, inv, context = None):
         if not inv.company_id.cnpj_cpf:
-            return '%s - %s' % (u'CNPJ/CPF da Empresa n\xe3o informado - ' + inv.company_id.name)
+            return '%s - %s' % (u'CNPJ/CPF da Empresa não informado - ' + inv.company_id.name)
         if not inv.company_id.nfe_a1_file:
-            return '%s - %s' % (u'Certificado Digital n\xe3o informado - ' + inv.company_id.name)
+            return '%s - %s' % (u'Certificado Digital não informado - ' + inv.company_id.name)
         if not inv.company_id.nfe_a1_password:
-            return '%s - %s' % (u'Senha do Certificado Digital n\xe3o informada - ', inv.company_id.name)
+            return '%s - %s' % (u'Senha do Certificado Digital não informada - ', inv.company_id.name)
         if not inv.partner_id.cnpj_cpf:
-            return '%s' % u'CNPJ/CPF do Cliente n\xe3o informado'
+            return '%s' % u'CNPJ/CPF do Cliente não informado'
         return ''
 
-    def cancel(self, cr, uid, ids, context = None):
+    def cancel(self, cr, uid, ids, context=None):
         account_invoice_obj = self.pool.get('account.invoice')
         account_invoice_ids = account_invoice_obj.search(cr, uid, [('id', 'in', context.get('active_ids'))])
         account_invoices_br = account_invoice_obj.browse(cr, uid, account_invoice_ids, context=context)
@@ -140,21 +143,24 @@ class electronic_invoice(osv.osv):
                 continue
             msg = self.validate_cancel(cr, uid, ids, invoice, context=context)
             if msg:
-                result = {'action': 'cancel',
-                 'message': msg}
+                result = {
+                    'action': 'cancel',
+                    'message': msg}
                 self.inv_write(cr, uid, ids, invoice, result, context=context)
                 continue
             cert_name = '/tmp/oe_electronic_invoice/' + self.create_temp_file(base64.decodestring(invoice.company_id.nfe_a1_file), path='/tmp/oe_electronic_invoice/')
             if not cert_name:
-                result = {'action': 'cancel',
-                 'message': u'Digital Certificate can not saved'}
+                result = {
+                    'action': 'cancel',
+                    'message': u'Digital Certificate can not be saved'}
             elif invoice.fiscal_type == 'product':
                 result = self.cancel_product(cr, uid, ids, invoice, cert_name, context=context)
             elif invoice.company_id.l10n_br_city_id.ibge_code == '50308':
                 result = self.cancel_sp_saopaulo(cr, uid, ids, invoice, cert_name, context=context)
             else:
-                result = {'action': 'cancel',
-                 'message': u'Cancelamento de NF-e nao dispon\xedvel'}
+                result = {
+                    'action': 'cancel',
+                    'message': u'Cancelamento de NF-e nao disponível'}
             self.inv_write(cr, uid, ids, invoice, result, context=context)
             os.remove(cert_name)
 
@@ -162,20 +168,20 @@ class electronic_invoice(osv.osv):
 
     def validate_inactivate(self, cr, uid, ids, inv, context = None):
         if not inv.company_id.ei_product_version:
-            return '%s - %s' % (u'Vers\xe3o da NF-e n\xe3o informada -', inv.company_id.name)
+            return '%s - %s' % (u'Versão da NF-e não informada -', inv.company_id.name)
         if not inv.company_id.nfe_a1_file:
-            return '%s - %s' % (u'Certificado Digital n\xe3o informado -' + inv.company_id.name)
+            return '%s - %s' % (u'Certificado Digital não informado -' + inv.company_id.name)
         if not inv.company_id.nfe_a1_password:
-            return '%s - %s' % (u'Senha do Certificado Digital n\xe3o informada -', inv.company_id.name)
+            return '%s - %s' % (u'Senha do Certificado Digital não informada -', inv.company_id.name)
         if not inv.company_id.partner_id or not inv.company_id.partner_id.l10n_br_city_id or not inv.company_id.partner_id.l10n_br_city_id.state_id or not inv.company_id.partner_id.l10n_br_city_id.state_id.code:
-            return '%s - %s' % (u'C\xf3digo do estado no endere\xe7o da empresa -', inv.company_id.name)
+            return '%s - %s' % (u'Código do estado no endereço da empresa -', inv.company_id.name)
         if not inv.company_id.cnpj_cpf:
-            return '%s - %s' % (u'CNPJ do Empresa n\xe3o informado - ', inv.company_id.name)
+            return '%s - %s' % (u'CNPJ do Empresa não informado - ', inv.company_id.name)
         if not inv.document_serie_id.code:
-            return u'Fatura sem S\xe9rie'
+            return u'Fatura sem Série'
         return ''
 
-    def inactivate(self, cr, uid, ids, context = None, *args):
+    def inactivate(self, cr, uid, ids, context=None, *args):
         account_invoice_obj = self.pool.get('account.invoice')
         account_invoice_ids = account_invoice_obj.search(cr, uid, [('id', 'in', context.get('active_ids'))])
         account_invoices_br = account_invoice_obj.browse(cr, uid, account_invoice_ids, context=context)
@@ -186,59 +192,67 @@ class electronic_invoice(osv.osv):
                 continue
             msg = self.validate_inactivate(cr, uid, ids, invoice, context=context)
             if msg:
-                result = {'action': 'inactivate',
-                 'message': msg}
+                result = {
+                    'action': 'inactivate',
+                    'message': msg}
                 self.inv_write(cr, uid, ids, invoice, result, context=context)
                 continue
             cert_name = '/tmp/oe_electronic_invoice/' + self.create_temp_file(base64.decodestring(invoice.company_id.nfe_a1_file), path='/tmp/oe_electronic_invoice/')
             if not cert_name:
-                result = {'action': 'inactivate',
-                 'message': u'Digital Certificate can not saved'}
+                result = {
+                    'action': 'inactivate',
+                    'message': u'Digital Certificate can not saved'}
             elif invoice.fiscal_type == 'product':
                 result = self.inactivate_product(cr, uid, ids, invoice, cert_name, context=context)
             elif invoice.company_id.l10n_br_city_id.ibge_code == '50308':
                 result = self.inactivate_sp_saopaulo(cr, uid, ids, invoice, cert_name, context=context)
             else:
-                result = {'action': 'inactivate',
-                 'message': u'Inativa\xe7\xe3o de NF-e n\xe3o dispon\xedvel'}
+                result = {
+                    'action': 'inactivate',
+                    'message': u'Inativação de NF-e não disponível'}
             self.inv_write(cr, uid, ids, invoice, result, context=context)
             os.remove(cert_name)
 
         return True
 
-    def validate_correction_letter(self, cr, uid, ids, inv, context = None):
+    def validate_correction_letter(self, cr, uid, ids, inv, context=None):
         if not inv.ei_access_key:
             return '%s' % u'Nota Fiscal sem Chave NF-e'
         if not inv.internal_number:
-            return u'Fatura sem n\xfamero'
+            return u'Fatura sem número'
         if not inv.ei_correction_letter:
-            return '%s' % u'Nota Fiscal sem dados para a Carta de Corre\xe7\xe3o'
+            return '%s' % u'Nota Fiscal sem dados para a Carta de Correção'
         return ''
 
-    def correction_letter(self, cr, uid, ids, context = None, *args):
+    def correction_letter(self, cr, uid, ids, context=None, *args):
         account_invoice_obj = self.pool.get('account.invoice')
-        account_invoice_ids = account_invoice_obj.search(cr, uid, [('id', 'in', context.get('active_ids'))])
-        account_invoices_br = account_invoice_obj.browse(cr, uid, account_invoice_ids, context=context)
+        account_invoice_ids = account_invoice_obj.search(
+            cr, uid, [('id', 'in', context.get('active_ids'))])
+        account_invoices_br = account_invoice_obj.browse(
+            cr, uid, account_invoice_ids, context=context)
         for invoice in account_invoices_br:
             if not invoice.ei_status == 'confirmed':
                 continue
             if invoice.state not in ('open', 'paid'):
                 continue
             if not invoice.fiscal_type == 'product':
-                result = {'action': 'correction_letter',
-                 'message': u'Carta de Corre\xe7\xe3o n\xe3o est\xe1 disponivel para a NF-e de servi\xe7o.'}
+                result = {
+                    'action': 'correction_letter',
+                    'message': u'Carta de Correção não está disponível para a NF-e de serviço.'}
                 self.inv_write(cr, uid, ids, invoice, result, context=context)
                 continue
             msg = self.validate_correction_letter(cr, uid, ids, invoice, context=context)
             if msg:
-                result = {'action': 'correction_letter',
-                 'message': msg}
+                result = {
+                    'action': 'correction_letter',
+                    'message': msg}
                 self.inv_write(cr, uid, ids, invoice, result, context=context)
                 continue
             cert_name = '/tmp/oe_electronic_invoice/' + self.create_temp_file(base64.decodestring(invoice.company_id.nfe_a1_file), path='/tmp/oe_electronic_invoice/')
             if not cert_name:
-                result = {'action': 'correction_letter',
-                 'message': u'Digital Certificate can not saved'}
+                result = {
+                    'action': 'correction_letter',
+                    'message': u'Digital Certificate can not be saved'}
             else:
                 result = self.correction_letter_product(cr, uid, ids, invoice, cert_name, context=context)
             self.inv_write(cr, uid, ids, invoice, result, context=context)
@@ -246,7 +260,7 @@ class electronic_invoice(osv.osv):
 
         return True
 
-    def schedule_to_send(self, cr, uid, ids, context = None):
+    def schedule_to_send(self, cr, uid, ids, context=None):
         obj_account_invoice = self.pool.get('account.invoice')
         src_account_invoice = obj_account_invoice.search(cr, uid, [('id', 'in', context.get('active_ids'))])
         br_account_invoice = obj_account_invoice.browse(cr, uid, src_account_invoice, context=context)
@@ -259,7 +273,7 @@ class electronic_invoice(osv.osv):
 
         return True
 
-    def scheduled_sending_invoices(self, cr, uid, context = None):
+    def scheduled_sending_invoices(self, cr, uid, context=None):
         if context is None:
             context = {}
         obj_account_invoice = self.pool.get('account.invoice')
@@ -276,51 +290,66 @@ class electronic_invoice(osv.osv):
             return False
         return True
 
-    def prepare_to_resend(self, cr, uid, ids, context = None):
+    def prepare_to_resend(self, cr, uid, ids, context=None):
         for invoice_id in context['active_ids']:
             inv = self.pool.get('account.invoice').browse(cr, uid, invoice_id)
             if inv.rps_code:
                 rps_code = self.pool.get('ir.sequence').get(cr, uid, 'rps.code.seq')
             else:
                 raise osv.except_osv(_('Error'), _('Invoice without RPS Number'))
-            self.pool.get('account.invoice').write(cr, uid, invoice_id, {'rps_code': rps_code,
-             'rps_serie': False,
-             'ei_status': False,
-             'ei_date': False,
-             'ei_code': False,
-             'ei_verification_code': False,
-             'ei_access_key': False,
-             'ei_protocol': False,
-             'ei_description': False,
-             'ei_events_ids': False})
+            self.pool.get('account.invoice').write(
+                cr, uid, invoice_id, {
+                    'rps_code': rps_code,
+                    'rps_serie': False,
+                    'ei_status': False,
+                    'ei_date': False,
+                    'ei_code': False,
+                    'ei_verification_code': False,
+                    'ei_access_key': False,
+                    'ei_protocol': False,
+                    'ei_description': False,
+                    'ei_events_ids': False})
 
         return True
 
-    def action_manual_electronic_invoice(self, cr, uid, ids, context = None):
-        return {'context': context,
-         'type': 'ir.actions.act_window',
-         'res_model': 'electronic.invoice.manual',
-         'view_mode': 'form',
-         'view_type': 'form',
-         'target': 'new'}
+    def action_manual_electronic_invoice(self, cr, uid, ids, context=None):
+        return {
+            'context': context,
+            'type': 'ir.actions.act_window',
+            'res_model': 'electronic.invoice.manual',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': 'new'
+        }
 
 
 electronic_invoice()
 
+
 class electronic_invoice_manual(osv.osv):
     _name = 'electronic.invoice.manual'
-    _columns = {'ei_status': fields.char('EI Status', readonly=True),
-     'ei_date': fields.date('EI Date'),
-     'ei_code': fields.char('EI Code'),
-     'ei_verification_code': fields.char('EI Verification Code')}
+    _columns = {
+        'ei_status': fields.char('EI Status', readonly=True),
+        'ei_date': fields.date('EI Date'),
+        'ei_code': fields.char('EI Code'),
+        'ei_verification_code': fields.char('EI Verification Code')
+    }
 
-    def save_data(self, cr, uid, ids, context = None):
+    def save_data(self, cr, uid, ids, context=None):
         data = self.read(cr, uid, ids)[0]
-        self.pool.get('account.invoice').write(cr, uid, context['active_id'], {'ei_status': 'confirmed',
-         'ei_date': data['ei_date'],
-         'ei_code': data['ei_code'],
-         'ei_verification_code': data['ei_verification_code']})
-        self.pool.get('electronic.invoice.event').create(cr, uid, {'action': 'send',
-         'message': u'NF-e criada manualmente',
-         'invoice_id': context['active_id']})
+        self.pool.get('account.invoice').write(
+            cr, uid, context['active_id'], {
+                'ei_status': 'confirmed',
+                'ei_date': data['ei_date'],
+                'ei_code': data['ei_code'],
+                'ei_verification_code': data['ei_verification_code']
+                }
+        )
+        self.pool.get('electronic.invoice.event').create(
+            cr, uid, {
+                'action': 'send',
+                'message': u'NF-e criada manualmente',
+                'invoice_id': context['active_id']
+                }
+        )
         return True
