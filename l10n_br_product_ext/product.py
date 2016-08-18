@@ -1,10 +1,14 @@
-# Embedded file name: /opt/openerp/homolog/addons-extension/l10n_br_product_ext/product.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from openerp.osv import osv, fields
+
 
 class product_product(osv.osv):
     _inherit = 'product.product'
 
-    def name_get(self, cr, user, ids, context = None):
+    def name_get(self, cr, user, ids, context=None):
         if context is None:
             context = {}
         if isinstance(ids, (int, long)):
@@ -26,17 +30,21 @@ class product_product(osv.osv):
                 sellers = filter(lambda x: x.name.id == partner_id, product.seller_ids)
                 if sellers:
                     for s in sellers:
-                        mydict = {'id': product.id,
-                         'name': s.product_name or product.name,
-                         'default_code': s.product_code or product.default_code,
-                         'variants': product.variants}
+                        mydict = {
+                            'id': product.id,
+                            'name': s.product_name or product.name,
+                            'default_code': s.product_code or product.default_code,
+                            'variants': product.variants
+                        }
                         result.append(_name_get(mydict))
 
                 else:
-                    mydict = {'id': product.id,
-                     'name': product.name,
-                     'default_code': product.default_code,
-                     'variants': product.variants}
+                    mydict = {
+                        'id': product.id,
+                        'name': product.name,
+                        'default_code': product.default_code,
+                        'variants': product.variants
+                    }
                     result.append(_name_get(mydict))
 
             return result

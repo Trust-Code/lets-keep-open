@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/producao/addons-extra/bank_transaction/wizard/file_format_loader.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from tools.translate import _
 from osv import osv, fields
 from lxml.etree import XML, XMLParser

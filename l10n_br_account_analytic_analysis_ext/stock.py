@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/homolog/addons-extension/l10n_br_account_analytic_analysis_ext/stock.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import time
@@ -13,10 +16,14 @@ import openerp.addons.decimal_precision as dp
 import logging
 _logger = logging.getLogger(__name__)
 
+
 class stock_production_lot(osv.osv):
     _name = 'stock.production.lot'
     _inherit = 'stock.production.lot'
-    _columns = {'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account')}
+    _columns = {
+        'analytic_account_id': fields.many2one(
+            'account.analytic.account', 'Analytic Account')
+    }
 
 
 stock_production_lot()

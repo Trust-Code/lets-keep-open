@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/producao/addons-extra/bank_transaction/bank_file.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from datetime import datetime, date
 from osv import osv, fields
 from openerp.osv import osv, fields

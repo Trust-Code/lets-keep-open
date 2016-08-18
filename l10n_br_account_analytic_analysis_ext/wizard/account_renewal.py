@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/homolog/addons-extension/l10n_br_account_analytic_analysis_ext/wizard/account_renewal.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from openerp.osv import fields, osv
 import datetime
 from openerp.tools.translate import _
@@ -31,9 +34,10 @@ class account_renewal(osv.osv_memory):
             w_date_new_str = w_date + relativedelta(months=+rec_account_analytic_account.months_renewal)
             w_date_new = w_date_new_str.strftime('%Y-%m-%d')
             field_get = obj_account_analytic_account.fields_get(cr, uid, ['date'], context=context)
-            tracked_values = {'date': {'new_value': w_date_new,
-                      'old_value': rec_account_analytic_account.date,
-                      'col_info': field_get['date']['string']}}
+            tracked_values = {
+                'date': {'new_value': w_date_new,
+                         'old_value': rec_account_analytic_account.date,
+                         'col_info': field_get['date']['string']}}
             for rec_recurring_invoice_line in rec_account_analytic_account.recurring_invoice_line_ids:
                 w_rate = 0
                 for rec_rate in rec_account_analytic_account.res_currency_id.rate_ids:

@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/homolog/addons-extra/electronic_invoice/wizard/danfe_join.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from osv import osv, fields
 from openerp.osv import fields, orm
 from openerp.tools.translate import _

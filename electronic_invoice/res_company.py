@@ -1,4 +1,8 @@
-# Embedded file name: /opt/openerp/homolog/addons-extra/electronic_invoice/res_company.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+
 from osv import fields, osv
 EI_SERVICE_VERSION = [('05030_1', 'São Paulo/SP - 1'), ('110', 'Piracicaba/SP - 1.10')]
 EI_PRODUCT_VERSION = [('310', '3.10')]

@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/producao/addons-extra/bank_transaction/wizard/export_cnab.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import time
 import netsvc
 import logging
@@ -54,7 +57,7 @@ class CNABExporter(osv.osv_memory):
             return re.sub('[^0-9]', '', v)
 
     def _spe_char_remove(self, text):
-        if not:
+        if not text:
             return text == ''
         else:
             text = text.encode('utf-8')

@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/homolog/addons-extension/l10n_br_account_analytic_analysis_ext/account_analytic_analysis.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import time
 import datetime
 from openerp.osv import osv, fields
@@ -20,7 +23,10 @@ class account_analytic_account(osv.osv):
             return res
         if child_ids:
             inv_line_obj = self.pool.get('account.invoice.line')
-            inv_lines = inv_line_obj.search(cr, uid, ['&', ('account_analytic_id', 'in', child_ids), ('invoice_id.state', '!=', 'cancel')], context=context)
+            inv_lines = inv_line_obj.search(
+                cr, uid, ['&', ('account_analytic_id', 'in', child_ids),
+                          ('invoice_id.state', '!=', 'cancel')],
+                context=context)
             for line in inv_line_obj.browse(cr, uid, inv_lines, context=context):
                 res[line.account_analytic_id.id] += line.price_total
 
@@ -30,32 +36,48 @@ class account_analytic_account(osv.osv):
         res_final = res
         return res_final
 
-    _columns = {'ca_invoiced': fields.function(_ca_invoiced_calc, type='float', string='Invoiced Amount', help='Total customer invoiced amount for this account.', digits_compute=dp.get_precision('Account')),
-     'date_cancel': fields.date('Cancel Date'),
-     'months_renewal': fields.integer('Months to renewal', help='Months to next due date'),
-     'res_currency_id': fields.many2one('res.currency', 'Rate to renewal'),
-     'generate_invoice_parent': fields.boolean('Generate Invoices for Parent Contract'),
-     'grouping_invoice_parent': fields.boolean('Grouping Invoice in Parent Contract'),
-     'recurring_rule_type': fields.selection([('daily', 'Day(s)'),
-                             ('weekly', 'Week(s)'),
-                             ('monthly', 'Month(s)'),
-                             ('yearly', 'Year(s)')], 'Recurrency', help='Invoice automatically repeat at specified interval'),
-     'recurring_interval': fields.integer('Repeat Every', help='Repeat every (Days/Week/Month/Year)'),
-     'recurring_next_date': fields.date('Date of Next Invoice'),
-     'fiscal_type': fields.selection([('product', 'Produto'), ('service', 'Servi\xc3\xa7o')], 'Fiscal Type', required=False),
-     'payment_term_id': fields.many2one('account.payment.term', 'Payment Term'),
-     'recurring_invoice_line_ids': fields.one2many('account.analytic.invoice.line', 'analytic_account_id', 'Invoice Lines'),
-     'invoice_additem_ids': fields.one2many('account.analytic.additional.item', 'analytic_account_id', 'Additional Item'),
-     'special_condition_ids': fields.one2many('account.analytic.special.condition', 'analytic_account_id', 'Special Condition'),
-     'salesperson_id': fields.many2one('res.users', 'Salesperson'),
-     'salesperson_commission': fields.float('Salesperson Commission (%)'),
-     'partner_commission_ids': fields.one2many('account.analytic.partner.commission', 'analytic_account_id', 'Partner Commission'),
-     'stock_production_lot_ids': fields.one2many('stock.production.lot', 'analytic_account_id', 'Serial Number')}
-    _defaults = {'recurring_interval': 1,
-     'recurring_next_date': lambda *a: time.strftime('%Y-%m-%d'),
-     'recurring_rule_type': 'monthly'}
+    _columns = {
+        'ca_invoiced': fields.function(_ca_invoiced_calc, type='float', string='Invoiced Amount', help='Total customer invoiced amount for this account.', digits_compute=dp.get_precision('Account')),
+        'date_cancel': fields.date('Cancel Date'),
+        'months_renewal': fields.integer('Months to renewal', help='Months to next due date'),
+        'res_currency_id': fields.many2one('res.currency', 'Rate to renewal'),
+        'generate_invoice_parent': fields.boolean('Generate Invoices for Parent Contract'),
+        'grouping_invoice_parent': fields.boolean('Grouping Invoice in Parent Contract'),
+        'recurring_rule_type': fields.selection(
+            [('daily', 'Day(s)'),
+             ('weekly', 'Week(s)'),
+             ('monthly', 'Month(s)'),
+             ('yearly', 'Year(s)')], 'Recurrency',
+            help='Invoice automatically repeat at specified interval'),
+        'recurring_interval': fields.integer(
+            'Repeat Every', help='Repeat every (Days/Week/Month/Year)'),
+        'recurring_next_date': fields.date('Date of Next Invoice'),
+        'fiscal_type': fields.selection(
+            [('product', 'Produto'),
+             ('service', 'Serviço')], 'Fiscal Type', required=False),
+        'payment_term_id': fields.many2one('account.payment.term', 'Payment Term'),
+        'recurring_invoice_line_ids': fields.one2many(
+            'account.analytic.invoice.line', 'analytic_account_id', 'Invoice Lines'),
+        'invoice_additem_ids': fields.one2many(
+            'account.analytic.additional.item', 'analytic_account_id', 'Additional Item'),
+        'special_condition_ids': fields.one2many(
+            'account.analytic.special.condition', 'analytic_account_id', 'Special Condition'),
+        'salesperson_id': fields.many2one('res.users', 'Salesperson'),
+        'salesperson_commission': fields.float('Salesperson Commission (%)'),
+        'partner_commission_ids': fields.one2many(
+            'account.analytic.partner.commission', 'analytic_account_id',
+            'Partner Commission'),
+        'stock_production_lot_ids': fields.one2many(
+            'stock.production.lot', 'analytic_account_id', 'Serial Number')
+    }
 
-    def action_create_invoice(self, cr, uid, ids, limit_date = None, context = None):
+    _defaults = {
+        'recurring_interval': 1,
+        'recurring_next_date': lambda *a: time.strftime('%Y-%m-%d'),
+        'recurring_rule_type': 'monthly'
+    }
+
+    def action_create_invoice(self, cr, uid, ids, limit_date=None, context=None):
         for rec_contract in self.browse(cr, uid, ids, context=context):
             if not rec_contract.grouping_invoice_parent:
                 w_recurring_next_date = rec_contract.recurring_next_date
@@ -81,14 +103,14 @@ class account_analytic_account(osv.osv):
         context = context or {}
         inv_obj = self.pool.get('account.invoice')
         journal_obj = self.pool.get('account.journal')
-        fpos_obj = self.pool.get('account.fiscal.position')
         contract_obj = self.pool.get('account.analytic.account')
         if rec_contract.generate_invoice_parent and rec_contract.parent_id != False:
             rec_partner = rec_contract.parent_id.partner_id
         else:
             rec_partner = rec_contract.partner_id
         if not rec_partner:
-            raise osv.except_osv(_('No Customer Defined!'), _('You must first select a Customer for Contract %s!') % rec_contract.name)
+            raise osv.except_osv(_('No Customer Defined!'),
+                                 _('You must first select a Customer for Contract %s!') % rec_contract.name)
         if rec_contract.fiscal_type == 'service':
             fcateg = rec_contract.company_id.out_invoice_service_fiscal_category_id.id
         else:
@@ -102,27 +124,31 @@ class account_analytic_account(osv.osv):
         if rec_contract.salesperson_id:
             salesperson = rec_contract.salesperson_id.id
             section = rec_contract.salesperson_id.default_section_id.id
-        inv_data = {'reference': rec_contract.code or False,
-         'account_id': rec_partner.property_account_receivable.id or False,
-         'type': 'out_invoice',
-         'partner_id': rec_partner.id,
-         'journal_id': len(journal_ids) and journal_ids[0] or False,
-         'date_invoice': invoice_date,
-         'origin': rec_contract.name,
-         'payment_term': False,
-         'payment_type': rec_partner.payment_type_customer.id or False,
-         'company_id': rec_contract.company_id.id or False,
-         'fiscal_type': rec_contract.fiscal_type,
-         'fiscal_category_id': fcateg,
-         'fiscal_position': False,
-         'user_id': salesperson,
-         'section_id': section,
-         'currency_id': rec_contract.company_id.currency_id.id or False}
-        kwargs = {'partner_id': rec_partner.id,
-         'partner_invoice_id': rec_partner.id,
-         'fiscal_category_id': fcateg,
-         'company_id': rec_contract.company_id.id or False,
-         'context': context}
+        inv_data = {
+            'reference': rec_contract.code or False,
+            'account_id': rec_partner.property_account_receivable.id or False,
+            'type': 'out_invoice',
+            'partner_id': rec_partner.id,
+            'journal_id': len(journal_ids) and journal_ids[0] or False,
+            'date_invoice': invoice_date,
+            'origin': rec_contract.name,
+            'payment_term': False,
+            'payment_type': rec_partner.payment_type_customer.id or False,
+            'company_id': rec_contract.company_id.id or False,
+            'fiscal_type': rec_contract.fiscal_type,
+            'fiscal_category_id': fcateg,
+            'fiscal_position': False,
+            'user_id': salesperson,
+            'section_id': section,
+            'currency_id': rec_contract.company_id.currency_id.id or False
+        }
+        kwargs = {
+            'partner_id': rec_partner.id,
+            'partner_invoice_id': rec_partner.id,
+            'fiscal_category_id': fcateg,
+            'company_id': rec_contract.company_id.id or False,
+            'context': context
+        }
         inv_add_data = self.pool.get('account.fiscal.position.rule').apply_fiscal_mapping(cr, uid, {'value': inv_data}, **kwargs)
         inv_data['fiscal_position'] = inv_add_data['value'].get('fiscal_position')
         lst_payment_term = {}
@@ -201,54 +227,64 @@ class account_analytic_account(osv.osv):
             cfop_id = False
         else:
             cfop_id = fpos_obj.browse(cr, uid, w_fiscal_position).cfop_id.id
-        invoice_line_val = {'name': product.name,
-         'account_id': account_id,
-         'account_analytic_id': contract.id,
-         'price_unit': inv_line.price_unit or 0.0,
-         'quantity': inv_line.quantity,
-         'uos_id': product.uom_id.id or False,
-         'product_id': product.id or False,
-         'invoice_id': invoice_id,
-         'invoice_line_tax_id': [(6, 0, tax_id)],
-         'fiscal_category_id': inv_data.get('fiscal_category_id'),
-         'product_type': contract_parent.fiscal_type,
-         'fiscal_classification_id': product.property_fiscal_classification.id,
-         'fiscal_position': inv_data.get('fiscal_position'),
-         'cfop_id': cfop_id,
-         'discount': discount}
-        self.pool.get('account.invoice.line').create(cr, uid, invoice_line_val, context=context)
+        invoice_line_val = {
+            'name': product.name,
+            'account_id': account_id,
+            'account_analytic_id': contract.id,
+            'price_unit': inv_line.price_unit or 0.0,
+            'quantity': inv_line.quantity,
+            'uos_id': product.uom_id.id or False,
+            'product_id': product.id or False,
+            'invoice_id': invoice_id,
+            'invoice_line_tax_id': [(6, 0, tax_id)],
+            'fiscal_category_id': inv_data.get('fiscal_category_id'),
+            'product_type': contract_parent.fiscal_type,
+            'fiscal_classification_id': product.property_fiscal_classification.id,
+            'fiscal_position': inv_data.get('fiscal_position'),
+            'cfop_id': cfop_id,
+            'discount': discount
+        }
+        self.pool.get('account.invoice.line').create(
+            cr, uid, invoice_line_val, context=context)
 
-    def set_cancel(self, cr, uid, ids, context = None):
-        return self.write(cr, uid, ids, {'state': 'cancelled',
-         'date_cancel': datetime.date.today()}, context=context)
+    def set_cancel(self, cr, uid, ids, context=None):
+        return self.write(
+            cr, uid, ids, {
+                'state': 'cancelled',
+                'date_cancel': datetime.date.today()}, context=context)
 
-    def set_open(self, cr, uid, ids, context = None):
-        return self.write(cr, uid, ids, {'state': 'open',
-         'date_cancel': False}, context=context)
+    def set_open(self, cr, uid, ids, context=None):
+        return self.write(
+            cr, uid, ids, {
+                'state': 'open',
+                'date_cancel': False}, context=context)
 
 
 account_analytic_account()
+
 
 class account_analytic_invoice_line(osv.osv):
     _name = 'account.analytic.invoice.line'
     _description = 'Contract Invoice Line'
 
-    def _amount_line(self, cr, uid, ids, prop, unknow_none, unknow_dict, context = None):
+    def _amount_line(self, cr, uid, ids, prop, unknow_none, unknow_dict, context=None):
         res = {}
         for line in self.browse(cr, uid, ids, context=context):
             res[line.id] = line.quantity * line.price_unit
 
         return res
 
-    _columns = {'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
-     'product_id': fields.many2one('product.product', 'Product', required=True),
-     'quantity': fields.float('Quantity', required=True),
-     'price_unit': fields.float('Unit Price', required=True),
-     'price_subtotal': fields.function(_amount_line, string='Sub Total', type='float', digits_compute=dp.get_precision('Account')),
-     'inactive_date': fields.date('Inactive Date')}
+    _columns = {
+        'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
+        'product_id': fields.many2one('product.product', 'Product', required=True),
+        'quantity': fields.float('Quantity', required=True),
+        'price_unit': fields.float('Unit Price', required=True),
+        'price_subtotal': fields.function(_amount_line, string='Sub Total', type='float', digits_compute=dp.get_precision('Account')),
+        'inactive_date': fields.date('Inactive Date')
+    }
     _defaults = {'quantity': 1}
 
-    def product_id_change(self, cr, uid, ids, product = None, partner_id = None, context = None):
+    def product_id_change(self, cr, uid, ids, product=None, partner_id=None, context=None):
         uom_id = False
         result = self.pool.get('account.invoice.line').product_id_change(cr, uid, ids, product, uom_id, partner_id=partner_id)
         return result
@@ -258,6 +294,7 @@ class account_analytic_invoice_line(osv.osv):
 
 
 account_analytic_invoice_line()
+
 
 class account_analytic_additional_item(osv.osv):
     _name = 'account.analytic.additional.item'
@@ -270,13 +307,15 @@ class account_analytic_additional_item(osv.osv):
 
         return res
 
-    _columns = {'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
-     'product_id': fields.many2one('product.product', 'Product', required=True),
-     'quantity': fields.float('Quantity', required=True),
-     'price_unit': fields.float('Unit Price', required=True),
-     'price_subtotal': fields.function(_amount_line, string='Sub Total', type='float', digits_compute=dp.get_precision('Account')),
-     'invoice_date_planned': fields.date('Invoice Date Planned'),
-     'invoice_date': fields.date('Invoice Date', readonly=True)}
+    _columns = {
+        'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
+        'product_id': fields.many2one('product.product', 'Product', required=True),
+        'quantity': fields.float('Quantity', required=True),
+        'price_unit': fields.float('Unit Price', required=True),
+        'price_subtotal': fields.function(_amount_line, string='Sub Total', type='float', digits_compute=dp.get_precision('Account')),
+        'invoice_date_planned': fields.date('Invoice Date Planned'),
+        'invoice_date': fields.date('Invoice Date', readonly=True)
+    }
     _defaults = {'quantity': 1}
 
     def product_id_change(self, cr, uid, ids, product = None, partner_id = None, context = None):
@@ -290,24 +329,30 @@ class account_analytic_additional_item(osv.osv):
 
 account_analytic_invoice_line()
 
+
 class account_analytic_special_condition(osv.osv):
     _name = 'account.analytic.special.condition'
     _description = 'Contract Special Condition'
-    _columns = {'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
-     'start_date': fields.date('Start Date'),
-     'end_date': fields.date('End Date'),
-     'discount': fields.float('Discount (%)'),
-     'payment_term': fields.many2one('account.payment.term', 'Payment Term')}
+    _columns = {
+        'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
+        'start_date': fields.date('Start Date'),
+        'end_date': fields.date('End Date'),
+        'discount': fields.float('Discount (%)'),
+        'payment_term': fields.many2one('account.payment.term', 'Payment Term')
+    }
 
 
 account_analytic_special_condition()
 
+
 class account_analytic_partner_commission(osv.osv):
     _name = 'account.analytic.partner.commission'
     _description = 'Contract Partner Commission'
-    _columns = {'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
-     'partner_id': fields.many2one('res.partner', 'Partner', required=True),
-     'partner_commission': fields.float('Partner Commission (%)', required=True)}
+    _columns = {
+        'analytic_account_id': fields.many2one('account.analytic.account', 'Analytic Account'),
+        'partner_id': fields.many2one('res.partner', 'Partner', required=True),
+        'partner_commission': fields.float('Partner Commission (%)', required=True)
+    }
 
 
 account_analytic_partner_commission()

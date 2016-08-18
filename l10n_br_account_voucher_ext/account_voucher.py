@@ -1,5 +1,9 @@
-# Embedded file name: /opt/openerp/producao/addons-extension/l10n_br_account_voucher_ext/account_voucher.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from openerp.osv import fields, osv
+
 
 class account_voucher(osv.osv):
     _inherit = 'account.voucher'

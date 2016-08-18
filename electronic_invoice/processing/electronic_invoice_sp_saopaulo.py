@@ -1,4 +1,7 @@
-# Embedded file name: /opt/openerp/homolog/addons-extra/electronic_invoice/processing/electronic_invoice_sp_saopaulo.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from osv import fields, osv
 from pysped_nfse.processador_sp import ProcessadorNFSeSP
 import datetime

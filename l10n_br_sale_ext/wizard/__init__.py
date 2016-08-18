@@ -1,2 +1,6 @@
-# Embedded file name: /home/ubuntu/wspace_openerp/openerp-extra/addons-extension/l10n_br_sale_ext/wizard/__init__.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+
 import sale_make_invoice_advance

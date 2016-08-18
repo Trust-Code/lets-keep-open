@@ -1,4 +1,7 @@
-# Embedded file name: /home/ubuntu/wspace_openerp/openerp-extra/addons-extension/l10n_br_sale_ext/report/sale_order_no_tax.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import time
 from openerp.report import report_sxw
 
@@ -6,8 +9,9 @@ class order_no_tax(report_sxw.rml_parse):
 
     def __init__(self, cr, uid, name, context = None):
         super(order_no_tax, self).__init__(cr, uid, name, context=context)
-        self.localcontext.update({'time': time,
-         'show_discount': self._show_discount})
+        self.localcontext.update({
+            'time': time,
+            'show_discount': self._show_discount})
 
     def _show_discount(self, uid, context = None):
         cr = self.cr

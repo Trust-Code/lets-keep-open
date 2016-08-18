@@ -1,4 +1,7 @@
-# Embedded file name: /home/ubuntu/workspace/openerp7-base/addons-extra/l10n_br_cnab_base/bank_receivable.py
+# -*- coding: utf-8 -*-
+# © 2016 Danimar Ribeiro, Trustcode
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 import time
 import netsvc
 from tools.translate import _
