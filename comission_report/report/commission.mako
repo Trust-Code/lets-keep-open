@@ -26,7 +26,7 @@
     <% setLang(partner.lang) %>
 
     <div style="padding-top:10px;">
-    Período de recebimento das mensalidades: ${data['start_date']} a ${data['end_date']}
+    Período de recebimento das mensalidades: ${data['formatted_start_date']} a ${data['formatted_end_date']}
     </div>
 
     <div style="padding-top:10px; padding-bottom:10px;">
@@ -58,7 +58,7 @@
             % else:
                 <tr class="alt">
             % endif
-                <td>${comissao['produto']}</td>
+                <td style="max-width: 100px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">${comissao['produto']}</td>
                 <td style="text-align:center;">${comissao['cnpj']}</td>
                 <td style="max-width: 280px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">${comissao['cliente']}</td>
                 <td style="text-align:center;">${comissao['vencimento']}</td>

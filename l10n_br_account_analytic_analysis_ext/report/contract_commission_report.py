@@ -34,7 +34,7 @@ class contract_partner_commission_report(osv.osv):
         sql += "min(ai.state) AS state, sum(aml.credit) AS received, min(aml.date) AS date, "
         sql += "min(aapc.partner_commission) AS perc_commission, "
         sql += "sum(aml.credit * aapc.partner_commission / 100) AS value_commission, "
-        sql += "min(ai.id) AS invoice_id, min(ai.partner_id) AS customer_id "
+        sql += "min(ai.id) AS invoice_id, min(ai.partner_id) AS customer_id, min(ail.name) as product_name "
         sql += "FROM account_move_reconcile AS amr INNER JOIN account_move_line AS aml "
         sql += "ON ((aml.reconcile_id=amr.id OR aml.reconcile_partial_id=amr.id) "
         sql += "AND aml.credit>0) INNER JOIN account_move_line AS amlv "

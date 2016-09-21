@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import os
+import shutil
 import base64
 import zipfile
 import os.path
@@ -29,21 +30,36 @@ class report_commission_wizard(osv.osv_memory):
 
     def action_generate_report(self, cr, uid, ids, context=None):
         items = self.browse(cr, uid, ids, context=context)
-        cr.execute('select distinct(partner_id) as partner_id from account_analytic_partner_commission where partner_id is not null limit 1')
+
+        inicio = datetime.strptime(items[0].start_date, '%Y-%m-%d')
+        final = datetime.strptime(items[0].end_date, '%Y-%m-%d')
+
+        sql = "select distinct(partner_id) from \
+        contract_partner_commission_report where date between %s and %s"
+        cr.execute(sql, (inicio, final))
         partners = cr.fetchall()
         ids = [x[0] for x in partners]
-        print ids
+
         datas = {
              'model': 'res.partner',
              'start_date': items[0].start_date,
              'end_date': items[0].end_date,
+             'formatted_start_date': inicio.strftime("%d/%m/%Y"),
+             'formatted_end_date': final.strftime("%d/%m/%Y"),
         }
 
         obj = netsvc.LocalService('report.commission.report')
-        caminho = '/home/danimar/Documentos/PDF'
+        caminho = '/tmp/innova-pdf'
+        if os.path.exists(caminho):
+            shutil.rmtree(caminho)
+        os.makedirs(caminho)
+
         for partner in ids:
+            partner_obj = self.pool['res.partner'].browse(
+                cr, uid, partner, context)
             (result, format) = obj.create(cr, uid, [partner], datas, context)
-            path = os.path.join(caminho, 'Relatorio-%d.pdf' % partner)
+            name = partner_obj.legal_name or partner_obj.name
+            path = os.path.join(caminho, '%s.pdf' % name.replace('/', ''))
             f = open(path, 'wb')
             f.write(result)
             f.close()
@@ -52,17 +68,22 @@ class report_commission_wizard(osv.osv_memory):
             # ziph is zipfile handle
             for root, dirs, files in os.walk(path):
                 for file in files:
-                    ziph.write(os.path.join(root, file))
+                    ziph.write(os.path.join(root, file), file)
 
-        zipf = zipfile.ZipFile('/home/danimar/Documentos/pdf.zip', 'w', zipfile.ZIP_DEFLATED)
-        zipdir('/home/danimar/Documentos/PDF/', zipf)
+        zipf = zipfile.ZipFile('/tmp/innova-pdf.zip', 'w',
+                               zipfile.ZIP_DEFLATED)
+        zipdir('/tmp/innova-pdf', zipf)
         zipf.close()
 
-        zip_file = open('/home/danimar/Documentos/pdf.zip', 'rb').read()
+        zip_file = open('/tmp/innova-pdf.zip', 'rb').read()
+        os.remove('/tmp/innova-pdf.zip')
 
-        id_wizard = self.create(cr, uid, {'start_date': items[0].start_date,
-                              'end_date': items[0].end_date,
-                              'result': base64.b64encode(zip_file)}, context)
+        vals = {
+            'start_date': items[0].start_date,
+            'end_date': items[0].end_date,
+            'result': base64.b64encode(zip_file)
+        }
+        id_wizard = self.create(cr, uid, vals, context)
 
         return {
             'type': 'ir.actions.act_window',

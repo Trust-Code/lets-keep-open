@@ -4,6 +4,7 @@
 
 import locale
 from openerp.osv import osv, fields
+from datetime import datetime
 
 
 class res_partner(osv.osv):
@@ -16,22 +17,24 @@ class res_partner(osv.osv):
     }
 
     def get_commission(self, cr, uid, ids, start_date, end_date, context=None):
-        sql = "select 'produto' as produto, rp.cnpj_cpf, rp.legal_name, \
-            ai.date_due, cpcr.date, \
-            cpcr.received, cpcr.perc_commission, cpcr.value_commission \
+        inicio = datetime.strptime(start_date, '%Y-%m-%d')
+        final = datetime.strptime(end_date, '%Y-%m-%d')
+        sql = "select cpcr.product_name, rp.cnpj_cpf, rp.legal_name, \
+            ai.date_due, cpcr.date, cpcr.received, \
+            cpcr.perc_commission, cpcr.value_commission \
             from contract_partner_commission_report cpcr \
             inner join res_partner rp on cpcr.customer_id = rp.id \
             inner join account_invoice ai on cpcr.invoice_id = ai.id \
-            where cpcr.date between '2016-09-01' and '2016-09-30' \
-            and cpcr.partner_id = %s and cpcr.state = 'paid'"
+            where cpcr.date between %s and %s \
+            and cpcr.partner_id = %s and cpcr.state = 'paid' \
+            order by cpcr.date"
 
-        cr.execute(sql % ids[0])
+        cr.execute(sql, (inicio, final, ids[0]))
         resultados = cr.fetchall()
 
         locale.setlocale(locale.LC_ALL, 'pt_BR')
-
         comissoes = [{
-            'produto': x[0],
+            'produto': x[0].replace(u'Licença de uso software', ''),
             'cnpj': x[1],
             'cliente': x[2],
             'vencimento': x[3],
