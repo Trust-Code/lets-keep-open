@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_report_commission-wizard_form" model="ir.ui.view">
+            <field name="name">report.commission.wizard.form</field>
+            <field name="model">report.commission.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Gerar Relatório de Comissão" version="7.0">
+                    <group>
+                        <field name="start_date" />
+                        <field name="end_date" />
+                        <field name="result" />
+                    </group>
+                    <footer>
+                        <button name="action_generate_report"  string="Gerar Relatório" type="object"
+                            class="oe_highlight" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_commission_report_wizard" model="ir.actions.act_window">
+            <field name="name">Relatório de Comissões</field>
+            <field name="res_model">report.commission.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_report_contract_commission"
+                  parent="base.next_id_64"
+                  name="Relatório Comissões"
+                  action="action_commission_report_wizard"
+                  sequence="12" />
+
+    </data>
+</openerp>

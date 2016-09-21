@@ -21,6 +21,7 @@
                 <field name="partner_id" invisible="1"/>
                 <field name="analytic_account_id"/>
                 <field name="internal_number"/>
+                <field name="date" />
                 <field name="received"/>
                 <field name="perc_commission"/>
                 <field name="value_commission"/>
@@ -33,6 +34,7 @@
         <field name="model">contract.partner.commission.report</field>
         <field name="arch" type="xml">
             <search string="Contract Partner Commission">
+                <field name="date" />
                 <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
                 <filter string="Open" name="open" domain="[('state','in',('open','proforma2','sefaz_export'))]"/>
                 <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>

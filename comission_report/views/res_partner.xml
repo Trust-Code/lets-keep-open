@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_report_commission_res_partner_form" model="ir.ui.view">
+            <field name="name">view.commission.report.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="l10n_br_base.view_l10n_br_base_partner_form" />
+            <field name="arch" type="xml">
+                <field name="inscr_mun" position="after">
+                    <field name="percentual_iss" />
+                    <field name="percentual_irrf" />
+                    <field name="percentual_pcc" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
