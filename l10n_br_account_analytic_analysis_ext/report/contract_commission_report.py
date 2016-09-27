@@ -28,7 +28,7 @@ class contract_partner_commission_report(osv.osv):
     def init(self, cr):
         tools.drop_view_if_exists(cr, 'contract_partner_commission_report')
         sql = "create or replace view contract_partner_commission_report as "
-        sql += "(SELECT (amr.id::text || aml.id || amlv.id || aapc.partner_id || ai.partner_id || ai.id || ail.account_analytic_id) as id, aapc.partner_id AS partner_id, "
+        sql += "(SELECT ('x'||substr(md5(amr.id::text || aml.id || amlv.id || aapc.partner_id || ai.partner_id || ai.id || ail.account_analytic_id),1,8))::bit(32)::int as id, aapc.partner_id AS partner_id, "
         sql += "ail.account_analytic_id AS analytic_account_id, aml.period_id AS period_id, "
         sql += "ai.internal_number AS internal_number, aml.id AS move_line_id, "
         sql += "min(ai.state) AS state, sum(aml.credit) AS received, min(aml.date) AS date, "
