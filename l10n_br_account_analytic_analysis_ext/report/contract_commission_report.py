@@ -28,7 +28,7 @@ class contract_partner_commission_report(osv.osv):
     def init(self, cr):
         tools.drop_view_if_exists(cr, 'contract_partner_commission_report')
         sql = "create or replace view contract_partner_commission_report as "
-        sql += "(SELECT row_number() OVER() AS id, aapc.partner_id AS partner_id, "
+        sql += "(SELECT (amr.id::text || aml.id || amlv.id || aapc.partner_id || ai.partner_id || ai.id || ail.account_analytic_id) as id, aapc.partner_id AS partner_id, "
         sql += "ail.account_analytic_id AS analytic_account_id, aml.period_id AS period_id, "
         sql += "ai.internal_number AS internal_number, aml.id AS move_line_id, "
         sql += "min(ai.state) AS state, sum(aml.credit) AS received, min(aml.date) AS date, "
@@ -43,7 +43,7 @@ class contract_partner_commission_report(osv.osv):
         sql += "ON (amlv.move_id=ai.move_id) INNER JOIN account_invoice_line AS ail "
         sql += "ON (ail.invoice_id=ai.id) INNER JOIN account_analytic_partner_commission AS aapc "
         sql += "ON (ail.account_analytic_id=aapc.analytic_account_id) GROUP BY "
-        sql += "aapc.partner_id, ail.account_analytic_id, ai.period_id, ai.internal_number, "
+        sql += " amr.id, amlv.id, ai.partner_id, ai.id, aapc.partner_id, ail.account_analytic_id, ai.period_id, ai.internal_number, "
         sql += "aml.id)"
         cr.execute(sql)
 
