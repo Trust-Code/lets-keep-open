@@ -59,7 +59,13 @@ class report_commission_wizard(osv.osv_memory):
                 cr, uid, partner, context)
             (result, format) = obj.create(cr, uid, [partner], datas, context)
             name = partner_obj.legal_name or partner_obj.name
-            path = os.path.join(caminho, '%s.pdf' % name.replace('/', ''))
+            name = name.replace('/', '')
+            name = unicode(name)
+            import unicodedata
+            name = unicodedata.normalize('NFKD', name).encode(
+                'ascii', 'ignore')
+
+            path = os.path.join(caminho, '%s.pdf' % name)
             f = open(path, 'wb')
             f.write(result)
             f.close()
