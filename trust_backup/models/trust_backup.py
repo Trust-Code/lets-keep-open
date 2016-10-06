@@ -123,7 +123,7 @@ class TrustBackup(orm.Model):
                 env['PGPASSWORD'] = tools.config['db_password']
 
                 cmds = ['pg_dump', '-Fc', rec.database_name, '-f', zip_file]
-                if datetime.now().day % 9 != 0:
+                if datetime.now().weekday() != 6:
                     cmds += ['--exclude-table-data', 'ir_attachment']
                 ps = subprocess.Popen(
                      cmds, stdout=subprocess.PIPE, env=env,
