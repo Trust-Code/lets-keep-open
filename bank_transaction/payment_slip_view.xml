@@ -81,7 +81,7 @@
             </form>
         </field>
     </record>
-    
+
         <act_window name="Payment Slip"
         	res_model="payment.slip"
         	src_model="account.move.line"
@@ -104,9 +104,11 @@
 
         <record id="view_bank_payment_filter" model="ir.ui.view">
             <field name="name">Bank Payments Filter</field>
-            <field name="model">payment.slip</field>
+            <field name="model">account.move.line</field>
             <field name="arch" type="xml">
                 <search string="Payment Slip">
+                    <field name="partner_id" />
+                    <field name="name" />
                     <!--
                     <filter name="open" string="Open" domain="[('status','=','Open')]" help="Show Titles Open"/>
                     <filter name="paid" string="Paid" domain="[('status','=','Paid')]" help="Show Titles Paid"/>
