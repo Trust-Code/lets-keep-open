@@ -112,6 +112,9 @@
             <hr />
             <h2><strong>** Total a Receber:</strong> R$ <span style="float:right;">${liquido}</span></h2>
             <hr />
+            <strong>${partner.service_type_id.code or ''}</strong> -
+            <strong>${partner.service_type_id.name or ''}</strong>
+            <br />
             <strong>* A Nota fiscal deverá ser emitida com o valor Total Bruto<br />
             ** O Boleto deverá ser emitido com o valor Total a receber
             </strong>

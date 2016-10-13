@@ -13,7 +13,7 @@
         'hr_timesheet',
         'stock',
         'l10n_br_account_analytic_analysis_ext',
-        'report_webkit',
+        'report_webkit'
     ],
     'data': [
         'wizard/report_commission.xml',

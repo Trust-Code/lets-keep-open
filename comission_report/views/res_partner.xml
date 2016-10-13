@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <field name="inscr_mun" position="after">
                     <field name="percentual_iss" />
+                    <field name="service_type_id" />
                     <field name="percentual_irrf" />
                     <field name="percentual_pcc" />
                 </field>

@@ -12,6 +12,8 @@ class res_partner(osv.osv):
 
     _columns = {
         'percentual_iss': fields.float('Percentual ISS'),
+        'service_type_id': fields.many2one(
+            'l10n_br_account.service.type', string="Tipo Serviço"),
         'percentual_irrf': fields.float('Percentual IRRF'),
         'percentual_pcc': fields.float('Percentual PCC'),
     }
@@ -47,16 +49,18 @@ class res_partner(osv.osv):
         bruto = sum(x['valor_decimal'] for x in comissoes)
 
         partner = self.browse(cr, uid, ids[0], context)
+        irrf = (bruto * partner.percentual_irrf / 100) if bruto > 666.40 else 0.0
+        pcc = (bruto * partner.percentual_pcc / 100) if bruto > 215 else 0.0
         impostos = {'iss': locale.format_string(
                         "%.2f", (bruto * partner.percentual_iss / 100)),
                     'perc_iss': locale.format_string(
                         "%.2f", (partner.percentual_iss)),
                     'irrf': locale.format_string(
-                        "%.2f", (bruto * partner.percentual_irrf / 100)),
+                        "%.2f", irrf),
                     'perc_irrf': locale.format_string(
                         "%.2f", (partner.percentual_irrf)),
                     'pcc': locale.format_string(
-                        "%.2f", (bruto * partner.percentual_pcc / 100)),
+                        "%.2f", pcc),
                     'perc_pcc': locale.format_string(
                         "%.2f", (partner.percentual_pcc))}
 
