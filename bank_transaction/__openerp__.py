@@ -24,6 +24,7 @@ Generate CNAB files to send the bank and import CNAB files to update system
                      'file_format_view.xml',
                      'res_partner_view.xml',
                      'res_bank_view.xml',
+                     'account_invoice_view.xml',
                      'wizard/file_format_loader_view.xml',
                      'wizard/export_cnab_view.xml',
                      'wizard/import_cnab_view.xml',

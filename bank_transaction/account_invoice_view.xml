@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_bank_transaction_account_invoice_form" model="ir.ui.view">
+            <field name="name">Bank Transaction Invoice Form</field>
+            <field name="view_type">form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="date_due" position="after">
+                    <field name="date_last_payment" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_bank_transaction_account_invoice_search" model="ir.ui.view">
+            <field name="name">Bank Transaction Invoice Search</field>
+            <field name="view_type">search</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <field name="period_id" position="after">
+                    <field name="date_last_payment" />
+                </field>
+                <filter string="Due Date" position="after">
+                     <filter string="Último pagamento" icon="terp-go-month" domain="[]" context="{'group_by':'date_last_payment'}"/>
+                </filter>
+            </field>
+        </record>
+
+
+
+    </data>
+</openerp>

@@ -15,6 +15,16 @@ class account_invoice(osv.osv):
     _name = 'account.invoice'
     _inherit = 'account.invoice'
 
+    _columns = {
+        'date_last_payment': fields.date('Data último pagamento'),
+    }
+
+    def confirm_paid(self, cr, uid, ids, context=None):
+        res = super(account_invoice, self).confirm_paid(
+            cr, uid, ids, context=context)
+        self.write(cr, uid, ids, {'date_last_payment': datetime.now()}, context=context)
+        return res
+
     def payment_type_default(self, cr, uid, result, False, partner_id,
                              company_id, context=None):
         obj_res_partner = self.pool.get('res.partner')
