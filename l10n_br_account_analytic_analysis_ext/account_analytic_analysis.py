@@ -90,7 +90,7 @@ class account_analytic_account(osv.osv):
     def get_next_date_invoice(self, cr, uid, rec_contract, invoice_date, context = None):
         context = context or {}
         next_date = datetime.datetime.strptime(invoice_date, '%Y-%m-%d')
-        interval = rec_contract.recurring_interval
+        interval = rec_contract.recurring_interval or 1
         if rec_contract.recurring_rule_type == 'daily':
             new_date = next_date + relativedelta(days=+interval)
         elif rec_contract.recurring_rule_type == 'weekly':
