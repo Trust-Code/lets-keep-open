@@ -21,7 +21,10 @@ class payment_type(osv.osv):
             domain=[('type', '=', 'extrato')]),
         'type_banking_billing': fields.selection(
             [('REG', 'Registrada'), ('SRG', 'Sem Registro'),
-             ('ESC', 'Escritural')], 'Type Banking Billing')
+             ('ESC', 'Escritural')], 'Type Banking Billing'),
+        'sequence_our_number': fields.many2one(
+            'ir.sequence', 'Sequência Nosso Número'),
+        'bank_col_service': fields.char('Carteira de Cobrança Bancária', size=3),
     }
 
 payment_type()

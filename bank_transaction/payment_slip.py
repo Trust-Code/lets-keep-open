@@ -106,8 +106,12 @@ class payment_slip(osv.osv):
         obj_account_move_line = self.pool.get('account.move.line')
         if rec_account_move_line.payment_type.type_banking_billing == 'REG' or \
            rec_account_move_line.payment_type.type_banking_billing == 'SRG':
-            our_number = self.pool.get('ir.sequence').get(
-                cr, uid, 'payment_slip_our_number_itau')
+            if not rec_account_move_line.payment_type.sequence_our_number:
+                raise osv.except_osv(
+                    _('Atenção!'), _('Configure a sequencia do nosso número no tipo de pagamento'))
+
+            our_number = self.pool.get('ir.sequence').next_by_id(
+                cr, uid, rec_account_move_line.payment_type.sequence_our_number.id)
             obj_account_move_line.write(
                 cr, uid, rec_account_move_line.id, {'our_number': our_number},
                 context=context)
@@ -161,7 +165,7 @@ class payment_slip(osv.osv):
         error = []
         if not rec_account_move_line.company_id.partner_id.cnpj_cpf:
             error.append('CPF/CNPJ (cedente)')
-        if not rec_account_move_line.payment_type.bank_account.bank_col_service:
+        if not rec_account_move_line.payment_type.bank_col_service and not rec_account_move_line.payment_type.bank_account.bank_col_service:
             error.append('Carteira Bancaria')
         if error:
             raise orm.except_orm(
@@ -182,7 +186,7 @@ class payment_slip(osv.osv):
         obj_boleto.nosso_numero = rec_account_move_line.our_number
         obj_boleto.numero_documento = rec_account_move_line.name
         obj_boleto.tipo_boleto = '1'
-        obj_boleto.carteira = rec_account_move_line.payment_type.bank_account.bank_col_service
+        obj_boleto.carteira = rec_account_move_line.payment_type.bank_col_service or rec_account_move_line.payment_type.bank_account.bank_col_service
         obj_boleto.demonstrativo = ''
         obj_boleto.sacado = ['%s' % sacado_nome, '%s' % sacado_endereco_1, '%s' % sacado_endereco_2]
         lista_dados_itau.append(obj_boleto)
@@ -284,7 +288,7 @@ class payment_slip(osv.osv):
         error = []
         if not rec_account_move_line.company_id.partner_id.cnpj_cpf:
             error.append('CPF/CNPJ (cedente)')
-        if not rec_account_move_line.payment_type.bank_account.bank_col_service:
+        if not rec_account_move_line.payment_type.bank_col_service and not rec_account_move_line.payment_type.bank_account.bank_col_service:
             error.append('Carteira Bancaria')
         if error:
             raise orm.except_orm(
@@ -305,7 +309,7 @@ class payment_slip(osv.osv):
         obj_boleto.nosso_numero = rec_account_move_line.our_number
         obj_boleto.numero_documento = rec_account_move_line.name
         obj_boleto.tipo_boleto = '1'
-        obj_boleto.carteira = rec_account_move_line.payment_type.bank_account.bank_col_service
+        obj_boleto.carteira = rec_account_move_line.payment_type.bank_col_service or rec_account_move_line.payment_type.bank_account.bank_col_service
         obj_boleto.demonstrativo = ''
         obj_boleto.sacado = ['%s' % sacado_nome, '%s' % sacado_endereco_1, '%s' % sacado_endereco_2]
         lista_dados_santander.append(obj_boleto)

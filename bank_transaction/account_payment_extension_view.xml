@@ -11,7 +11,9 @@
 					<field name="bank_account"/>
 				</field>
                 <field name="company_id" position="after">
-					<field name="type_banking_billing"/>
+                    <field name="type_banking_billing"/>
+                    <field name="sequence_our_number" attrs="{'required': [('type_banking_billing', '=', 'REG')]}" />
+                    <field name="bank_col_service"/>
                     <separator string="Layout dos Arquivos" colspan="4"/>
                     <field name="layout_remessa"/>
                     <field name="layout_extrato"/>

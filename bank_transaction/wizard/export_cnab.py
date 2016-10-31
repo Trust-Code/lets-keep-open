@@ -174,7 +174,7 @@ class CNABExporter(osv.osv_memory):
             'ConvenioCobranca': rec_account_move_line.payment_type.bank_account.bank_col_agreement,
             'UsoEmpresa': '',
             'NossoNumero': rec_account_move_line.our_number,
-            'Carteira': rec_account_move_line.payment_type.bank_account.bank_col_service,
+            'Carteira': rec_account_move_line.payment_type.bank_col_service or rec_account_move_line.payment_type.bank_account.bank_col_service,
             'UsoBanco': '',
             'NDocumento': rec_account_move_line.name,
             'DataVencimentoTitulo': datetime.strptime(rec_account_move_line.date_maturity, '%Y-%m-%d'),
