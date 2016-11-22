@@ -25,8 +25,8 @@
     %for partner in objects:
     <% setLang(partner.lang) %>
 
-    <div style="padding-top:10px;">
-    Período de recebimento das mensalidades: ${data['formatted_start_date']} a ${data['formatted_end_date']}
+    <div style="padding-top:12px;">
+    <b>Período de recebimento das comissões:</b> ${data['formatted_start_date']} a ${data['formatted_end_date']}
     </div>
 
     <div style="padding-top:10px; padding-bottom:10px;">
@@ -80,6 +80,9 @@
             <hr />
             <strong>* Total Bruto: R$ </strong><label style="float:right;">${bruto}</label>
             <hr />
+            <strong>${partner.service_type_id.code or ''}</strong> -
+            <strong>${partner.service_type_id.name or ''}</strong>
+            <br />
             <table class="datagrid" width="100%">
                 <thead>
                     <tr>
@@ -111,10 +114,6 @@
             </table>
             <hr />
             <h2><strong>** Total a Receber:</strong> R$ <span style="float:right;">${liquido}</span></h2>
-            <hr />
-            <strong>${partner.service_type_id.code or ''}</strong> -
-            <strong>${partner.service_type_id.name or ''}</strong>
-            <br />
             <strong>* A Nota fiscal deverá ser emitida com o valor Total Bruto<br />
             ** O Boleto deverá ser emitido com o valor Total a receber
             </strong>
