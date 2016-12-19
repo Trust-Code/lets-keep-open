@@ -16,7 +16,7 @@ class account_invoice(osv.osv):
     _inherit = 'account.invoice'
 
     _columns = {
-        'date_last_payment': fields.date('Data último pagamento'),
+        'date_last_payment': fields.date(u'Data último pagamento'),
     }
 
     def confirm_paid(self, cr, uid, ids, context=None):
