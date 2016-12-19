@@ -25,8 +25,8 @@
     %for partner in objects:
     <% setLang(partner.lang) %>
 
-    <div style="padding-top:10px;">
-    Período de recebimento das mensalidades: ${data['formatted_start_date']} a ${data['formatted_end_date']}
+    <div style="padding-top:12px;">
+    <b>Período de recebimento das comissões:</b> ${data['formatted_start_date']} a ${data['formatted_end_date']}
     </div>
 
     <div style="padding-top:10px; padding-bottom:10px;">
@@ -42,11 +42,11 @@
         <thead>
             <tr>
                 <th style="width:130px;">Produto</th>
-                <th style="width:125px;">Cnpj</th>
+                <th style="width:130px;">Cnpj</th>
                 <th>Cliente TEF2</th>
                 <th>Vencimento</th>
                 <th>Pagamento</th>
-                <th>Mensalidade</th>
+                <th>Mensalid.</th>
                 <th style="width:30px;">%</th>
                 <th style="width:80px;">Valor</th>
             </tr>
@@ -80,6 +80,9 @@
             <hr />
             <strong>* Total Bruto: R$ </strong><label style="float:right;">${bruto}</label>
             <hr />
+            <span style="font-size: 11px"> ${partner.service_type_id.code or ''}</span> -
+            <span style="font-size: 11px"> ${partner.service_type_id.name or ''}</span>
+            <br />
             <table class="datagrid" width="100%">
                 <thead>
                     <tr>
@@ -111,10 +114,6 @@
             </table>
             <hr />
             <h2><strong>** Total a Receber:</strong> R$ <span style="float:right;">${liquido}</span></h2>
-            <hr />
-            <strong>${partner.service_type_id.code or ''}</strong> -
-            <strong>${partner.service_type_id.name or ''}</strong>
-            <br />
             <strong>* A Nota fiscal deverá ser emitida com o valor Total Bruto<br />
             ** O Boleto deverá ser emitido com o valor Total a receber
             </strong>
