@@ -100,7 +100,7 @@ class ProcessadorBase(object):
         result_str = resp_xml.find(".//{%s}RetornoXML" % self.NS).text
         xsd_retorno.ExternalEncoding = 'utf-8'
         result = xsd_retorno.parseString(result_str.encode('utf-8'))
-        
+
         return result
 
     def _parse_result(self, result):
@@ -158,7 +158,7 @@ class ProcessadorBase(object):
 
         xml = self._soap(xml, service)
 
-        connection = HTTPSConnection(server, key_file=key_file, cert_file=cert_file)
+        connection = HTTPSConnection(server, key_file=key_file, cert_file=cert_file, timeout=15)
         result = self._soap_post(connection, xml, xsd_retorno, service)
 
         sucesso, erros, alertas = self._parse_result(result)
@@ -232,4 +232,3 @@ class ProcessadorBase(object):
             self._destino = os.path.join(destino, arquivo)
 
         return self._destino
-

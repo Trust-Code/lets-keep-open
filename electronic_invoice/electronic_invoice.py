@@ -2,22 +2,23 @@
 # © 2016 Danimar Ribeiro, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import re
 import random
+import logging
 import os
 import base64
-import urllib2
 import datetime
-import requests
-import xml.etree.ElementTree as ET
 from openerp.osv import fields, osv
 from openerp.tools.translate import _
 from uuid import uuid4
 
+
+_logger = logging.getLogger(__name__)
+
+
 class electronic_invoice(osv.osv):
     _name = 'electronic.invoice'
 
-    def create_temp_file(self, content_file, path = None):
+    def create_temp_file(self, content_file, path=None):
         if not path:
             path = '/tmp'
         if not os.path.exists(path):
@@ -28,7 +29,7 @@ class electronic_invoice(osv.osv):
         w_file.close()
         return name
 
-    def inv_write(self, cr, uid, ids, inv, args, context = None):
+    def inv_write(self, cr, uid, ids, inv, args, context=None):
         attachment_obj = self.pool.get('ir.attachment')
         self.pool.get('electronic.invoice.event').create(cr, uid, {'invoice_id': inv.id,
          'action': False if 'action' not in args else args['action'],
@@ -87,40 +88,47 @@ class electronic_invoice(osv.osv):
         invoice_obj = self.pool.get('account.invoice')
         invoice_ids = invoice_obj.search(cr, uid, [('id', 'in', context.get('active_ids'))])
         invoice_br = invoice_obj.browse(cr, uid, invoice_ids, context=context)
+        _logger.info("Total de notas a enviar: %s" % len(invoice_ids))
+        indice = 0
         for invoice in invoice_br:
-            if invoice.ei_status and invoice.ei_status not in ('failed', 'scheduled'):
-                continue
-            if invoice.state not in ('open', 'paid'):
-                continue
-            msg = self.validate_send(cr, uid, ids, invoice, context=context)
-            if msg:
-                result = {
-                    'action': 'send',
-                    'status': 'failed',
-                    'message': msg}
+            indice += 1
+            _logger.info("Emitindo nota numero %s" % indice)
+            try:
+                if invoice.ei_status and invoice.ei_status not in ('failed', 'scheduled'):
+                    continue
+                if invoice.state not in ('open', 'paid'):
+                    continue
+                msg = self.validate_send(cr, uid, ids, invoice, context=context)
+                if msg:
+                    result = {
+                        'action': 'send',
+                        'status': 'failed',
+                        'message': msg}
+                    self.inv_write(cr, uid, ids, invoice, result, context=context)
+                    continue
+                cert_name = '/tmp/oe_electronic_invoice/' + self.create_temp_file(base64.decodestring(invoice.company_id.nfe_a1_file), path='/tmp/oe_electronic_invoice/')
+                if not cert_name:
+                    result = {
+                        'action': 'send',
+                        'status': 'failed',
+                        'message': 'Digital Certificate can not be saved'}
+                elif invoice.fiscal_type == 'product':
+                    result = self.send_product(cr, uid, ids, invoice, cert_name, context=context)
+                elif invoice.company_id.l10n_br_city_id.ibge_code == '50308':
+                    result = self.send_sp_saopaulo(cr, uid, ids, invoice, cert_name, context=context)
+                elif invoice.company_id.l10n_br_city_id.ibge_code in '38709':
+                    result = self.send_simpliss(cr, uid, ids, invoice, cert_name, context=context)
+                elif invoice.company_id.l10n_br_city_id.ibge_code in '44004':
+                    result = self.send_ariss(cr, uid, ids, invoice, cert_name, context=context)
+                else:
+                    result = {
+                        'action': 'send',
+                        'status': False,
+                        'message': 'Envio de NF-e não disponível'}
                 self.inv_write(cr, uid, ids, invoice, result, context=context)
-                continue
-            cert_name = '/tmp/oe_electronic_invoice/' + self.create_temp_file(base64.decodestring(invoice.company_id.nfe_a1_file), path='/tmp/oe_electronic_invoice/')
-            if not cert_name:
-                result = {
-                    'action': 'send',
-                    'status': 'failed',
-                    'message': 'Digital Certificate can not be saved'}
-            elif invoice.fiscal_type == 'product':
-                result = self.send_product(cr, uid, ids, invoice, cert_name, context=context)
-            elif invoice.company_id.l10n_br_city_id.ibge_code == '50308':
-                result = self.send_sp_saopaulo(cr, uid, ids, invoice, cert_name, context=context)
-            elif invoice.company_id.l10n_br_city_id.ibge_code in '38709':
-                result = self.send_simpliss(cr, uid, ids, invoice, cert_name, context=context)
-            elif invoice.company_id.l10n_br_city_id.ibge_code in '44004':
-                result = self.send_ariss(cr, uid, ids, invoice, cert_name, context=context)
-            else:
-                result = {
-                    'action': 'send',
-                    'status': False,
-                    'message': 'Envio de NF-e não disponível'}
-            self.inv_write(cr, uid, ids, invoice, result, context=context)
-            os.remove(cert_name)
+                os.remove(cert_name)
+            except:
+                _logger.info('Erro ao enviar NFSe - Ignorando e indo para a proxima', exc_info=True)
 
         return True
 
@@ -282,8 +290,8 @@ class electronic_invoice(osv.osv):
         obj_account_invoice = self.pool.get('account.invoice')
         src_account_invoice = obj_account_invoice.search(cr, uid, [('ei_status', '=', 'scheduled')])
         if src_account_invoice:
-            if len(src_account_invoice) >= 50:
-                src_account_invoice = random.sample(src_account_invoice, 50)
+            if len(src_account_invoice) >= 4:
+                src_account_invoice = random.sample(src_account_invoice, 4)
             if 'active_ids' in context:
                 context['active_ids'] = src_account_invoice
             else:

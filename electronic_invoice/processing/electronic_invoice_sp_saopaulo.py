@@ -197,11 +197,11 @@ class ei_sp_saopaulo_001(osv.osv):
                     'message': '%s - %s' % (
                         u'Certificado Digital fora da validade',
                         inv.company_id.name)}
-        if not self._check_server(cr, uid, ids, proc.servidor):
-            return {
-                'action': 'send',
-                'ei_status': 'failed',
-                'message': u'Falha de comunicação com o servidor'}
+        # if not self._check_server(cr, uid, ids, proc.servidor):
+        #    return {
+        #        'action': 'send',
+        #        'ei_status': 'failed',
+        #        'message': u'Falha de comunicação com o servidor'}
         if inv.company_id.ei_environment == 'production':
             success, res, warnings, errors = proc.consultar_nfse(consulta_rps)
             if success and not res.NFe:
