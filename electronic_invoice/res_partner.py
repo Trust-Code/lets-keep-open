@@ -8,5 +8,5 @@ from openerp.osv import orm, fields
 class res_partner(orm.Model):
     _inherit = 'res.partner'
     _columns = {
-        'ei_service_description': fields.text('EI Description')
+        'ei_service_description': fields.text(u'EI Description')
     }

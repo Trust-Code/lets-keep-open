@@ -14,8 +14,8 @@ class res_partner(osv.osv):
     _columns = {
         'payment_type_default': fields.one2many(
             'partner.payment.type.default', 'partner_id',
-            'Payment Type Default'),
-        'send_payment_slip': fields.boolean('Send Payment Slip by Email')
+            u'Payment Type Default'),
+        'send_payment_slip': fields.boolean(u'Send Payment Slip by Email')
     }
 
 

@@ -11,11 +11,11 @@ class res_partner(osv.osv):
     _inherit = 'res.partner'
 
     _columns = {
-        'percentual_iss': fields.float('Percentual ISS'),
+        'percentual_iss': fields.float(u'Percentual ISS'),
         'service_type_id': fields.many2one(
-            'l10n_br_account.service.type', string="Tipo Serviço"),
-        'percentual_irrf': fields.float('Percentual IRRF'),
-        'percentual_pcc': fields.float('Percentual PCC'),
+            'l10n_br_account.service.type', string=u"Tipo Serviço"),
+        'percentual_irrf': fields.float(u'Percentual IRRF'),
+        'percentual_pcc': fields.float(u'Percentual PCC'),
     }
 
     def get_commission(self, cr, uid, ids, start_date, end_date, context=None):

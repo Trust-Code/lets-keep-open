@@ -8,7 +8,7 @@ from openerp.osv import fields, osv
 class res_partner(osv.osv):
     _inherit = 'res.partner'
     _columns = {
-        'parent_id': fields.many2one('res.partner', 'Related Company')
+        'parent_id': fields.many2one('res.partner', u'Related Company')
     }
 
     def _get_account_payable(self, cr, uid, ids, context=None):
