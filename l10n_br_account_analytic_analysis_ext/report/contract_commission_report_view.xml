@@ -75,6 +75,7 @@
                 <field name="salesperson_id" invisible="1"/>
                 <field name="analytic_account_id"/>
                 <field name="internal_number"/>
+                <field name="date" />
                 <field name="received"/>
                 <field name="perc_commission"/>
                 <field name="value_commission"/>

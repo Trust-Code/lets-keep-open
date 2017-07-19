@@ -61,6 +61,7 @@ class contract_salesperson_commission_report(osv.osv):
         'period_id': fields.many2one('account.period', 'Period', readonly=True),
         'internal_number': fields.char('Invoice Number', size=32, readonly=True),
         'received': fields.float('Payment Value', digits=(16, 2), readonly=True),
+        'date': fields.date('Payment Date', readonly=True),
         'perc_commission': fields.float('Perc. Commission %', digits=(16, 2), readonly=True),
         'value_commission': fields.float('Commission Value', digits=(16, 2), readonly=True),
         'state': fields.char('Status', readonly=True),
