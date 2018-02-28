@@ -114,9 +114,9 @@ class ei_sp_saopaulo_001(osv.osv):
 
         iss_retido = valores['iss_retido'] < 0
         account_invoice_line = inv.invoice_line[0]
-        codigo_servico = account_invoice_line.product_id.service_type_id and account_invoice_line.product_id.service_type_id.code or ''
+        codigo_servico = account_invoice_line.service_type_id and account_invoice_line.service_type_id.code or ''
         aliquota = account_invoice_line.issqn_percent
-        discriminacao = account_invoice_line.product_id.service_type_id and account_invoice_line.product_id.service_type_id.ei_description or ''
+        discriminacao = account_invoice_line.service_type_id and account_invoice_line.service_type_id.ei_description or ''
         discriminacao += inv.partner_id.ei_service_description and '\n' + inv.partner_id.ei_service_description or ''
         discriminacao += inv.ei_description and '\n' + inv.ei_description or ''
         discriminacao += inv.company_id.ei_service_description and '\n' + inv.company_id.ei_service_description or ''
@@ -139,7 +139,7 @@ class ei_sp_saopaulo_001(osv.osv):
             'ValorIR': valores['irpj'],
             'ValorCSLL': valores['csll'],
             'CodigoServico': int(codigo_servico),
-            'AliquotaServicos': round(aliquota / 100, 2),
+            'AliquotaServicos': round(aliquota / 100, 3),
             'ISSRetido': iss_retido,
             'CPFCNPJTomador': re.sub('[^0-9]', '', inv.partner_id.cnpj_cpf),
             'TipoInscricaoTomador': 'J' if inv.partner_id.is_company else 'F',
